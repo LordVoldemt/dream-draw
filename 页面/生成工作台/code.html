@@ -1,0 +1,494 @@
+<!DOCTYPE html><html class="light" lang="zh-CN" style=""><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif:wght@400;600;700&amp;family=Plus+Jakarta+Sans:wght@400;500;600&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "tertiary-fixed": "#ffe088",
+                    "surface-container-lowest": "#ffffff",
+                    "on-primary-fixed": "#3e0400",
+                    "on-secondary-fixed": "#002118",
+                    "outline-variant": "#e2bfb8",
+                    "on-error-container": "#93000a",
+                    "surface-bright": "#fcf9f8",
+                    "on-primary": "#ffffff",
+                    "tertiary": "#735c00",
+                    "on-secondary-fixed-variant": "#244e41",
+                    "error-container": "#ffdad6",
+                    "tertiary-fixed-dim": "#e9c349",
+                    "on-error": "#ffffff",
+                    "outline": "#8e706a",
+                    "misty-white": "#F5F5F3",
+                    "secondary-fixed": "#bfecda",
+                    "surface-container-low": "#f6f3f2",
+                    "secondary": "#3d6658",
+                    "secondary-fixed-dim": "#a3d0be",
+                    "inverse-primary": "#ffb4a5",
+                    "on-surface": "#1c1b1b",
+                    "surface-container": "#f0eded",
+                    "silk-gold": "#D4AF37",
+                    "on-tertiary-fixed": "#241a00",
+                    "ink-black": "#1A1A1A",
+                    "background": "#fcf9f8",
+                    "on-primary-container": "#ffefeb",
+                    "on-tertiary": "#ffffff",
+                    "primary-container": "#c83c23",
+                    "surface-tint": "#b12c14",
+                    "on-secondary": "#ffffff",
+                    "jade-green": "#4F796A",
+                    "surface-dim": "#dcd9d9",
+                    "surface": "#fcf9f8",
+                    "on-primary-fixed-variant": "#8e1300",
+                    "primary-fixed": "#ffdad3",
+                    "on-secondary-container": "#416b5c",
+                    "on-surface-variant": "#5a413c",
+                    "surface-container-highest": "#e5e2e1",
+                    "primary-fixed-dim": "#ffb4a5",
+                    "surface-variant": "#e5e2e1",
+                    "inverse-surface": "#313030",
+                    "on-background": "#1c1b1b",
+                    "inverse-on-surface": "#f3f0ef",
+                    "surface-container-high": "#eae7e7",
+                    "tertiary-container": "#cca72f",
+                    "cinnabar-red": "#C83C23",
+                    "error": "#ba1a1a",
+                    "on-tertiary-container": "#4e3d00",
+                    "secondary-container": "#bce9d7",
+                    "on-tertiary-fixed-variant": "#574500",
+                    "primary": "#a5230c"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "container-max": "1280px",
+                    "section-gap": "80px",
+                    "gutter": "24px",
+                    "margin-desktop": "40px",
+                    "unit": "4px",
+                    "margin-mobile": "16px"
+            },
+            "fontFamily": {
+                    "headline-lg-mobile": ["Noto Serif"],
+                    "body-md": ["Plus Jakarta Sans"],
+                    "display-hero": ["Noto Serif"],
+                    "title-lg": ["Plus Jakarta Sans"],
+                    "headline-lg": ["Noto Serif"],
+                    "body-lg": ["Plus Jakarta Sans"],
+                    "label-md": ["Plus Jakarta Sans"],
+                    "caption": ["Plus Jakarta Sans"],
+                    "headline-md": ["Noto Serif"]
+            },
+            "fontSize": {
+                    "headline-lg-mobile": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "display-hero": ["48px", {"lineHeight": "60px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "title-lg": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+                    "headline-lg": ["32px", {"lineHeight": "40px", "fontWeight": "600"}],
+                    "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                    "label-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0.05em", "fontWeight": "500"}],
+                    "caption": ["12px", {"lineHeight": "16px", "fontWeight": "400"}],
+                    "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .ink-wash-shadow {
+            box-shadow: 0 10px 30px -10px rgba(26, 26, 26, 0.08);
+        }
+        .vertical-text {
+            writing-mode: vertical-rl;
+            text-orientation: mixed;
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+            height: 6px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: rgba(212, 175, 55, 0.2);
+            border-radius: 10px;
+        }
+        .style-card-mask {
+            mask-image: linear-gradient(to top, black 20%, transparent 100%);
+        }
+    </style>
+</head>
+<body class="bg-misty-white font-body-md text-on-surface selection:bg-cinnabar-red/20 overflow-x-hidden">
+<!-- Top Navigation Bar -->
+<header class="bg-misty-white/80 backdrop-blur-xl border-b border-ink-black/5 sticky top-0 z-50">
+<div class="flex justify-between items-center w-full px-margin-desktop py-4 max-w-container-max mx-auto">
+<div class="font-headline-md text-headline-md text-cinnabar-red font-bold tracking-tight">墨染梦境</div>
+<nav class="hidden md:flex items-center gap-8">
+<a class="font-body-md text-body-md text-on-surface-variant hover:text-cinnabar-red transition-colors" href="#">首页</a>
+<a class="font-body-md text-body-md text-on-surface-variant hover:text-cinnabar-red transition-colors" href="#">画廊</a>
+<a class="font-body-md text-body-md text-cinnabar-red font-semibold border-b-2 border-cinnabar-red pb-1" href="#">创作空间</a>
+<a class="font-body-md text-body-md text-on-surface-variant hover:text-cinnabar-red transition-colors" href="#">我的作品</a>
+</nav>
+<div class="flex items-center gap-4">
+<button class="material-symbols-outlined p-2 text-on-surface-variant hover:opacity-80 transition-opacity">toll</button>
+<button class="material-symbols-outlined p-2 text-on-surface-variant hover:opacity-80 transition-opacity">notifications</button>
+<div class="w-10 h-10 rounded-full overflow-hidden border-2 border-white ink-wash-shadow">
+<img alt="User Avatar" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAlvcQDD4pV4USm8hnnwjmJmv6wP6ayk6-amHHan8mskFMxa-4ADLN7INjZ-n-WNqmXoj4EOQ5dgjb3BGVcpRxJCHeJ2jyfQ2a9QAXMtWsgYEOzo_nCmVKuE9An7n5OXkOXMCCBSDFImlxHXwMddisvcZgMbTkWmPcB1l9TLP1cE4IrYEGvNaa9Ro2y_gbBUrEU-_2Tqweafm8GajEL7CkvetLYFYmkM0CdGIB8xXXjMB8Ky1X2PellodrEvFjS1-t2QUnLCTPRte8">
+</div>
+</div>
+</div>
+</header>
+<main class="max-w-container-max mx-auto px-margin-desktop py-10">
+<div class="flex flex-col lg:flex-row gap-12">
+<!-- Left Column: Input & Config (2/3) -->
+<div class="w-full lg:w-2/3 flex flex-col gap-10">
+<!-- Prompt Section -->
+<section class="flex flex-col gap-4">
+<div class="flex justify-between items-end">
+<h2 class="font-headline-md text-headline-md text-ink-black flex items-center gap-2">
+<span class="material-symbols-outlined text-cinnabar-red">edit_note</span>
+                            灵感描绘
+                        </h2>
+<span class="font-label-md text-label-md text-on-surface-variant/60">0 / 500</span>
+</div>
+<div class="relative bg-white p-6 rounded-2xl ink-wash-shadow border border-ink-black/5">
+<textarea class="w-full h-44 bg-transparent border-none focus:ring-0 resize-none font-body-lg text-body-lg placeholder:text-on-surface-variant/30" placeholder="描述您梦境中的画面，例如：一位身着绯红汉服的女子，在漫天飞舞的桃花瓣下，轻抚古琴，周身缭绕着淡雅的水墨烟雾..."></textarea>
+<div class="flex items-center justify-end gap-3 pt-4 border-t border-ink-black/5">
+<button class="flex items-center gap-1.5 px-4 py-2 bg-misty-white border border-ink-black/5 rounded-full font-label-md text-label-md text-on-surface-variant hover:text-cinnabar-red hover:bg-white transition-all">
+<span class="material-symbols-outlined text-[18px]">magic_button</span>
+                                推荐词
+                            </button>
+<button class="flex items-center gap-1.5 px-4 py-2 bg-misty-white border border-ink-black/5 rounded-full font-label-md text-label-md text-on-surface-variant hover:text-cinnabar-red hover:bg-white transition-all">
+<span class="material-symbols-outlined text-[18px]">auto_awesome</span>
+                                一键灵感
+                            </button>
+<button class="flex items-center gap-1.5 px-4 py-2 bg-misty-white border border-ink-black/5 rounded-full font-label-md text-label-md text-on-surface-variant hover:text-cinnabar-red hover:bg-white transition-all">
+<span class="material-symbols-outlined text-[18px]">casino</span>
+                                随机
+                            </button>
+</div>
+</div>
+</section>
+<!-- Style Selection Grid -->
+<section class="flex flex-col gap-5">
+<h3 class="font-title-lg text-title-lg text-ink-black flex items-center gap-2">
+<span class="material-symbols-outlined text-jade-green">palette</span>
+                        意境选择
+                    </h3>
+<div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+<!-- Tang Style -->
+<div class="group cursor-pointer relative aspect-[3/4] rounded-xl overflow-hidden border-2 border-transparent hover:border-silk-gold transition-all">
+<img alt="Tang Style" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD_YQR65_jkMdKHpsvbcXqxhCr2Sq3l6dC2aQug-_9-7xDGJNEN5RhVodQg58vBcgkiOa6cJ3Ox6B9HKWcSXDRybFPWXS6TiW4oTM9Q2JHqLKeMH0Z9cZNHHBGWCq_ABsv0JdaIh2ZOmafKAIJSyK71eiuf65IH_lkNIxgpGu4kdqtR-BX1EKB3GtG_vU8BQm7ECoL_S2qtqvGAz7ycYfEQFAwe9EcvWbwfKb7IGluM_iX3WGYJKEtFojTy21diAW1M8xBo4e9DKaA">
+<div class="absolute inset-0 bg-gradient-to-t from-ink-black/90 via-ink-black/20 to-transparent flex flex-col justify-end p-4">
+<span class="font-headline-md text-white">盛唐</span>
+<span class="text-[10px] text-white/70 uppercase tracking-widest mt-1">Magnificent Tang</span>
+</div>
+</div>
+<!-- Han Style -->
+<div class="group cursor-pointer relative aspect-[3/4] rounded-xl overflow-hidden border-2 border-silk-gold transition-all">
+<img alt="Han Style" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBeuy3ptfSOz1BLOpoAmiQ6p0iuY1iNf5sk-MbMZL-v_uv9hGwbH9BRL-NARBS0xkCvYoAepV89-nMpNaXmH3ZTSmec4gKNxjTSgmzzqQfzbbEdA3GsjVEEuq_jn7dZ9jYFHNx2YOU89JYP3YhqZHAvx8Qpw0nNVvfOGQvnJj1KMLaQTl9yQhQkbVjHt3EQebkcdpaDsqLQwJVqQIlBb0Jq989nKWnCrX2e74ZoCGRW36zJC4uJeEovlnK8PtQ_pzYTQ1Y-cSUcsjg">
+<div class="absolute inset-0 bg-gradient-to-t from-ink-black/90 via-ink-black/20 to-transparent flex flex-col justify-end p-4">
+<span class="font-headline-md text-white">汉韵</span>
+<span class="text-[10px] text-white/70 uppercase tracking-widest mt-1">Han Elegance</span>
+</div>
+<div class="absolute top-2 right-2 bg-silk-gold text-white rounded-full p-1">
+<span class="material-symbols-outlined text-[14px]" style="font-variation-settings: 'FILL' 1;">check</span>
+</div>
+</div>
+<!-- Xianxia Style -->
+<div class="group cursor-pointer relative aspect-[3/4] rounded-xl overflow-hidden border-2 border-transparent hover:border-silk-gold transition-all">
+<img alt="Xianxia Style" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDsZhFK6Zc-pzqgNxCNPrmyED9YFY5P9by86zjGheZTDFpBu-APaPxh5zdyvbb8LfHueuIFKW89KuW7P_ZOt1QYrfXaRH6KqPuLu7kOEr2Xn-l7TgmPdlCfTNnFHxHj_YLbQW8uac7VwzGo9cVpcERx55tTLOoeDzhdaYRUxvXbUbaxXaz97lntAisPpFfRTQr8t8J5YZxzm3hDtMwngWqP-DQi9rsxJ3KsM99Lp9wlhKGgBPAVBpyc0nFf6mYi-TjMUTKd2BJAbaE">
+<div class="absolute inset-0 bg-gradient-to-t from-ink-black/90 via-ink-black/20 to-transparent flex flex-col justify-end p-4">
+<span class="font-headline-md text-white">仙侠</span>
+<span class="text-[10px] text-white/70 uppercase tracking-widest mt-1">Immortal Hero</span>
+</div>
+</div>
+<!-- New Chinese Style -->
+<div class="group cursor-pointer relative aspect-[3/4] rounded-xl overflow-hidden border-2 border-transparent hover:border-silk-gold transition-all">
+<img alt="New Chinese Style" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAlvcQDD4pV4USm8hnnwjmJmv6wP6ayk6-amHHan8mskFMxa-4ADLN7INjZ-n-WNqmXoj4EOQ5dgjb3BGVcpRxJCHeJ2jyfQ2a9QAXMtWsgYEOzo_nCmVKuE9An7n5OXkOXMCCBSDFImlxHXwMddisvcZgMbTkWmPcB1l9TLP1cE4IrYEGvNaa9Ro2y_gbBUrEU-_2Tqweafm8GajEL7CkvetLYFYmkM0CdGIB8xXXjMB8Ky1X2PellodrEvFjS1-t2QUnLCTPRte8">
+<div class="absolute inset-0 bg-gradient-to-t from-ink-black/90 via-ink-black/20 to-transparent flex flex-col justify-end p-4">
+<span class="font-headline-md text-white">新中式</span>
+<span class="text-[10px] text-white/70 uppercase tracking-widest mt-1">Modern Zen</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Template Selection -->
+<section class="flex flex-col gap-5">
+<h3 class="font-title-lg text-title-lg text-ink-black flex items-center gap-2">
+<span class="material-symbols-outlined text-jade-green">temp_preferences_custom</span>
+                        常用模板
+                    </h3>
+<div class="flex overflow-x-auto gap-4 pb-2 custom-scrollbar">
+<!-- OC Avatar -->
+<div class="flex-shrink-0 w-48 bg-white p-4 rounded-xl border border-ink-black/5 hover:border-silk-gold/30 cursor-pointer transition-all">
+<div class="font-label-md font-bold text-on-surface mb-1">OC 头像</div>
+<div class="text-[12px] text-on-surface-variant leading-tight mb-3">特化面部细节，适合个人原创角色。</div>
+<div class="flex justify-between items-center text-cinnabar-red">
+<span class="font-caption text-caption">1 积分</span>
+<span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+</div>
+</div>
+<!-- Dream Girl -->
+<div class="flex-shrink-0 w-48 bg-white p-4 rounded-xl border border-silk-gold/30 bg-silk-gold/5 cursor-pointer transition-all">
+<div class="font-label-md font-bold text-on-surface mb-1 text-silk-gold">梦中佳人</div>
+<div class="text-[12px] text-on-surface-variant leading-tight mb-3">全身构图，营造唯美氛围感与意境。</div>
+<div class="flex justify-between items-center text-cinnabar-red">
+<span class="font-caption text-caption">2 积分</span>
+<span class="material-symbols-outlined text-[16px]">check_circle</span>
+</div>
+</div>
+<!-- Novel Heroine -->
+<div class="flex-shrink-0 w-48 bg-white p-4 rounded-xl border border-ink-black/5 hover:border-silk-gold/30 cursor-pointer transition-all">
+<div class="font-label-md font-bold text-on-surface mb-1">小说女主</div>
+<div class="text-[12px] text-on-surface-variant leading-tight mb-3">封面级质感，加强叙事性与服饰华丽度。</div>
+<div class="flex justify-between items-center text-cinnabar-red">
+<span class="font-caption text-caption">3 积分</span>
+<span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+</div>
+</div>
+<!-- Illustration -->
+<div class="flex-shrink-0 w-48 bg-white p-4 rounded-xl border border-ink-black/5 hover:border-silk-gold/30 cursor-pointer transition-all">
+<div class="font-label-md font-bold text-on-surface mb-1">精美插画</div>
+<div class="text-[12px] text-on-surface-variant leading-tight mb-3">宽屏构图，适合作为故事背景。</div>
+<div class="flex justify-between items-center text-cinnabar-red">
+<span class="font-caption text-caption">2 积分</span>
+<span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Configuration Row -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+<!-- Aspect Ratio -->
+<div class="flex flex-col gap-4"><div class="flex justify-between items-center">
+<h3 class="font-title-lg text-title-lg text-ink-black flex items-center gap-2">
+<span class="material-symbols-outlined text-jade-green">aspect_ratio</span>
+                            画幅尺寸
+                        </h3>
+<button class="text-label-md text-cinnabar-red flex items-center hover:opacity-80 transition-opacity" onclick="document.getElementById('ratio-modal').classList.remove('hidden')">
+                            更多比例 <span class="material-symbols-outlined text-[18px]">chevron_right</span>
+</button>
+</div>
+<div class="flex gap-3">
+<button class="flex-1 flex items-center gap-3 p-4 rounded-xl bg-silk-gold/5 border-2 border-silk-gold transition-all">
+<div class="w-6 h-8 border-2 border-silk-gold rounded-sm"></div>
+<div class="text-left">
+<div class="font-label-md font-bold text-silk-gold">3:4 爱版标儖</div>
+<div class="text-[10px] text-on-surface-variant/60">區舒人像、国风写真</div>
+</div>
+</button>
+</div></div>
+<!-- Reference Image -->
+<div class="flex flex-col gap-4">
+<div class="flex justify-between items-center">
+<h3 class="font-title-lg text-title-lg text-ink-black flex items-center gap-2">
+<span class="material-symbols-outlined text-jade-green">add_photo_alternate</span>
+                                底图参考
+                            </h3>
+<span class="font-caption text-on-surface-variant/60">最多 3 张</span>
+</div>
+<div class="flex gap-3">
+<div class="w-16 h-16 rounded-xl border-2 border-dashed border-ink-black/10 flex flex-col items-center justify-center cursor-pointer hover:bg-white hover:border-silk-gold/30 transition-all group bg-white/50">
+<span class="material-symbols-outlined text-on-surface-variant/40 group-hover:text-silk-gold">upload</span>
+</div>
+<!-- Uploaded Thumb -->
+<div class="relative w-16 h-16 rounded-xl overflow-hidden group border border-ink-black/5">
+<img alt="Ref" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCPg3_RVOfncbnbNCrRwD3T29c6aQ4ZpiU4p1vGvDBanJdnBEzQl5MhNvczf_HzHzjXYLUbY82EPqx2hAcNO8kotstBpjoAFXcfsm4enaakLJkkrPVv-02s_7dppUDKHvoCmcTc9AwCBge8dSOlfGbF6ApMo6DqK9r-L4AeU8ebL6aMo593BakdRcD3eC2FqFOFQiTjLGfKnz6PMI0R0ekftX5Aea63j7RTou3tOOiGrb4BDAgpdYvh-_HZWg1ofPU4M28v_FByrjY">
+<button class="absolute top-1 right-1 bg-ink-black/60 text-white rounded-full p-0.5 opacity-0 group-hover:opacity-100 transition-opacity">
+<span class="material-symbols-outlined text-[12px]">close</span>
+</button>
+</div>
+<!-- Mode Selection -->
+<div class="flex-1 flex flex-col justify-center gap-1 pl-1">
+<select class="bg-transparent border-none p-0 font-label-md text-label-md text-on-surface-variant focus:ring-0 cursor-pointer hover:text-silk-gold">
+<option>人物参考</option>
+<option>构图参考</option>
+<option>色彩风格</option>
+</select>
+<div class="text-[10px] text-on-surface-variant/40">参考强度：中等</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Right Column: Preview & Action (1/3) -->
+<aside class="w-full lg:w-1/3 flex flex-col gap-8">
+<!-- Preview Area -->
+<div class="bg-white p-2 rounded-2xl ink-wash-shadow border border-ink-black/5 overflow-hidden">
+<div class="relative aspect-[3/4] rounded-xl overflow-hidden bg-misty-white flex items-center justify-center">
+<img alt="Style Preview" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDsZhFK6Zc-pzqgNxCNPrmyED9YFY5P9by86zjGheZTDFpBu-APaPxh5zdyvbb8LfHueuIFKW89KuW7P_ZOt1QYrfXaRH6KqPuLu7kOEr2Xn-l7TgmPdlCfTNnFHxHj_YLbQW8uac7VwzGo9cVpcERx55tTLOoeDzhdaYRUxvXbUbaxXaz97lntAisPpFfRTQr8t8J5YZxzm3hDtMwngWqP-DQi9rsxJ3KsM99Lp9wlhKGgBPAVBpyc0nFf6mYi-TjMUTKd2BJAbaE">
+<div class="absolute bottom-4 left-4 right-4 bg-ink-black/40 backdrop-blur-md px-4 py-2 rounded-lg border border-white/10">
+<div class="text-white text-[12px] font-medium">当前风格预览：仙姿佚貌</div>
+</div>
+</div>
+</div>
+<!-- Generation Config Card -->
+<div class="bg-white/60 backdrop-blur-2xl p-6 rounded-2xl border border-white ink-wash-shadow flex flex-col gap-8">
+<!-- Quality Selection -->
+<div class="flex flex-col gap-4">
+<h3 class="font-title-lg text-title-lg text-ink-black flex items-center gap-2">
+<span class="material-symbols-outlined text-jade-green">high_quality</span>
+                            生成质量
+                        </h3>
+<div class="flex p-1 bg-misty-white rounded-full border border-ink-black/5">
+<button class="flex-1 py-1.5 px-3 rounded-full text-label-md font-medium transition-all text-on-surface-variant hover:text-on-surface">标准</button>
+<button class="flex-1 py-1.5 px-3 rounded-full text-label-md font-bold transition-all bg-white shadow-sm text-jade-green">高清 HD</button>
+<button class="flex-1 py-1.5 px-3 rounded-full text-label-md font-medium transition-all text-on-surface-variant hover:text-on-surface">极清 Ultra</button>
+</div>
+</div>
+<!-- Points Breakdown -->
+<div class="flex flex-col gap-3">
+<div class="flex justify-between items-center">
+<span class="font-label-md text-on-surface-variant flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[18px]">toll</span>
+                                消耗估算
+                            </span>
+<div class="flex items-baseline gap-1">
+<span class="font-caption text-on-surface-variant">1 + 1 =</span>
+<span class="font-headline-md text-cinnabar-red">2</span>
+<span class="text-[12px] text-cinnabar-red ml-0.5">积分</span>
+</div>
+</div>
+<div class="p-4 bg-jade-green/5 rounded-xl border border-jade-green/10">
+<p class="text-[12px] text-jade-green/80 leading-relaxed italic">
+                                * 为什么积分增加了？HD 和 Ultra 模式使用更高级的模型引擎，以呈现更细腻的质感与光影细节。
+                            </p>
+</div>
+</div>
+<!-- Main Action -->
+<div class="flex flex-col gap-4">
+<button class="w-full py-4 bg-cinnabar-red text-white rounded-xl shadow-[0_8px_30px_rgba(200,60,35,0.3)] hover:brightness-110 active:scale-[0.98] transition-all flex items-center justify-center gap-3 group">
+<div class="w-7 h-7 border border-white/40 flex items-center justify-center font-serif text-lg leading-none">印</div>
+<span class="font-title-lg text-title-lg tracking-[0.2em]">立即开启绘制</span>
+</button>
+<div class="flex items-center justify-center gap-2 text-error text-[12px]">
+<span class="material-symbols-outlined text-[14px]">warning</span>
+<span class="">当前排队人数较多，预计耗时 30-60 秒</span>
+</div>
+</div>
+</div>
+</aside>
+</div>
+</main>
+<!-- Footer -->
+<footer class="bg-surface-container-low border-t border-outline-variant/30 mt-20">
+<div class="max-w-container-max mx-auto px-margin-desktop py-12 flex flex-col md:flex-row justify-between items-center gap-8">
+<div class="flex flex-col items-center md:items-start gap-4">
+<div class="font-headline-lg text-headline-lg text-ink-black opacity-10 font-bold">墨染梦境</div>
+<p class="font-body-md text-body-md text-on-surface-variant">© 2024 墨染梦境 Ink Dream AI. All Rights Reserved.</p>
+</div>
+<div class="flex gap-8">
+<a class="font-label-md text-label-md text-on-surface-variant hover:text-ink-black hover:underline transition-all" href="#">关于我们</a>
+<a class="font-label-md text-label-md text-on-surface-variant hover:text-ink-black hover:underline transition-all" href="#">使用协议</a>
+<a class="font-label-md text-label-md text-on-surface-variant hover:text-ink-black hover:underline transition-all" href="#">隐私政策</a>
+<a class="font-label-md text-label-md text-on-surface-variant hover:text-ink-black hover:underline transition-all" href="#">联系支持</a>
+</div>
+</div>
+</footer>
+<div class="fixed inset-0 z-[100] hidden" id="ratio-modal">
+<div class="absolute inset-0 bg-ink-black/60 backdrop-blur-sm" onclick="document.getElementById('ratio-modal').classList.add('hidden')"></div>
+<div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[90%] max-w-[800px] bg-misty-white rounded-3xl p-8 ink-wash-shadow border border-white">
+<div class="flex justify-between items-center mb-8">
+<h2 class="font-headline-md text-headline-md text-ink-black flex items-center gap-2">
+<span class="material-symbols-outlined text-cinnabar-red">aspect_ratio</span>
+                        选择画幅尺寸
+                    </h2>
+<button class="material-symbols-outlined text-on-surface-variant hover:text-cinnabar-red" onclick="document.getElementById('ratio-modal').classList.add('hidden')">close</button>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-8">
+<!-- 1:1 -->
+<div class="cursor-pointer p-4 rounded-2xl bg-white border border-ink-black/5 hover:border-silk-gold transition-all group">
+<div class="flex justify-between items-start mb-3">
+<div class="w-8 h-8 border-2 border-on-surface-variant/30 rounded-sm flex items-center justify-center">
+<div class="w-4 h-4 bg-on-surface-variant/10"></div>
+</div>
+<span class="px-2 py-0.5 rounded-full bg-jade-green/10 text-jade-green text-[10px] font-bold">+0 积分</span>
+</div>
+<div class="font-label-md font-bold text-on-surface">正方形 (1:1)</div>
+<div class="text-[11px] text-on-surface-variant/60 mt-1 mb-2">头像、社交封面、小管书配图</div>
+<div class="text-[10px] font-mono text-on-surface-variant/40 uppercase">1024x1024</div>
+</div>
+<!-- 3:4 -->
+<div class="cursor-pointer p-4 rounded-2xl bg-silk-gold/5 border-2 border-silk-gold transition-all group">
+<div class="flex justify-between items-start mb-3">
+<div class="w-6 h-8 border-2 border-silk-gold rounded-sm flex items-center justify-center">
+<div class="w-3 h-5 bg-silk-gold/20"></div>
+</div>
+<span class="px-2 py-0.5 rounded-full bg-jade-green/10 text-jade-green text-[10px] font-bold">+0 积分</span>
+</div>
+<div class="font-label-md font-bold text-on-surface">竖版标准 (3:4)</div>
+<div class="text-[11px] text-on-surface-variant/60 mt-1 mb-2">半身人像、国风写真</div>
+<div class="text-[10px] font-mono text-on-surface-variant/40 uppercase">960x1280</div>
+</div>
+<!-- 2:3 -->
+<div class="cursor-pointer p-4 rounded-2xl bg-white border border-ink-black/5 hover:border-silk-gold transition-all group">
+<div class="flex justify-between items-start mb-3">
+<div class="w-5 h-8 border-2 border-on-surface-variant/30 rounded-sm flex items-center justify-center">
+<div class="w-2.5 h-6 bg-on-surface-variant/10"></div>
+</div>
+<span class="px-2 py-0.5 rounded-full bg-jade-green/10 text-jade-green text-[10px] font-bold">+0 积分</span>
+</div>
+<div class="font-label-md font-bold text-on-surface">竖版海报 (2:3)</div>
+<div class="text-[11px] text-on-surface-variant/60 mt-1 mb-2">全身角色、壁纸、小说角色展示</div>
+<div class="text-[10px] font-mono text-on-surface-variant/40 uppercase">1024x1536</div>
+</div>
+<!-- 4:3 -->
+<div class="cursor-pointer p-4 rounded-2xl bg-white border border-ink-black/5 hover:border-silk-gold transition-all group">
+<div class="flex justify-between items-start mb-3">
+<div class="w-8 h-6 border-2 border-on-surface-variant/30 rounded-sm flex items-center justify-center">
+<div class="w-5 h-3 bg-on-surface-variant/10"></div>
+</div>
+<span class="px-2 py-0.5 rounded-full bg-jade-green/10 text-jade-green text-[10px] font-bold">+0 积分</span>
+</div>
+<div class="font-label-md font-bold text-on-surface">横版标准 (4:3)</div>
+<div class="text-[11px] text-on-surface-variant/60 mt-1 mb-2">场景插画、多人构图</div>
+<div class="text-[10px] font-mono text-on-surface-variant/40 uppercase">1280x960</div>
+</div>
+<!-- 16:9 -->
+<div class="cursor-pointer p-4 rounded-2xl bg-white border border-ink-black/5 hover:border-silk-gold transition-all group">
+<div class="flex justify-between items-start mb-3">
+<div class="w-9 h-5 border-2 border-on-surface-variant/30 rounded-sm flex items-center justify-center">
+<div class="w-7 h-2.5 bg-on-surface-variant/10"></div>
+</div>
+<span class="px-2 py-0.5 rounded-full bg-jade-green/10 text-jade-green text-[10px] font-bold">+0 积分</span>
+</div>
+<div class="font-label-md font-bold text-on-surface">横版封面 (16:9)</div>
+<div class="text-[11px] text-on-surface-variant/60 mt-1 mb-2">视频封面、横版头图</div>
+<div class="text-[10px] font-mono text-on-surface-variant/40 uppercase">1536x864</div>
+</div>
+<!-- 9:16 -->
+<div class="cursor-pointer p-4 rounded-2xl bg-white border border-ink-black/5 hover:border-silk-gold transition-all group">
+<div class="flex justify-between items-start mb-3">
+<div class="w-4.5 h-8 border-2 border-on-surface-variant/30 rounded-sm flex items-center justify-center">
+<div class="w-2.5 h-6 bg-on-surface-variant/10"></div>
+</div>
+<span class="px-2 py-0.5 rounded-full bg-jade-green/10 text-jade-green text-[10px] font-bold">+0 积分</span>
+</div>
+<div class="font-label-md font-bold text-on-surface">竖屏封面 (9:16)</div>
+<div class="text-[11px] text-on-surface-variant/60 mt-1 mb-2">手机壁纸、短视频封面</div>
+<div class="text-[10px] font-mono text-on-surface-variant/40 uppercase">864x1536</div>
+</div>
+</div>
+<div class="flex justify-end">
+<button class="px-12 py-3 bg-cinnabar-red text-white rounded-full font-title-lg text-title-lg hover:brightness-110 shadow-lg" onclick="document.getElementById('ratio-modal').classList.add('hidden')">
+                        确认选择
+                    </button>
+</div>
+</div>
+</div>
+
+
+
+</body></html>

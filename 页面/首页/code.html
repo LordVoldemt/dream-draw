@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+
+<html class="light" lang="zh-CN"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif:wght@400;600;700&amp;family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "tertiary-fixed": "#ffe088",
+                        "surface-container-lowest": "#ffffff",
+                        "on-primary-fixed": "#3e0400",
+                        "on-secondary-fixed": "#002118",
+                        "outline-variant": "#e2bfb8",
+                        "on-error-container": "#93000a",
+                        "surface-bright": "#fcf9f8",
+                        "on-primary": "#ffffff",
+                        "tertiary": "#735c00",
+                        "on-secondary-fixed-variant": "#244e41",
+                        "error-container": "#ffdad6",
+                        "tertiary-fixed-dim": "#e9c349",
+                        "on-error": "#ffffff",
+                        "outline": "#8e706a",
+                        "misty-white": "#F5F5F3",
+                        "secondary-fixed": "#bfecda",
+                        "surface-container-low": "#f6f3f2",
+                        "secondary": "#3d6658",
+                        "secondary-fixed-dim": "#a3d0be",
+                        "inverse-primary": "#ffb4a5",
+                        "on-surface": "#1c1b1b",
+                        "surface-container": "#f0eded",
+                        "silk-gold": "#D4AF37",
+                        "on-tertiary-fixed": "#241a00",
+                        "ink-black": "#1A1A1A",
+                        "background": "#fcf9f8",
+                        "on-primary-container": "#ffefeb",
+                        "on-tertiary": "#ffffff",
+                        "primary-container": "#c83c23",
+                        "surface-tint": "#b12c14",
+                        "on-secondary": "#ffffff",
+                        "jade-green": "#4F796A",
+                        "surface-dim": "#dcd9d9",
+                        "surface": "#fcf9f8",
+                        "on-primary-fixed-variant": "#8e1300",
+                        "primary-fixed": "#ffdad3",
+                        "on-secondary-container": "#416b5c",
+                        "on-surface-variant": "#5a413c",
+                        "surface-container-highest": "#e5e2e1",
+                        "primary-fixed-dim": "#ffb4a5",
+                        "surface-variant": "#e5e2e1",
+                        "inverse-surface": "#313030",
+                        "on-background": "#1c1b1b",
+                        "inverse-on-surface": "#f3f0ef",
+                        "surface-container-high": "#eae7e7",
+                        "tertiary-container": "#cca72f",
+                        "cinnabar-red": "#C83C23",
+                        "error": "#ba1a1a",
+                        "on-tertiary-container": "#4e3d00",
+                        "secondary-container": "#bce9d7",
+                        "on-tertiary-fixed-variant": "#574500",
+                        "primary": "#a5230c"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "container-max": "1280px",
+                        "section-gap": "80px",
+                        "gutter": "24px",
+                        "margin-desktop": "40px",
+                        "unit": "4px",
+                        "margin-mobile": "16px"
+                    },
+                    "fontFamily": {
+                        "headline-lg-mobile": ["Noto Serif"],
+                        "body-md": ["Plus Jakarta Sans"],
+                        "display-hero": ["Noto Serif"],
+                        "title-lg": ["Plus Jakarta Sans"],
+                        "headline-lg": ["Noto Serif"],
+                        "body-lg": ["Plus Jakarta Sans"],
+                        "label-md": ["Plus Jakarta Sans"],
+                        "caption": ["Plus Jakarta Sans"],
+                        "headline-md": ["Noto Serif"]
+                    },
+                    "fontSize": {
+                        "headline-lg-mobile": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                        "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "display-hero": ["48px", {"lineHeight": "60px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "title-lg": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+                        "headline-lg": ["32px", {"lineHeight": "40px", "fontWeight": "600"}],
+                        "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                        "label-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0.05em", "fontWeight": "500"}],
+                        "caption": ["12px", {"lineHeight": "16px", "fontWeight": "400"}],
+                        "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            background-color: #fcf9f8;
+            color: #1c1b1b;
+        }
+        .glass-panel {
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+        }
+        .vertical-text {
+            writing-mode: vertical-rl;
+            text-orientation: mixed;
+        }
+        .ink-shadow {
+            box-shadow: 0 10px 40px -10px rgba(26, 26, 26, 0.08);
+        }
+    </style>
+</head>
+<body class="font-body-md text-body-md overflow-x-hidden">
+<!-- TopNavBar Navigation Shell -->
+<nav class="fixed top-0 left-0 w-full z-50 bg-misty-white/80 dark:bg-ink-black/80 backdrop-blur-xl border-b border-ink-black/5 dark:border-white/5 shadow-[0_4px_20px_-4px_rgba(26,26,26,0.08)]">
+<div class="flex justify-between items-center w-full px-margin-desktop py-4 max-w-container-max mx-auto">
+<div class="font-headline-md text-headline-md text-cinnabar-red font-bold tracking-tight">墨染梦境</div>
+<div class="hidden md:flex items-center gap-8">
+<a class="text-cinnabar-red font-semibold border-b-2 border-cinnabar-red pb-1 font-body-md text-body-md" href="#">首页</a>
+<a class="text-on-surface-variant hover:text-cinnabar-red transition-colors font-body-md text-body-md" href="#">画廊</a>
+<a class="text-on-surface-variant hover:text-cinnabar-red transition-colors font-body-md text-body-md" href="#">创作空间</a>
+<a class="text-on-surface-variant hover:text-cinnabar-red transition-colors font-body-md text-body-md" href="#">我的作品</a>
+</div>
+<div class="flex items-center gap-4">
+<button class="material-symbols-outlined text-on-surface-variant hover:opacity-80 transition-opacity">toll</button>
+<button class="material-symbols-outlined text-on-surface-variant hover:opacity-80 transition-opacity">notifications</button>
+<div class="w-10 h-10 rounded-full overflow-hidden border border-outline-variant/30">
+<img alt="User Avatar" class="w-full h-full object-cover" data-alt="A close-up portrait of a serene woman with classical East Asian features, soft natural lighting, and a minimalist aesthetic. The image reflects the premium 'New Chinese' brand identity with a clean, misty-white background and subtle textures of high-end digital photography." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAydyxN1789O3wsNrKl52BiPfUiA3MNExeEE5JpwAFrAqtXPL_lrnIusFOoM_hXptRjfh9wSq4OrwVyavh7wzW3nvpIRcHTBtp_SZKmUeo3eTdvUdngRCID-7M5Uuf-GOVIQ23YUJUK9GZJ2XCihw-FAtwdx1X_-5y72kRU25WnmryaFt396pOrdLJzPeoEMkxaG0rkoeS7mXoP3E-MRBQbA3_lSPZ3m7wSlDrXvCgpiVGu9tB33m60PsMHrer2XKKaFCOSVD3T5qI"/>
+</div>
+</div>
+</div>
+</nav>
+<!-- Hero Section -->
+<section class="relative min-h-[921px] flex items-center pt-20 overflow-hidden">
+<div class="absolute inset-0 z-0">
+<img class="w-full h-full object-cover" data-alt="An ethereal and cinematic AI-generated portrait of a stunning Chinese female character in flowing traditional silk robes. She stands amidst a misty, dreamlike landscape reminiscent of classical ink wash paintings. The lighting is soft and otherworldly, with a palette of cinnabar red, misty white, and deep ink black creating a high-end, Xianxia atmosphere." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBO1l9mDQbux9vYJ4PlsLhv_5vdvbIYTbBipT3GWIbaVgMOtGfzaTBpAuEeKSQkIybWSW1gXg_h-MFHUsnMEC-0LlyIUqlCmeJDaBpLW2DvJ_A9XcE5lBHBKK9BLSTZoXXtQHp0-9sPVotq0dhOGotEV7QmtJYugQi0Ljo_n7GOEfA3jbb8_g39Sa7IeWWS7qRWFTnpZ11j3vqRQIzb_QK9lepqdijfWsc9LPOJ9uO9NnkrQ_Yzw6TPvPQ01hJxwsdsEd5eiHtKUj4"/>
+<div class="absolute inset-0 bg-gradient-to-r from-misty-white via-misty-white/40 to-transparent"></div>
+</div>
+<div class="relative z-10 w-full max-w-container-max mx-auto px-margin-desktop">
+<div class="max-w-2xl">
+<h1 class="font-display-hero text-display-hero text-ink-black mb-6 leading-tight">
+                    输入一句描述，<br/>
+                    生成你的<span class="text-cinnabar-red">专属国风</span>角色
+                </h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant mb-10 max-w-lg">
+                    融合东方画意与现代AI，让每一个梦境中的绝代佳人跃然纸上。从长安盛景到仙山云海，开启你的中式幻想之旅。
+                </p>
+<div class="flex flex-col sm:flex-row gap-4">
+<button class="px-8 py-4 bg-cinnabar-red text-white font-title-lg text-title-lg rounded-lg hover:opacity-90 transition-opacity flex items-center justify-center gap-2 shadow-lg shadow-cinnabar-red/20 active:scale-95 transition-transform">
+<span class="material-symbols-outlined" data-weight="fill">auto_awesome</span>
+                        立即生成
+                    </button>
+<button class="px-8 py-4 bg-misty-white/80 backdrop-blur-md border border-ink-black/10 text-ink-black font-title-lg text-title-lg rounded-lg hover:bg-surface-container-low transition-all">
+                        探索灵感
+                    </button>
+</div>
+</div>
+</div>
+</section>
+<!-- Style Showcase -->
+<section class="py-section-gap bg-surface">
+<div class="max-w-container-max mx-auto px-margin-desktop">
+<div class="flex items-center gap-4 mb-12">
+<div class="w-12 h-[1px] bg-silk-gold"></div>
+<h2 class="font-headline-lg text-headline-lg text-ink-black">格律传承 · 四大风格</h2>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-gutter">
+<!-- Tang Style -->
+<div class="group relative aspect-[3/4] rounded-xl overflow-hidden cursor-pointer ink-shadow border border-white/20 transition-all hover:-translate-y-2">
+<img class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" data-alt="A magnificent representation of Tang Dynasty aesthetics, featuring a noble woman in rich, colorful silks with elaborate gold hair ornaments. The background is a warm, glowing palace interior with silk screens and lanterns. The color palette emphasizes cinnabar red, silk gold, and deep jade green in a high-fidelity digital art style." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAnBg8OWz4cO4o8xNOkAtLlFgtXng5zSRrUfrpFhSj7ZJ55dxoTvVCiNSYy3cYr19BTQphcfIOJCCUblRuv097K06R9Bm-a7xGx564H3ccFHvzda1LzKTUcpALsemMGdqPV00rDtBPsFQkr2xGyUd3q0t5pf4ws4UY5Kg1QLqNxDPVParWBrwcK4xdRBy6sYxu5PDnmflYwS10Lm1U5FyvVKABd6T8JowJPgKghlwgBJtdXiUXJig2c9wIXq2H4eunQt6DtUtuPUzI"/>
+<div class="absolute inset-0 bg-gradient-to-t from-ink-black/80 via-transparent to-transparent"></div>
+<div class="absolute right-6 top-6">
+<span class="vertical-text font-headline-md text-headline-md text-white tracking-widest bg-ink-black/20 backdrop-blur-sm p-2">盛唐气象</span>
+</div>
+</div>
+<!-- Han Style -->
+<div class="group relative aspect-[3/4] rounded-xl overflow-hidden cursor-pointer ink-shadow border border-white/20 transition-all hover:-translate-y-2">
+<img class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" data-alt="A graceful Han Dynasty character portrayed with minimalist elegance. She wears simple, layered linen robes in earthy tones and muted reds. The setting is a serene bamboo grove with soft, diffused morning light filtering through the leaves, creating a peaceful and scholarly atmosphere with a clean, misty-white aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAe3jDAjNbzAgEzXzi43eN-OeAZi3LJFFovJ9siwOM35GhgfYFNkgp-6HQsLR4MDFUJbXN-ZjDCKXIuC3U8z-a0eUzoVypFVgWtgT-4j1NHV286oEfmQHwbOQWCY3qvKmCc7umNAIz27qD7OfC5oIO07FUVOSZDmj-XCrE8Ss_0Nc9zEqF-qeXf_hyrvh5sqs5NEOavWifJwpuvbkNIfGydpIG5dJFNaMCGqW3YLR0lAQT5XOd3Ielk4WFDkX8pZcxo8bfAXlU9f3Y"/>
+<div class="absolute inset-0 bg-gradient-to-t from-ink-black/80 via-transparent to-transparent"></div>
+<div class="absolute right-6 top-6">
+<span class="vertical-text font-headline-md text-headline-md text-white tracking-widest bg-ink-black/20 backdrop-blur-sm p-2">汉代风骨</span>
+</div>
+</div>
+<!-- Xianxia Style -->
+<div class="group relative aspect-[3/4] rounded-xl overflow-hidden cursor-pointer ink-shadow border border-silk-gold transition-all hover:-translate-y-2">
+<img class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" data-alt="An ethereal Xianxia immortal character floating among crystalline clouds and floating mountain peaks. Her robes are made of semi-transparent, shimmering silk that trails behind her. The lighting is magical and cool-toned, with jade green and pearlescent white highlights, evoking a sense of divine power and mystery." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBaVRraIFo978qNfI5SkArxUH-MNq007mRTys6td5rDjcu07z-Weyi2KmVwFk8a0NpR0sNdRhhMH5hhH8PhezWbX-PmWKicofCKmUndWN1DE5mFn4SmaFp7TOos2QNdmbxvbBh3za_7wM5cBMdPZ70vDXSLiJv-7fYH6oVvqHniiw2ZLA_inWEWY5sULmBeoOcHjMDHFZSn1HD_0pzWP6tgs5Pd42VqrKVYi28KVLknf-1H1uohnumv_8VFXTBO4g0M75h9EFtjg4c"/>
+<div class="absolute inset-0 bg-gradient-to-t from-ink-black/80 via-transparent to-transparent"></div>
+<div class="absolute right-6 top-6">
+<span class="vertical-text font-headline-md text-headline-md text-white tracking-widest bg-ink-black/20 backdrop-blur-sm p-2">仙侠梦幻</span>
+</div>
+</div>
+<!-- New Chinese Style -->
+<div class="group relative aspect-[3/4] rounded-xl overflow-hidden cursor-pointer ink-shadow border border-white/20 transition-all hover:-translate-y-2">
+<img class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" data-alt="A modern 'New Chinese' fashion concept featuring a contemporary model wearing a stylized Cheongsam with modern patterns. The setting is a minimalist architectural space with sharp shadows and clean lines. The palette is a sophisticated mix of deep ink black and bright white, punctuated by a single vibrant cinnabar red accessory." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCAZY0KV_1g5PF3qKPgpQzsk2EOHtBhtfdc31WQRn43IlYC16PObwO_5PbiyQ-Bobo1U5pG2Ch4-yZvmkswfguduwvfrx2YeCOXtuRQmB-yA76cIOEOmJmrmhXh8diohlx5xD6LfUKDFjyMuqGV9pVqZfFlrmXBAg6e4o7O_3DglxcG6DlmFjEYrn0NNpIr2EBiHbkjOkW7vxDnJW7RJxfh061Fr9zcoRJFJJP4tP9GyJV7FZsKuXJlCFPBe5F-C7LwCB1t0_1sT6o"/>
+<div class="absolute inset-0 bg-gradient-to-t from-ink-black/80 via-transparent to-transparent"></div>
+<div class="absolute right-6 top-6">
+<span class="vertical-text font-headline-md text-headline-md text-white tracking-widest bg-ink-black/20 backdrop-blur-sm p-2">新中式感</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Emotional Templates (Bento Layout) -->
+<section class="py-section-gap bg-surface-container-low/30 overflow-hidden">
+<div class="max-w-container-max mx-auto px-margin-desktop">
+<div class="text-center mb-16">
+<h2 class="font-headline-lg text-headline-lg text-ink-black mb-4">入画灵感</h2>
+<p class="text-on-surface-variant max-w-xl mx-auto">精选情感模版，一键开启你的国风角色叙事</p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-12 gap-6 h-auto md:h-[600px]">
+<!-- Large Feature: Female Sword Immortal -->
+<div class="md:col-span-7 relative group rounded-2xl overflow-hidden glass-panel ink-shadow border border-white/40">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000" data-alt="A stunning digital art piece of a female sword immortal standing under a massive full moon. She is dressed in flowing silver and white silk, holding a glowing jade sword. The landscape is a misty mountain peak with cherry blossoms falling. The mood is cold, serene, and majestic, dominated by misty white and deep ink tones." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCg0Jf2rs1pUInY0Zdr40sheRfU36gT7iJZUrDFsU3HwKW1jaK8JkCocvVUPH3apPqwHnplfHLK7xXWr8KshqiiHpYFl1N0CwH8I2ZeCvytPlWmK4ItpiZQD330_qtmw9PULfqLgL3Vq4F_J_fatVB2OTmoOFAdUMqh5KEaZPAAqtNF0CqI4wKJWARDCiGpBuiYa9EGmYhjpOp5-zBMMIRzEnDQJQFH1PCFh8GfckumKcMjWHxjwaVQFnO27znn4UieVgLjig7bGMg"/>
+<div class="absolute inset-0 bg-gradient-to-t from-ink-black/90 via-ink-black/20 to-transparent"></div>
+<div class="absolute bottom-0 left-0 p-8 w-full">
+<div class="flex items-center gap-3 mb-4">
+<span class="bg-jade-green text-white text-caption px-3 py-1 rounded-full uppercase tracking-wider">清冷 · 仙气</span>
+</div>
+<h3 class="font-headline-md text-headline-md text-white mb-2">清冷月下女剑仙</h3>
+<p class="text-white/70 font-body-md text-body-md mb-6 max-w-md">“昆仑寒月，孤剑藏锋。她是众生仰望的极境，也是永恒的寂寞。”</p>
+<button class="flex items-center gap-2 text-silk-gold font-semibold hover:gap-4 transition-all">
+                            使用此模版 <span class="material-symbols-outlined">arrow_forward</span>
+</button>
+</div>
+</div>
+<!-- Side Column -->
+<div class="md:col-span-5 flex flex-col gap-6">
+<!-- Noble Daughter -->
+<div class="flex-1 relative group rounded-2xl overflow-hidden glass-panel ink-shadow border border-white/40">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000" data-alt="An exquisite portrait of a Tang Dynasty noble daughter sitting in a luxury garden pavilion. She is surrounded by peonies and delicate birdcages. The image is filled with warm golden sunlight and rich textures of silk and carved wood. The palette is dominated by cinnabar red, gold, and vibrant jade green." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCF2rGnx5N7Ly6ZwhWP26fahXjWELAa--AoU10EQ1IHFHVHUVhPxiteGuyBvdUvrb8UDtrAp-Wemk-3KKM-YKjsz62mp_Oa62i0BuOMJVxYBR3b4dD3UR3pFd9Yra86Wo7xUaQzMl2icfzfoX6mvVTM1l-I4JfD5XF5usFiOGqmt1QiU8-00eR3dRSEo70AVGV1Q4sFFoibkCaz532jc-nTvq0DQgzGyKxVqh1pa5BXD8R7s0MfntNXnTkKMsRv3oCk0mykpDeM88A"/>
+<div class="absolute inset-0 bg-gradient-to-t from-ink-black/90 via-transparent to-transparent"></div>
+<div class="absolute bottom-0 left-0 p-6">
+<h3 class="font-title-lg text-title-lg text-white mb-1">长安贵族千金</h3>
+<p class="text-white/60 text-caption">盛世繁花，一眼万年的雍容气度</p>
+</div>
+</div>
+<!-- Red Rogue -->
+<div class="flex-1 relative group rounded-2xl overflow-hidden glass-panel ink-shadow border border-white/40">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000" data-alt="A dramatic and dark AI-generated character of a 'Bingjiao' (obsessive) red-clad rogue. She stands in a rainy courtyard with a red umbrella, her expression intense and haunting. The image uses high-contrast lighting with deep ink blacks and a piercing cinnabar red for her outfit. The mood is mysterious and emotionally charged." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAXfnqX6_yZwTtQs-RSvRHyKwxfyYasGRz2dwbA3LPR7W5zcnBUm9km5ZLdEerE_q4VNuVo2AuVsPUBHL_Lmf0ACTXqVOwzSN3Yn8COKFS6GHUXuhwP3HBgwOvb8URexSmxrZ0VmnV7ZDbZu3dRlRxeunnBzxe7v9Ty3K4RHbvXDyjyIRv66SdHoT1gaYHBSYR11ewaF1LN2UqSO5xLZCmru9T1kCNgAssyBoKKTeXddoTuwNqPn8tIuodAOkYuCIEIS7X09Cs_x2E"/>
+<div class="absolute inset-0 bg-gradient-to-t from-ink-black/90 via-transparent to-transparent"></div>
+<div class="absolute bottom-0 left-0 p-6">
+<h3 class="font-title-lg text-title-lg text-white mb-1">病娇红衣妖姬</h3>
+<p class="text-white/60 text-caption">深情至狂，如曼珠沙华般凄艳</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Example Gallery -->
+<section class="py-section-gap">
+<div class="max-w-container-max mx-auto px-margin-desktop">
+<div class="flex justify-between items-end mb-12">
+<div>
+<h2 class="font-headline-lg text-headline-lg text-ink-black">墨染·万象画廊</h2>
+<p class="text-on-surface-variant">探索用户创作的惊艳作品</p>
+</div>
+<button class="flex items-center gap-2 text-cinnabar-red font-semibold hover:opacity-80">
+                    查看全部 <span class="material-symbols-outlined">grid_view</span>
+</button>
+</div>
+<div class="columns-1 sm:columns-2 lg:columns-4 gap-6 space-y-6">
+<!-- Gallery Item 1 -->
+<div class="break-inside-avoid relative group rounded-xl overflow-hidden ink-shadow border border-outline-variant/20">
+<img class="w-full h-auto" data-alt="A detailed digital painting of a Chinese goddess floating in a sea of clouds. Her hair is adorned with intricate silver jewelry and pearls. The overall look is misty and soft, using a pastel palette of whites, light blues, and soft golds. The aesthetic is premium and dreamlike." src="https://lh3.googleusercontent.com/aida-public/AB6AXuA9nXmJvOxMnHxHtqARG4qXym3izqRLfuFOXNCARwchxYxSFVoTJCraBEHuj21iShDoGTXXwzlBGPiigdzU7feZt5gTEHs_7LdgQgottLmDF0AEQWtt6tE3HdDkTICzYt70kbsDV-0IMNoum0ZFamO9ZPMEtVNxfojrGsdJ2Jn0CKoXF6jBvK7k3Gbz3zFzx6vUwlxgsi3ISxCtpLdmxDwqap8eTArgz1TJSBOt5EkorsrRIq9PbY6XoKqOjgOr0i0XBhKDMQSa3a4"/>
+<div class="absolute inset-0 bg-ink-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex flex-col justify-end p-4">
+<p class="text-white font-label-md text-label-md">云顶神女</p>
+</div>
+</div>
+<!-- Gallery Item 2 -->
+<div class="break-inside-avoid relative group rounded-xl overflow-hidden ink-shadow border border-outline-variant/20">
+<img class="w-full h-auto" data-alt="A portrait of a male swordsman in a simple black ink-wash style robe. He is leaning against a twisted pine tree on a snowy mountain cliff. The image uses a stark monochrome palette with minimal red accents on his sword hilt. High-end minimalist Guofeng aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBrJU3PerL6_kgfzq9qfZ7latIB65Qwm46Cia2uyBhfCEqGlsPy8Cy6yh8K01f8K3Rzp6nTd04p2U_h_RPgxy8wu8qxoRszcpvxSRL7NfBE0T4sYn0mkcsZgx-OwQZI0kiz5dx9DThsSAg_0T1Jhft3glPIdeylifcbZlzrBdN_QrTNXO61Kjux9ciXd_6TkD2G9EdlfL8zTGechC1UOPyfUSj1YqPBECKQy65kbOA4s4EK2CF_UaNTswbJDv1e1Sz49a-KKdmtR4E"/>
+<div class="absolute inset-0 bg-ink-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex flex-col justify-end p-4">
+<p class="text-white font-label-md text-label-md">墨客寻梅</p>
+</div>
+</div>
+<!-- Gallery Item 3 -->
+<div class="break-inside-avoid relative group rounded-xl overflow-hidden ink-shadow border border-outline-variant/20">
+<img class="w-full h-auto" data-alt="A close-up of a character's eyes, styled with traditional Chinese makeup including intricate red floral patterns on the forehead. The lighting is dramatic and cinematic, highlighting the moisture in the eyes and the delicate textures of silk fans in the background." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAkfkoO9d6VwCEZSPAfUxGmp0eqPXV-FSVci_qjzRhoCNeSW35KFE68gE4ETqy0TiDoVN-BT46h-o8HT1GDcPDwMl_soSo1gbrBsAwwittSWwdu3yCxtX6RJGTPnmua1Sc8vdlC-Qeb2xnJTpGQtmuelpAtz1oK16WfhxKUZQhBmBo68H0gzF8oqxhCwVr9Lyt8nS3Ql-OcnLD9LRYwlKLVFJHC1Wk5P1aPT_RFNKGEHsN9RTaJk3LNoHXMyslDzXNkzPsrZSaBnfw"/>
+<div class="absolute inset-0 bg-ink-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex flex-col justify-end p-4">
+<p class="text-white font-label-md text-label-md">花钿弄影</p>
+</div>
+</div>
+<!-- Gallery Item 4 -->
+<div class="break-inside-avoid relative group rounded-xl overflow-hidden ink-shadow border border-outline-variant/20">
+<img class="w-full h-auto" data-alt="A wide-angle landscape showing a lone character in a small boat on a vast, mirror-like lake at dusk. The sky is a deep indigo, reflected perfectly in the water. The only warm light comes from a single lantern on the boat, casting a golden glow on the character's silk robes." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDUOpXQ-XGpcnGdJh_jLU_2RgmPYDbidb-H1VeaCaEqzd9WZRTWd1qtsDy7XpYYW8BnHevr8LZmAhDRgqkfxeIBhrkCt7tdUeoTi3ILpegamo4wOqMdUDJSR8iRAP5Yh9pPHrN3xp5sQ1wp3JJ8eJ5jWKuzhyZRBiQ-l0wdmO3d30UFrceOGydeMDnDFYSyjfHeqOVY6RIDnLSYOIgdCbCOOTQ2B-Qnj2Q-xvO1AbNtzrQtprouhcAJQJCH2OIPrL5LsbizfzQGxwc"/>
+<div class="absolute inset-0 bg-ink-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex flex-col justify-end p-4">
+<p class="text-white font-label-md text-label-md">平湖秋月</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Call to Action -->
+<section class="py-section-gap relative overflow-hidden">
+<div class="absolute inset-0 bg-surface-container-high/50 -z-10"></div>
+<div class="max-w-4xl mx-auto px-margin-desktop text-center">
+<div class="mb-8 flex justify-center">
+<div class="w-16 h-16 border-2 border-cinnabar-red flex items-center justify-center rotate-45">
+<div class="font-headline-md text-headline-md text-cinnabar-red -rotate-45">夢</div>
+</div>
+</div>
+<h2 class="font-headline-lg text-headline-lg text-ink-black mb-6">此刻，绘就你的东方美学奇迹</h2>
+<p class="text-on-surface-variant font-body-lg text-body-lg mb-10">超过 1,000,000+ 个独特国风角色已在墨染梦境中诞生。加入我们，赋予你的想象以血肉，赋予你的文字以灵魂。</p>
+<button class="px-12 py-5 bg-cinnabar-red text-white font-title-lg text-title-lg rounded-none relative group overflow-hidden active:scale-95 transition-transform">
+<div class="absolute inset-0 bg-white/10 translate-y-full group-hover:translate-y-0 transition-transform"></div>
+<span class="relative z-10">立即开启创作之旅</span>
+</button>
+</div>
+</section>
+<!-- Footer -->
+<footer class="bg-surface-container-low dark:bg-surface-dim border-t border-outline-variant/30 py-section-gap px-margin-desktop">
+<div class="max-w-container-max mx-auto">
+<div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-gutter mb-12">
+<div class="flex flex-col gap-2">
+<div class="font-headline-lg text-headline-lg text-ink-black opacity-40">墨染梦境</div>
+<p class="text-on-surface-variant font-body-md text-body-md max-w-sm">专业的AI国风人像创作平台，让传统美学在数字时代焕发新生。</p>
+</div>
+<div class="flex gap-8">
+<a class="text-on-surface-variant hover:text-ink-black hover:underline transition-all font-body-md text-body-md" href="#">关于我们</a>
+<a class="text-on-surface-variant hover:text-ink-black hover:underline transition-all font-body-md text-body-md" href="#">使用协议</a>
+<a class="text-on-surface-variant hover:text-ink-black hover:underline transition-all font-body-md text-body-md" href="#">隐私政策</a>
+<a class="text-on-surface-variant hover:text-ink-black hover:underline transition-all font-body-md text-body-md" href="#">联系支持</a>
+</div>
+</div>
+<div class="flex flex-col md:flex-row justify-between items-center gap-gutter pt-8 border-t border-outline-variant/20">
+<p class="text-on-surface-variant font-caption text-caption">© 2024 墨染梦境 Ink Dream AI. All Rights Reserved.</p>
+<div class="flex items-center gap-6">
+<span class="text-jade-green font-semibold font-caption text-caption">关注我们：</span>
+<div class="flex gap-4">
+<button class="w-8 h-8 rounded-full bg-surface-container-high flex items-center justify-center hover:bg-cinnabar-red hover:text-white transition-all">
+<span class="material-symbols-outlined text-[18px]">share</span>
+</button>
+<button class="w-8 h-8 rounded-full bg-surface-container-high flex items-center justify-center hover:bg-cinnabar-red hover:text-white transition-all">
+<span class="material-symbols-outlined text-[18px]">chat</span>
+</button>
+<button class="w-8 h-8 rounded-full bg-surface-container-high flex items-center justify-center hover:bg-cinnabar-red hover:text-white transition-all">
+<span class="material-symbols-outlined text-[18px]">alternate_email</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</footer>
+</body></html>

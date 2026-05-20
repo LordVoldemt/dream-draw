@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+
+<html lang="zh-CN"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif:wght@400;600;700&amp;family=Plus+Jakarta+Sans:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "tertiary-fixed": "#ffe088",
+                        "surface-container-lowest": "#ffffff",
+                        "on-primary-fixed": "#3e0400",
+                        "on-secondary-fixed": "#002118",
+                        "outline-variant": "#e2bfb8",
+                        "on-error-container": "#93000a",
+                        "surface-bright": "#fcf9f8",
+                        "on-primary": "#ffffff",
+                        "tertiary": "#735c00",
+                        "on-secondary-fixed-variant": "#244e41",
+                        "error-container": "#ffdad6",
+                        "tertiary-fixed-dim": "#e9c349",
+                        "on-error": "#ffffff",
+                        "outline": "#8e706a",
+                        "misty-white": "#F5F5F3",
+                        "secondary-fixed": "#bfecda",
+                        "surface-container-low": "#f6f3f2",
+                        "secondary": "#3d6658",
+                        "secondary-fixed-dim": "#a3d0be",
+                        "inverse-primary": "#ffb4a5",
+                        "on-surface": "#1c1b1b",
+                        "surface-container": "#f0eded",
+                        "silk-gold": "#D4AF37",
+                        "on-tertiary-fixed": "#241a00",
+                        "ink-black": "#1A1A1A",
+                        "background": "#fcf9f8",
+                        "on-primary-container": "#ffefeb",
+                        "on-tertiary": "#ffffff",
+                        "primary-container": "#c83c23",
+                        "surface-tint": "#b12c14",
+                        "on-secondary": "#ffffff",
+                        "jade-green": "#4F796A",
+                        "surface-dim": "#dcd9d9",
+                        "surface": "#fcf9f8",
+                        "on-primary-fixed-variant": "#8e1300",
+                        "primary-fixed": "#ffdad3",
+                        "on-secondary-container": "#416b5c",
+                        "on-surface-variant": "#5a413c",
+                        "surface-container-highest": "#e5e2e1",
+                        "primary-fixed-dim": "#ffb4a5",
+                        "surface-variant": "#e5e2e1",
+                        "inverse-surface": "#313030",
+                        "on-background": "#1c1b1b",
+                        "inverse-on-surface": "#f3f0ef",
+                        "surface-container-high": "#eae7e7",
+                        "tertiary-container": "#cca72f",
+                        "cinnabar-red": "#C83C23",
+                        "error": "#ba1a1a",
+                        "on-tertiary-container": "#4e3d00",
+                        "secondary-container": "#bce9d7",
+                        "on-tertiary-fixed-variant": "#574500",
+                        "primary": "#a5230c"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "container-max": "1280px",
+                        "section-gap": "80px",
+                        "gutter": "24px",
+                        "margin-desktop": "40px",
+                        "unit": "4px",
+                        "margin-mobile": "16px"
+                    },
+                    "fontFamily": {
+                        "headline-lg-mobile": ["Noto Serif"],
+                        "body-md": ["Plus Jakarta Sans"],
+                        "display-hero": ["Noto Serif"],
+                        "title-lg": ["Plus Jakarta Sans"],
+                        "headline-lg": ["Noto Serif"],
+                        "body-lg": ["Plus Jakarta Sans"],
+                        "label-md": ["Plus Jakarta Sans"],
+                        "caption": ["Plus Jakarta Sans"],
+                        "headline-md": ["Noto Serif"]
+                    },
+                    "fontSize": {
+                        "headline-lg-mobile": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                        "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "display-hero": ["48px", {"lineHeight": "60px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "title-lg": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+                        "headline-lg": ["32px", {"lineHeight": "40px", "fontWeight": "600"}],
+                        "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                        "label-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0.05em", "fontWeight": "500"}],
+                        "caption": ["12px", {"lineHeight": "16px", "fontWeight": "400"}],
+                        "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .ink-progress {
+            background: radial-gradient(circle, rgba(26,26,26,0.1) 0%, rgba(26,26,26,0) 70%);
+            mask-image: radial-gradient(black, transparent);
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+</head>
+<body class="bg-misty-white font-body-md text-on-surface selection:bg-cinnabar-red/20">
+<!-- Shell Suppression: This is a task-focused generation screen, suppressing global TopNavBar and SideNavBar for focus. -->
+<main class="min-h-screen flex flex-col items-center justify-center relative px-margin-mobile md:px-margin-desktop overflow-hidden">
+<!-- Subtle Background Texture -->
+<div class="absolute inset-0 opacity-10 pointer-events-none" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuA3attKHY-QEijwXnNssJX-kjGP4d0xAoacnCq1PWZ8DAqfsdlF5hvBarmQSI528hNRVWQeOIHVtOHGPabTrxqaTZne9Bbvyw0P5gg0820MCIYUsRVoymKsTKYMHzerTXnRPSyqf8RmYCNGPrPF7sgh9sNbRVLu0tS7VY84Zk8bsh0fYxw0IW10wsRTtgBFq7NVB7VYVXZqDouwcoYrnUIs2DkTJESdkxHdSACV4IH8Pk-mTWh3_LFar0B4RBh2YPyEv8DHlm6B7bo');"></div>
+<!-- Decorative Top-Right Seal Style Icon (Suppressed Nav but maintaining brand ID) -->
+<div class="absolute top-10 right-10 flex flex-col items-center opacity-40">
+<div class="w-12 h-12 border-2 border-cinnabar-red flex items-center justify-center p-1">
+<span class="font-headline-md text-cinnabar-red text-[20px] leading-tight text-center">墨染<br/>梦境</span>
+</div>
+</div>
+<!-- Main Content Area: Centered Progress -->
+<div class="max-w-md w-full flex flex-col items-center gap-10 z-10">
+<!-- Central Ink-Wash Progress Visual -->
+<div class="relative w-64 h-64 flex items-center justify-center">
+<!-- Outer Ring -->
+<div class="absolute inset-0 border-[1px] border-ink-black/5 rounded-full"></div>
+<!-- Pulsing Ink Effect Container -->
+<div class="w-48 h-48 rounded-full bg-surface-container-lowest shadow-2xl shadow-ink-black/5 flex items-center justify-center overflow-hidden border border-ink-black/10">
+<img class="w-full h-full object-cover opacity-80" data-alt="A mesmerizing, abstract ink-wash animation showing a bloom of black ink diffusing into pristine white water, creating elegant, organic smoky patterns. The style is minimalist Guofeng, with a misty white background and high-contrast ink textures. The lighting is soft and diffused, evoking a serene and poetic atmosphere typical of traditional Chinese landscape painting refined for a modern digital interface." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCEwc15TAl0cw0XWVouR0ZQaiT_vhtkR1qWj6dAcbhQZRy1R8ynf2ZPaZL_giZIeoeX5X9Bsw41caJEBgaWRtEEiU8mQ4_UzeUCfTK8TCwcu9j7mz1P4qCoNXFGBfUE6-5qiZt5_1xEdkbWDC0C7nLfIMQIZvPx1oAO6tjTy6mE9z4qbyl3cH2WowuSY0s9BN_s1YtJGpdKtyhfcqeUhkadSvXnFMneozTQCldxA9jn22BZii2FtmkAYQNNEarM5DFmjV_qLoI53A4"/>
+</div>
+<!-- Silk Gold Decorative Ring Fragment -->
+<div class="absolute -inset-2 border-2 border-silk-gold/20 rounded-full border-t-silk-gold"></div>
+</div>
+<!-- Progress Text Group -->
+<div class="text-center flex flex-col gap-3">
+<h1 class="font-headline-md text-headline-md text-ink-black tracking-widest">
+                    AI 正在墨染梦境中...
+                </h1>
+<p class="font-body-md text-on-surface-variant flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-[18px]">schedule</span>
+                    预计还需 15 秒
+                </p>
+</div>
+<!-- Loading Bar (Subtle) -->
+<div class="w-full bg-surface-container-highest/30 h-1 rounded-full overflow-hidden">
+<div class="h-full bg-cinnabar-red w-3/4 rounded-full shadow-[0_0_12px_rgba(200,60,35,0.4)]"></div>
+</div>
+</div>
+<!-- Bottom Tip Card (Glassmorphism) -->
+<div class="absolute bottom-12 max-w-lg w-full px-4">
+<div class="bg-surface-container-lowest/60 backdrop-blur-xl border border-white/40 p-6 rounded-xl shadow-sm flex items-start gap-4">
+<div class="bg-jade-green/10 p-2 rounded-lg text-jade-green">
+<span class="material-symbols-outlined" data-icon="lightbulb">lightbulb</span>
+</div>
+<div class="flex flex-col gap-1">
+<span class="font-label-md text-jade-green font-bold uppercase tracking-wider">创作贴士 (Creative Tip)</span>
+<p class="font-body-md text-on-surface-variant">
+                        试试在提示词中加入 “烟雨朦胧” 或 “朱砂点缀”，这能让生成的画面更具中国画的韵律美。
+                    </p>
+</div>
+</div>
+</div>
+<!-- Aesthetic Floating Elements (Liu Bai support) -->
+<div class="absolute top-1/4 left-10 w-24 h-24 bg-jade-green/5 blur-[60px] rounded-full"></div>
+<div class="absolute bottom-1/4 right-20 w-40 h-40 bg-cinnabar-red/5 blur-[80px] rounded-full"></div>
+</main>
+<!-- Footer - Simplified for the Loading State -->
+<footer class="fixed bottom-0 left-0 w-full p-6 text-center">
+<p class="font-caption text-on-surface-variant/40">
+            © 2024 墨染梦境 Ink Dream AI. All Rights Reserved.
+        </p>
+</footer>
+</body></html>

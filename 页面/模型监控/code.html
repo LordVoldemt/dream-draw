@@ -1,0 +1,425 @@
+<!DOCTYPE html><html lang="zh-CN"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif:wght@400;600;700&amp;family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "secondary-fixed-dim": "#a3d0be",
+                    "tertiary-fixed": "#ffe088",
+                    "inverse-on-surface": "#f3f0ef",
+                    "misty-white": "#F5F5F3",
+                    "secondary-fixed": "#bfecda",
+                    "surface-dim": "#dcd9d9",
+                    "on-primary": "#ffffff",
+                    "on-secondary-fixed-variant": "#244e41",
+                    "tertiary-fixed-dim": "#e9c349",
+                    "on-surface": "#1c1b1b",
+                    "surface": "#fcf9f8",
+                    "on-tertiary-fixed-variant": "#574500",
+                    "error-container": "#ffdad6",
+                    "inverse-surface": "#313030",
+                    "primary-fixed": "#ffdad3",
+                    "outline-variant": "#e2bfb8",
+                    "on-error": "#ffffff",
+                    "primary-fixed-dim": "#ffb4a5",
+                    "outline": "#8e706a",
+                    "surface-bright": "#fcf9f8",
+                    "on-tertiary": "#ffffff",
+                    "on-primary-container": "#ffefeb",
+                    "ink-black": "#1A1A1A",
+                    "surface-container-highest": "#e5e2e1",
+                    "background": "#fcf9f8",
+                    "on-secondary": "#ffffff",
+                    "surface-variant": "#e5e2e1",
+                    "jade-green": "#4F796A",
+                    "on-secondary-fixed": "#002118",
+                    "surface-tint": "#b12c14",
+                    "on-primary-fixed": "#3e0400",
+                    "inverse-primary": "#ffb4a5",
+                    "silk-gold": "#D4AF37",
+                    "on-background": "#1c1b1b",
+                    "primary": "#a5230c",
+                    "on-surface-variant": "#5a413c",
+                    "on-tertiary-fixed": "#241a00",
+                    "on-tertiary-container": "#4e3d00",
+                    "secondary": "#3d6658",
+                    "surface-container-lowest": "#ffffff",
+                    "secondary-container": "#bce9d7",
+                    "error": "#ba1a1a",
+                    "surface-container-high": "#eae7e7",
+                    "tertiary-container": "#cca72f",
+                    "on-secondary-container": "#416b5c",
+                    "cinnabar-red": "#C83C23",
+                    "surface-container": "#f0eded",
+                    "surface-container-low": "#f6f3f2",
+                    "tertiary": "#735c00",
+                    "primary-container": "#c83c23",
+                    "on-error-container": "#93000a",
+                    "on-primary-fixed-variant": "#8e1300"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "margin-desktop": "40px",
+                    "container-max": "1280px",
+                    "margin-mobile": "16px",
+                    "gutter": "24px",
+                    "section-gap": "80px",
+                    "unit": "4px"
+            },
+            "fontFamily": {
+                    "label-md": ["Plus Jakarta Sans"],
+                    "headline-lg-mobile": ["Noto Serif"],
+                    "headline-lg": ["Noto Serif"],
+                    "headline-md": ["Noto Serif"],
+                    "body-lg": ["Plus Jakarta Sans"],
+                    "body-md": ["Plus Jakarta Sans"],
+                    "display-hero": ["Noto Serif"],
+                    "caption": ["Plus Jakarta Sans"],
+                    "title-lg": ["Plus Jakarta Sans"]
+            },
+            "fontSize": {
+                    "label-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0.05em", "fontWeight": "500"}],
+                    "headline-lg-mobile": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                    "headline-lg": ["32px", {"lineHeight": "40px", "fontWeight": "600"}],
+                    "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                    "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "display-hero": ["48px", {"lineHeight": "60px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "caption": ["12px", {"lineHeight": "16px", "fontWeight": "400"}],
+                    "title-lg": ["20px", {"lineHeight": "28px", "fontWeight": "600"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+      .material-symbols-outlined {
+        font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+      }
+      .glass-panel {
+        background: rgba(255, 255, 255, 0.7);
+        backdrop-filter: blur(24px);
+        -webkit-backdrop-filter: blur(24px);
+      }
+      .ink-shadow {
+        box-shadow: 0 4px 20px -4px rgba(26, 26, 26, 0.08);
+      }
+      .seal-button {
+        position: relative;
+        overflow: hidden;
+      }
+      .seal-button::after {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background-image: radial-gradient(circle at center, rgba(255,255,255,0.1) 0%, transparent 100%);
+        pointer-events: none;
+      }
+    </style>
+</head>
+<body class="bg-misty-white font-body-md text-on-surface">
+<!-- TopNavBar -->
+<header class="bg-misty-white/80 backdrop-blur-xl border-b border-ink-black/5 fixed top-0 z-50 w-full shadow-[0_4px_20px_-4px_rgba(26,26,26,0.08)]">
+<div class="flex justify-between items-center w-full px-margin-desktop py-4 max-w-container-max mx-auto">
+<div class="flex items-center gap-8">
+<span class="font-headline-md text-headline-md text-cinnabar-red font-bold tracking-tight">墨染梦境</span>
+<nav class="hidden md:flex gap-6">
+<a class="text-on-surface-variant hover:text-cinnabar-red transition-colors font-body-md text-body-md" href="#">首页</a>
+<a class="text-on-surface-variant hover:text-cinnabar-red transition-colors font-body-md text-body-md" href="#">画廊</a>
+<a class="text-on-surface-variant hover:text-cinnabar-red transition-colors font-body-md text-body-md" href="#">创作空间</a>
+<a class="text-on-surface-variant hover:text-cinnabar-red transition-colors font-body-md text-body-md" href="#">我的作品</a>
+</nav>
+</div>
+<div class="flex items-center gap-4">
+<button class="material-symbols-outlined text-on-surface-variant hover:opacity-80 transition-opacity">toll</button>
+<button class="material-symbols-outlined text-on-surface-variant hover:opacity-80 transition-opacity">notifications</button>
+<div class="w-8 h-8 rounded-full bg-surface-container-highest overflow-hidden">
+<img alt="User Avatar" class="w-full h-full object-cover" data-alt="A portrait of a refined woman with elegant features, subtly lit in a high-key minimalist setting. The visual style is inspired by modern Chinese aesthetics, featuring soft shadows and a pristine, ethereal atmosphere that blends classical beauty with contemporary digital clarity. The lighting is soft and diffused, creating a serene and premium feel." src="https://lh3.googleusercontent.com/aida-public/AB6AXuC-HhQ60N6uZXYtkXAwCKoWI53sp0N1iO2VWsaflPu3NrzuSPouyS5r9RyDrdnJgtBx_ENETIDP5eAIw-nHcI4c4iRUUmzUXqhP53Z346aQ7rb7nuSYVKP5_LDnO-7aERLMtGKY37nGMBgUVdjuetdnKourmissS6m1Rf7CR-gQCUhdU6eLJdOSkFVmBwgMu_ojTmZXh7qKOiJH63tSZtyJ5fyOmk1T2XptJWE5fBO5IW1ZX_I6125D7t9TC1V2u__p5XNNIPg7hGs">
+</div>
+</div>
+</div>
+</header>
+<!-- SideNavBar -->
+<aside class="fixed left-0 top-0 h-screen w-64 z-40 bg-misty-white/60 backdrop-blur-2xl border-r border-ink-black/10 flex flex-col p-6 gap-6 pt-24">
+<div class="flex flex-col gap-1">
+<h2 class="font-headline-md text-headline-md text-cinnabar-red">墨染梦境</h2>
+<p class="font-label-md text-label-md text-on-surface-variant">AI 艺术工坊</p>
+</div>
+<nav class="flex-grow flex flex-col gap-2"><a class="text-on-surface-variant hover:bg-surface-container-low px-4 py-3 rounded-lg flex items-center gap-3 transition-all" href="#">
+<span class="material-symbols-outlined">group</span>
+<span class="font-label-md text-label-md">用户管理</span>
+</a>
+<a class="text-on-surface-variant hover:bg-surface-container-low px-4 py-3 rounded-lg flex items-center gap-3 transition-all" href="#">
+<span class="material-symbols-outlined">tune</span>
+<span class="font-label-md text-label-md">模型配置</span>
+</a>
+<a class="bg-secondary-container/30 text-jade-green font-bold rounded-lg px-4 py-3 flex items-center gap-3 translate-x-1" href="#">
+<span class="material-symbols-outlined">analytics</span>
+<span class="font-label-md text-label-md">模型监控</span>
+</a></nav>
+<div class="mt-auto border-t border-ink-black/5 pt-4">
+<a class="text-on-surface-variant hover:bg-surface-container-low px-4 py-3 rounded-lg flex items-center gap-3 transition-all" href="#">
+<span class="material-symbols-outlined">help</span>
+<span class="font-label-md text-label-md">帮助中心</span>
+</a>
+</div>
+</aside>
+<!-- Main Content -->
+<main class="pl-64 pt-24 min-h-screen">
+<div class="max-w-container-max mx-auto px-margin-desktop py-8">
+<!-- Header Section -->
+<div class="flex justify-between items-end mb-10">
+<div class="space-y-1">
+<h1 class="font-headline-lg text-headline-lg text-ink-black">模型监控中心</h1>
+<p class="font-body-md text-body-md text-on-surface-variant">实时追踪 AI 模型性能与系统健康度</p>
+</div>
+<!-- One-click Switch Component -->
+<div class="glass-panel p-4 rounded-xl border border-silk-gold/30 flex items-center gap-6 ink-shadow">
+<div class="flex flex-col gap-1">
+<span class="font-label-md text-label-md text-on-surface-variant uppercase tracking-wider">当前活动模型</span>
+<div class="flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-jade-green"></span>
+<span class="font-title-lg text-title-lg text-jade-green font-bold">Dream-Ink V4.2</span>
+</div>
+</div>
+<button class="seal-button bg-cinnabar-red text-white px-6 py-3 rounded-lg font-label-md text-label-md flex items-center gap-2 hover:opacity-90 active:scale-95 transition-all">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">swap_horiz</span>
+                        切换至备用模型
+                    </button>
+</div>
+</div>
+<!-- Health Overview Cards -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-gutter mb-gutter">
+<div class="glass-panel p-6 rounded-xl ink-shadow border-l-4 border-jade-green">
+<div class="flex justify-between items-start mb-4">
+<span class="font-label-md text-label-md text-on-surface-variant">运行状态</span>
+<span class="material-symbols-outlined text-jade-green">sensors</span>
+</div>
+<div class="flex items-baseline gap-2">
+<span class="font-display-hero text-display-hero text-ink-black">Online</span>
+</div>
+<p class="font-caption text-caption text-jade-green mt-2 flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">check_circle</span>
+                        集群节点全部正常运行
+                    </p>
+</div>
+<div class="glass-panel p-6 rounded-xl ink-shadow border-l-4 border-jade-green">
+<div class="flex justify-between items-start mb-4">
+<span class="font-label-md text-label-md text-on-surface-variant">整体成功率</span>
+<span class="material-symbols-outlined text-jade-green">verified_user</span>
+</div>
+<div class="flex items-baseline gap-2">
+<span class="font-display-hero text-display-hero text-ink-black">99.82</span>
+<span class="font-title-lg text-title-lg text-on-surface-variant">%</span>
+</div>
+<p class="font-caption text-caption text-jade-green mt-2 flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">trending_up</span>
+                        较昨日提升 0.12%
+                    </p>
+</div>
+<div class="glass-panel p-6 rounded-xl ink-shadow border-l-4 border-silk-gold">
+<div class="flex justify-between items-start mb-4">
+<span class="font-label-md text-label-md text-on-surface-variant">平均推理延迟</span>
+<span class="material-symbols-outlined text-silk-gold">timer</span>
+</div>
+<div class="flex items-baseline gap-2">
+<span class="font-display-hero text-display-hero text-ink-black">1.24</span>
+<span class="font-title-lg text-title-lg text-on-surface-variant">s</span>
+</div>
+<p class="font-caption text-caption text-on-surface-variant mt-2 flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">info</span>
+                        处于标准响应区间 (0.8s - 1.5s)
+                    </p>
+</div>
+</div>
+<!-- Metrics & Alerts Bento Grid -->
+<div class="grid grid-cols-12 gap-gutter">
+<!-- Success Rate Line Chart -->
+<div class="col-span-12 lg:col-span-8 glass-panel p-gutter rounded-xl ink-shadow">
+<div class="flex justify-between items-center mb-8">
+<h3 class="font-title-lg text-title-lg text-ink-black">24小时成功率趋势</h3>
+<div class="flex gap-2">
+<span class="px-3 py-1 rounded-full bg-misty-white text-on-surface-variant font-label-md text-caption border border-ink-black/5">1h</span>
+<span class="px-3 py-1 rounded-full bg-jade-green text-white font-label-md text-caption">24h</span>
+<span class="px-3 py-1 rounded-full bg-misty-white text-on-surface-variant font-label-md text-caption border border-ink-black/5">7d</span>
+</div>
+</div>
+<!-- Chart Placeholder -->
+<div class="h-64 flex items-end justify-between gap-1 border-l border-b border-ink-black/10 relative overflow-hidden">
+<div class="absolute inset-0 flex flex-col justify-between pointer-events-none">
+<div class="border-t border-ink-black/5 w-full h-0"></div>
+<div class="border-t border-ink-black/5 w-full h-0"></div>
+<div class="border-t border-ink-black/5 w-full h-0"></div>
+</div>
+<!-- Mock Wave/Line -->
+<div class="flex-grow h-full flex items-center justify-center">
+<div class="w-full h-full relative">
+<svg class="w-full h-full" preserveAspectRatio="none" viewBox="0 0 800 200">
+<path d="M0 150 Q 100 120 200 160 T 400 130 T 600 150 T 800 120" fill="none" stroke="#4F796A" stroke-width="3"></path>
+<path d="M0 150 Q 100 120 200 160 T 400 130 T 600 150 T 800 120 V 200 H 0 Z" fill="url(#gradient-jade)" fill-opacity="0.1"></path>
+<defs>
+<linearGradient id="gradient-jade" x1="0%" x2="0%" y1="0%" y2="100%">
+<stop offset="0%" style="stop-color:#4F796A;stop-opacity:1"></stop>
+<stop offset="100%" style="stop-color:#4F796A;stop-opacity:0"></stop>
+</linearGradient>
+</defs>
+</svg>
+</div>
+</div>
+</div>
+<div class="flex justify-between mt-4 text-on-surface-variant font-caption text-caption">
+<span class="">00:00</span>
+<span class="">06:00</span>
+<span class="">12:00</span>
+<span class="">18:00</span>
+<span class="">现在</span>
+</div>
+</div>
+<!-- Latency Bar Chart -->
+<div class="col-span-12 lg:col-span-4 glass-panel p-gutter rounded-xl ink-shadow">
+<h3 class="font-title-lg text-title-lg text-ink-black mb-8">延迟分布 (ms)</h3>
+<div class="flex flex-col gap-6">
+<div class="space-y-2">
+<div class="flex justify-between font-label-md text-label-md">
+<span class="text-on-surface-variant">0-500ms</span>
+<span class="text-ink-black font-bold">42%</span>
+</div>
+<div class="h-2 w-full bg-misty-white rounded-full overflow-hidden">
+<div class="h-full bg-jade-green w-[42%]"></div>
+</div>
+</div>
+<div class="space-y-2">
+<div class="flex justify-between font-label-md text-label-md">
+<span class="text-on-surface-variant">500-1500ms</span>
+<span class="text-ink-black font-bold">48%</span>
+</div>
+<div class="h-2 w-full bg-misty-white rounded-full overflow-hidden">
+<div class="h-full bg-silk-gold w-[48%]"></div>
+</div>
+</div>
+<div class="space-y-2">
+<div class="flex justify-between font-label-md text-label-md">
+<span class="text-on-surface-variant">1500ms+</span>
+<span class="text-ink-black font-bold">10%</span>
+</div>
+<div class="h-2 w-full bg-misty-white rounded-full overflow-hidden">
+<div class="h-full bg-cinnabar-red w-[10%]"></div>
+</div>
+</div>
+<div class="pt-4 border-t border-ink-black/5 text-center">
+<p class="font-caption text-caption text-on-surface-variant">P99 延迟: 1.84s</p>
+</div>
+</div>
+</div>
+<!-- Alert List -->
+<div class="col-span-12 glass-panel p-gutter rounded-xl ink-shadow">
+<div class="flex justify-between items-center mb-6">
+<div class="flex items-center gap-3">
+<h3 class="font-title-lg text-title-lg text-ink-black">异常警报</h3>
+<span class="px-2 py-0.5 rounded-md bg-error-container text-error font-label-md text-caption">3 未读警报</span>
+</div>
+<button class="text-on-surface-variant hover:text-ink-black font-label-md text-label-md flex items-center gap-1 transition-all">
+                            全部标记已读
+                        </button>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full">
+<thead>
+<tr class="text-left border-b border-ink-black/5">
+<th class="pb-4 font-label-md text-label-md text-on-surface-variant uppercase">级别</th>
+<th class="pb-4 font-label-md text-label-md text-on-surface-variant uppercase">异常描述</th>
+<th class="pb-4 font-label-md text-label-md text-on-surface-variant uppercase">模型版本</th>
+<th class="pb-4 font-label-md text-label-md text-on-surface-variant uppercase">发生时间</th>
+<th class="pb-4 font-label-md text-label-md text-on-surface-variant uppercase">状态</th>
+<th class="pb-4"></th>
+</tr>
+</thead>
+<tbody class="divide-y divide-ink-black/5">
+<tr class="hover:bg-misty-white/50 transition-colors">
+<td class="py-4">
+<span class="flex items-center gap-2 text-cinnabar-red">
+<span class="material-symbols-outlined text-[20px]" style="font-variation-settings: 'FILL' 1;">error</span>
+<span class="font-label-md text-label-md font-bold">CRITICAL</span>
+</span>
+</td>
+<td class="py-4 font-body-md text-body-md text-ink-black">Request Timeout - Gateway Error 504</td>
+<td class="py-4 font-label-md text-label-md text-on-surface-variant">Dream-Ink V4.2</td>
+<td class="py-4 font-label-md text-label-md text-on-surface-variant">14:24:05</td>
+<td class="py-4">
+<span class="px-2 py-1 rounded bg-secondary-fixed/50 text-jade-green font-label-md text-caption">已抑制</span>
+</td>
+<td class="py-4 text-right">
+<button class="material-symbols-outlined text-on-surface-variant hover:text-ink-black">more_vert</button>
+</td>
+</tr>
+<tr class="hover:bg-misty-white/50 transition-colors">
+<td class="py-4">
+<span class="flex items-center gap-2 text-silk-gold">
+<span class="material-symbols-outlined text-[20px]" style="font-variation-settings: 'FILL' 1;">warning</span>
+<span class="font-label-md text-label-md font-bold">WARNING</span>
+</span>
+</td>
+<td class="py-4 font-body-md text-body-md text-ink-black">Latency Spike &gt; 2500ms</td>
+<td class="py-4 font-label-md text-label-md text-on-surface-variant">Dream-Ink V4.2</td>
+<td class="py-4 font-label-md text-label-md text-on-surface-variant">14:18:22</td>
+<td class="py-4">
+<span class="px-2 py-1 rounded bg-surface-container-highest text-on-surface-variant font-label-md text-caption">分析中</span>
+</td>
+<td class="py-4 text-right">
+<button class="material-symbols-outlined text-on-surface-variant hover:text-ink-black">more_vert</button>
+</td>
+</tr>
+<tr class="hover:bg-misty-white/50 transition-colors">
+<td class="py-4">
+<span class="flex items-center gap-2 text-on-surface-variant">
+<span class="material-symbols-outlined text-[20px]" style="font-variation-settings: 'FILL' 1;">info</span>
+<span class="font-label-md text-label-md font-bold">INFO</span>
+</span>
+</td>
+<td class="py-4 font-body-md text-body-md text-ink-black">Model Load Balancing Shifted</td>
+<td class="py-4 font-label-md text-label-md text-on-surface-variant">Cluster-Main</td>
+<td class="py-4 font-label-md text-label-md text-on-surface-variant">14:02:11</td>
+<td class="py-4">
+<span class="px-2 py-1 rounded bg-jade-green/10 text-jade-green font-label-md text-caption">已解决</span>
+</td>
+<td class="py-4 text-right">
+<button class="material-symbols-outlined text-on-surface-variant hover:text-ink-black">more_vert</button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Footer -->
+<footer class="pl-64 w-full bg-surface-container-low border-t border-outline-variant/30 py-12 px-margin-desktop">
+<div class="flex flex-col md:flex-row justify-between items-center max-w-container-max mx-auto gap-gutter">
+<div class="flex flex-col gap-2">
+<span class="font-headline-lg text-headline-lg text-ink-black opacity-20">墨染梦境</span>
+<p class="font-caption text-caption text-on-surface-variant">© 2024 墨染梦境 Ink Dream AI. All Rights Reserved.</p>
+</div>
+<div class="flex gap-8">
+<a class="font-body-md text-body-md text-on-surface-variant hover:text-ink-black hover:underline transition-all" href="#">关于我们</a>
+<a class="font-body-md text-body-md text-on-surface-variant hover:text-ink-black hover:underline transition-all" href="#">使用协议</a>
+<a class="font-body-md text-body-md text-on-surface-variant hover:text-ink-black hover:underline transition-all" href="#">隐私政策</a>
+<a class="font-body-md text-body-md text-on-surface-variant hover:text-ink-black hover:underline transition-all" href="#">联系支持</a>
+</div>
+</div>
+</footer>
+
+
+</body></html>

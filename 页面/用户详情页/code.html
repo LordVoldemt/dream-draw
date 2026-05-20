@@ -1,0 +1,324 @@
+<!DOCTYPE html><html class="light" lang="zh-CN"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700&amp;family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+        }
+        .ink-shadow {
+            box-shadow: 0 4px 20px -4px rgba(26, 26, 26, 0.08);
+        }
+        .seal-button {
+            position: relative;
+            overflow: hidden;
+        }
+        .seal-button::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background-image: radial-gradient(circle, rgba(255,255,255,0.1) 1px, transparent 1px);
+            background-size: 4px 4px;
+            opacity: 0.3;
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "secondary-fixed-dim": "#a3d0be",
+                        "tertiary-fixed": "#ffe088",
+                        "inverse-on-surface": "#f3f0ef",
+                        "misty-white": "#F5F5F3",
+                        "secondary-fixed": "#bfecda",
+                        "surface-dim": "#dcd9d9",
+                        "on-primary": "#ffffff",
+                        "on-secondary-fixed-variant": "#244e41",
+                        "tertiary-fixed-dim": "#e9c349",
+                        "on-surface": "#1c1b1b",
+                        "surface": "#fcf9f8",
+                        "on-tertiary-fixed-variant": "#574500",
+                        "error-container": "#ffdad6",
+                        "inverse-surface": "#313030",
+                        "primary-fixed": "#ffdad3",
+                        "outline-variant": "#e2bfb8",
+                        "on-error": "#ffffff",
+                        "primary-fixed-dim": "#ffb4a5",
+                        "outline": "#8e706a",
+                        "surface-bright": "#fcf9f8",
+                        "on-tertiary": "#ffffff",
+                        "on-primary-container": "#ffefeb",
+                        "ink-black": "#1A1A1A",
+                        "surface-container-highest": "#e5e2e1",
+                        "background": "#fcf9f8",
+                        "on-secondary": "#ffffff",
+                        "surface-variant": "#e5e2e1",
+                        "jade-green": "#4F796A",
+                        "on-secondary-fixed": "#002118",
+                        "surface-tint": "#b12c14",
+                        "on-primary-fixed": "#3e0400",
+                        "inverse-primary": "#ffb4a5",
+                        "silk-gold": "#D4AF37",
+                        "on-background": "#1c1b1b",
+                        "primary": "#a5230c",
+                        "on-surface-variant": "#5a413c",
+                        "on-tertiary-fixed": "#241a00",
+                        "on-tertiary-container": "#4e3d00",
+                        "secondary": "#3d6658",
+                        "surface-container-lowest": "#ffffff",
+                        "secondary-container": "#bce9d7",
+                        "error": "#ba1a1a",
+                        "surface-container-high": "#eae7e7",
+                        "tertiary-container": "#cca72f",
+                        "on-secondary-container": "#416b5c",
+                        "cinnabar-red": "#C83C23",
+                        "surface-container": "#f0eded",
+                        "surface-container-low": "#f6f3f2",
+                        "tertiary": "#735c00",
+                        "primary-container": "#c83c23",
+                        "on-error-container": "#93000a",
+                        "on-primary-fixed-variant": "#8e1300"
+                    },
+                    "fontFamily": {
+                        "label-md": ["Plus Jakarta Sans"],
+                        "headline-lg": ["Noto Serif SC"],
+                        "headline-md": ["Noto Serif SC"],
+                        "body-lg": ["Plus Jakarta Sans"],
+                        "body-md": ["Plus Jakarta Sans"],
+                        "display-hero": ["Noto Serif SC"],
+                        "caption": ["Plus Jakarta Sans"],
+                        "title-lg": ["Plus Jakarta Sans"]
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-misty-white text-on-surface font-body-md antialiased min-h-screen">
+<!-- Top Navigation Bar -->
+<header class="bg-misty-white/80 backdrop-blur-xl border-b border-ink-black/5 sticky top-0 z-50 shadow-[0_4px_20px_-4px_rgba(26,26,26,0.08)]">
+<div class="flex justify-between items-center w-full px-10 py-4 max-w-[1280px] mx-auto">
+<div class="flex items-center gap-8">
+<span class="font-headline-md text-headline-md text-cinnabar-red font-bold tracking-tight">墨染梦境</span>
+<nav class="hidden md:flex items-center gap-6"><a class="text-cinnabar-red font-semibold font-body-md text-body-md transition-colors" href="#">用户管理</a><a class="text-on-surface-variant hover:text-cinnabar-red transition-colors font-body-md text-body-md" href="#">模型配置</a><a class="text-on-surface-variant hover:text-cinnabar-red transition-colors font-body-md text-body-md" href="#">模型监控</a></nav>
+</div>
+<div class="flex items-center gap-4">
+<button class="material-symbols-outlined text-on-surface-variant hover:opacity-80 transition-opacity">toll</button>
+<button class="material-symbols-outlined text-on-surface-variant hover:opacity-80 transition-opacity">notifications</button>
+<img alt="User Avatar" class="w-10 h-10 rounded-full border border-silk-gold/30" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDYTMfERbQWNUhnGCyKnOW3TUtrIiH6UY6laa61Fl8SwwpzpyeEdxI80N_gimVJsqRmfOG-87NUmehQ_OjE3JzkKk9TMZkKBaK5yWN_EKaW5gXESii0puDIF4PomZLqa5RwnWJ7mHrY77rSBsogHERwRgCq8NR_ekivF9TQqXQCCqBwAqhLkCgzBg2JP5QiTjjn7JRjzR-jJ4EnK1lgzDS20EARtkdqAagy3pSDa16sxqXZXnqSNelOt1Id-BTK921SaOpg1VNOWYc">
+</div>
+</div>
+</header>
+<main class="max-w-[1280px] mx-auto px-10 py-10 flex flex-col gap-8">
+<!-- Page Header & Actions Area -->
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-6">
+<div>
+<nav class="flex items-center gap-2 text-on-surface-variant mb-2">
+<span class="font-label-md text-label-md">管理后台</span>
+<span class="material-symbols-outlined text-[16px]">chevron_right</span>
+<span class="font-label-md text-label-md">用户管理</span>
+</nav>
+<h1 class="font-headline-lg text-headline-lg text-ink-black flex items-center gap-3">
+                    用户详情 
+                    <span class="font-label-md text-label-md px-3 py-1 bg-jade-green/10 text-jade-green rounded-full">UID: 882910</span>
+</h1>
+</div>
+<!-- Moderation Action Area -->
+<div class="flex flex-wrap gap-3">
+<button class="flex items-center gap-2 px-6 py-2.5 bg-misty-white border border-ink-black/20 rounded-lg font-label-md text-label-md text-on-surface hover:bg-surface-container-low transition-all">
+<span class="material-symbols-outlined text-[18px]">history</span>
+                    查看审计日志
+                </button>
+<button class="flex items-center gap-2 px-6 py-2.5 bg-misty-white border border-ink-black/20 rounded-lg font-label-md text-label-md text-on-surface hover:bg-surface-container-low transition-all">
+<span class="material-symbols-outlined text-[18px]">block</span>
+                    冻结账号
+                </button>
+<button class="seal-button flex items-center gap-2 px-6 py-2.5 bg-cinnabar-red text-white rounded-lg font-label-md text-label-md shadow-lg shadow-cinnabar-red/20 active:scale-95 transition-transform">
+<span class="material-symbols-outlined text-[18px]">add_circle</span>
+                    调整算力点数
+                </button>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-12 gap-8 items-start">
+<!-- Left Column: User Profile & History -->
+<div class="md:col-span-8 flex flex-col gap-8">
+<!-- Basic Information Card -->
+<section class="glass-panel rounded-2xl p-8 border border-white/40 ink-shadow">
+<div class="flex flex-col sm:flex-row gap-8 items-start">
+<div class="relative group">
+<img alt="Profile" class="w-32 h-32 rounded-2xl object-cover border-2 border-silk-gold/20 shadow-sm" data-alt="A professional high-resolution profile photograph of a young woman with elegant features, styled with a subtle New Chinese aesthetic. She has dark hair styled neatly, wearing a minimalist modern Hanfu-inspired blouse in misty white. The lighting is soft and ethereal, set against a blurred ink-wash painting background in the style of Guofeng minimalism. The mood is serene, creative, and sophisticated." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBp0a8sqyy_4fng2ymytQnQvnnfmiaT2soS1UVBMbmvoXXJcwYgZYYU0KAwluR4q0dCazjA9iUfA8VCRnWdlsLugKyAP6Ws799bkCua2D-PQthRhB7F75ESxrgvVJyZyDGULj5V3GVKfvqBiGXOcr27v5TeNX9wCa3zfmxdLb48WEspE64u_0YhQU1pLVcmpu0qV8y_AfC8uA7Gb60uHMz_Z1aeGTfjYAj83mOhBuvzASeLEBga5dP2rQoOf_Ie3mDV7ufcbWal1Tg">
+<div class="absolute -bottom-2 -right-2 bg-jade-green text-white px-2 py-0.5 rounded-md text-[10px] font-bold uppercase tracking-wider">Active</div>
+</div>
+<div class="flex-1 grid grid-cols-1 sm:grid-cols-2 gap-y-4 gap-x-8">
+<div class="col-span-2 border-b border-ink-black/5 pb-4 mb-2">
+<h2 class="font-title-lg text-title-lg text-ink-black">青黛羽落 (Qing Dai)</h2>
+<p class="text-on-surface-variant font-body-md text-body-md">加入时间: 2023年11月14日</p>
+</div>
+<div>
+<span class="font-label-md text-label-md text-on-surface-variant block mb-1">电子邮箱</span>
+<span class="font-body-md text-body-md text-ink-black">qingdai.yu@dreamink.ai</span>
+</div>
+<div>
+<span class="font-label-md text-label-md text-on-surface-variant block mb-1">手机号码</span>
+<span class="font-body-md text-body-md text-ink-black">+86 188 **** 8829</span>
+</div>
+<div>
+<span class="font-label-md text-label-md text-on-surface-variant block mb-1">账号等级</span>
+<span class="flex items-center gap-1 font-body-md text-body-md text-silk-gold font-semibold">
+<span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">star</span>
+                                    高级创作者
+                                </span>
+</div>
+<div>
+<span class="font-label-md text-label-md text-on-surface-variant block mb-1">实名认证</span>
+<span class="flex items-center gap-1 font-body-md text-body-md text-jade-green">
+<span class="material-symbols-outlined text-[18px]">verified</span>
+                                    已认证
+                                </span>
+</div>
+</div>
+</div>
+</section>
+<!-- Points Balance & Transaction History -->
+<section class="glass-panel rounded-2xl border border-white/40 ink-shadow overflow-hidden">
+<div class="p-8 border-b border-ink-black/5 flex justify-between items-center bg-white/30">
+<div class="flex items-center gap-4">
+<div class="p-3 bg-silk-gold/10 rounded-xl">
+<span class="material-symbols-outlined text-silk-gold" style="font-variation-settings: 'FILL' 1;">payments</span>
+</div>
+<div>
+<h3 class="font-title-lg text-title-lg text-ink-black">算力点数余额</h3>
+<div class="flex items-baseline gap-1">
+<span class="text-3xl font-bold text-cinnabar-red">1,280</span>
+<span class="font-label-md text-label-md text-on-surface-variant">Points</span>
+</div>
+</div>
+</div>
+<button class="text-jade-green font-label-md text-label-md hover:underline">导出记录</button>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left">
+<thead class="bg-surface-container-low text-on-surface-variant font-label-md text-label-md">
+<tr>
+<th class="px-8 py-4 font-semibold">变更原因</th>
+<th class="px-8 py-4 font-semibold">数值变动</th>
+<th class="px-8 py-4 font-semibold">发生时间</th>
+<th class="px-8 py-4 font-semibold text-right">状态</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-ink-black/5 font-body-md text-body-md">
+<tr class="hover:bg-white/40 transition-colors">
+<td class="px-8 py-4">每日签到奖励</td>
+<td class="px-8 py-4 text-jade-green font-semibold">+20</td>
+<td class="px-8 py-4 text-on-surface-variant">2024-05-24 09:12</td>
+<td class="px-8 py-4 text-right"><span class="text-xs px-2 py-0.5 bg-jade-green/10 text-jade-green rounded">成功</span></td>
+</tr>
+<tr class="hover:bg-white/40 transition-colors">
+<td class="px-8 py-4">AI 绘画生成 (高清定制)</td>
+<td class="px-8 py-4 text-cinnabar-red font-semibold">-50</td>
+<td class="px-8 py-4 text-on-surface-variant">2024-05-23 21:45</td>
+<td class="px-8 py-4 text-right"><span class="text-xs px-2 py-0.5 bg-jade-green/10 text-jade-green rounded">成功</span></td>
+</tr>
+<tr class="hover:bg-white/40 transition-colors">
+<td class="px-8 py-4">购买“繁花落尽”算力包</td>
+<td class="px-8 py-4 text-jade-green font-semibold">+1000</td>
+<td class="px-8 py-4 text-on-surface-variant">2024-05-20 14:30</td>
+<td class="px-8 py-4 text-right"><span class="text-xs px-2 py-0.5 bg-jade-green/10 text-jade-green rounded">成功</span></td>
+</tr>
+<tr class="hover:bg-white/40 transition-colors">
+<td class="px-8 py-4">系统维护补偿</td>
+<td class="px-8 py-4 text-jade-green font-semibold">+50</td>
+<td class="px-8 py-4 text-on-surface-variant">2024-05-18 10:00</td>
+<td class="px-8 py-4 text-right"><span class="text-xs px-2 py-0.5 bg-jade-green/10 text-jade-green rounded">成功</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+</div>
+<!-- Right Column: Generation History & Summary -->
+<div class="md:col-span-4 flex flex-col gap-8">
+<!-- Generation History Summary -->
+<section class="glass-panel rounded-2xl p-6 border border-white/40 ink-shadow h-full">
+<div class="flex items-center justify-between mb-6">
+<h3 class="font-title-lg text-title-lg text-ink-black flex items-center gap-2">
+<span class="material-symbols-outlined text-jade-green">auto_awesome</span>
+                            创作记录
+                        </h3>
+<a class="text-on-surface-variant text-[13px] hover:text-cinnabar-red" href="#">查看全部</a>
+</div>
+<div class="grid grid-cols-2 gap-4">
+<div class="group relative aspect-[3/4] rounded-xl overflow-hidden border border-silk-gold/10">
+<img alt="Gen 1" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" data-alt="A breathtaking digital painting of a mystical landscape in the style of classical Chinese ink-wash art combined with modern cinematic lighting. Rolling mountains are partially veiled by ethereal white mist, with a single ancient pine tree catching golden morning light. The color palette features deep charcoal blacks, soft misty whites, and subtle hints of jade green. The composition is airy and elegant, following the 'Liu Bai' principle." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAL-ynTWu2NradnyKhKg4ix7sr6RLNhgprE-JDMdqG_lCTYfDE6n2azqTGgl_XjujwSfuFwV9T07gwS1Ken-Ma9mWBbs9N912CZbhrxZKv1Y_R_a2v4UfGm19hgaE_2smF8EDi1SYL2XZBri3nsD0sY_yaELAZ2NEgQqnSSmMCQptKhphqUotpI0OxurC0woAGaMysivoPYEdxYFiWxmPi4ll8M_khNDmPNXC36oGs3oF1Ha4j1GLKt2kzCDek1yygfG0GeHmN9Dns">
+<div class="absolute inset-x-0 bottom-0 p-3 bg-gradient-to-t from-black/80 to-transparent">
+<p class="text-[10px] text-white/90 truncate">敦煌飞天系列 #01</p>
+</div>
+</div>
+<div class="group relative aspect-[3/4] rounded-xl overflow-hidden border border-silk-gold/10">
+<img alt="Gen 2" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" data-alt="An exquisite AI-generated portrait of a woman in a traditional Tang Dynasty dress, rendered with a dreamlike watercolor texture. She is surrounded by floating peony petals in vibrant cinnabar red. The lighting is dramatic yet soft, creating a high-fashion editorial feel for the character. The background is a minimalist paper-like texture with faint ink splashes, emphasizing the Guofeng aesthetic. The overall mood is poetic and high-end." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDRQm_F_rt9jzT9zIv1Cy2l2O_RuEGIkCmJ5M40VQvCZ-7OQG5Czke5eLJglb06-d3vGJWgUBdGR7McUROoxVx4yES4rfcxChSHjSXwb0fhjTysmjEfw80vTgtOH2MWZexaor5U67en571W-NkYAx3yJMZrX3EKhiThFq763Ux54kJNM125fNhVNdpuy2-RCWulQKsHreaZRXf3WBwIXj2_Pn4TdXtSRceO-oW-wg7ThwhewfiOKRCLX8H0wC5YylJ9PkdahEX1Bq8">
+<div class="absolute inset-x-0 bottom-0 p-3 bg-gradient-to-t from-black/80 to-transparent">
+<p class="text-[10px] text-white/90 truncate">盛世繁花 #12</p>
+</div>
+</div>
+<div class="group relative aspect-[3/4] rounded-xl overflow-hidden border border-silk-gold/10">
+<img alt="Gen 3" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" data-alt="A stylized digital illustration of a serene garden pagoda under a silver moon, using a sophisticated monochrome ink palette with gold leaf accents. The water in the foreground reflects the moon with delicate ripples. The style is a fusion of traditional woodblock printing and modern digital precision. High contrast between the ink black and misty white creates a strong visual impact. The atmosphere is quiet, contemplative, and premium." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBg7iNvfGqSClLWYfJP_lAnUQlCeaCc3rd9VVe0F2E50C-d0sr_PO4o0zHDmZkztXw6vX4WX3mly2OQmzrOCON3XiQqcQ6qrAUA1MIR-uA2CtyZ2L9gcYGMlvA3VfKwc2fXBPzJ-OrtlqS1HC_SztsmgBSbLV2yPT2jv0nuWf8ckaA7zkBR-DS3R5D7NKUQWPsSnST0D3-6qwmh_b3jQJg5m-UoOo8fPe3rYfwDnVfmiv8kQfRuEsKq1xt9FP8FduyYYI9kYpEH9Bs">
+<div class="absolute inset-x-0 bottom-0 p-3 bg-gradient-to-t from-black/80 to-transparent">
+<p class="text-[10px] text-white/90 truncate">山外青山 #08</p>
+</div>
+</div>
+<div class="group relative aspect-[3/4] rounded-xl overflow-hidden border border-silk-gold/10">
+<img alt="Gen 4" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" data-alt="A modern abstract digital artwork inspired by traditional Chinese calligraphy, featuring bold, energetic brushstrokes in deep ink black against a textured cream background. Splashes of vibrant cinnabar red and delicate gold powder are scattered across the canvas, suggesting a fusion of heritage and futuristic AI technology. The composition is asymmetrical and dynamic, embodying a premium fantasy studio aesthetic. The lighting highlights the texture of the virtual paper." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAo4gqUfkJ3RFhLxF-9EupGqtHhLuyAuU8qUarX9TTehE8V4GE9ZjVnI4PooPguNYeoJ6fy6bOQJqcFkAJ4Q89AFWDjXC2cRURDD7IvZ1lvQY-N2Dqg92aD6QYIgWdamLbZ-qce_H-wNclxjzakvEvXWJrXO3q3XL235saWJ8qMNvcNpW8o3fgZ0gncnm8B5UToKm12qYi1C7UFWAQ7vVUilF8Z8EBh8IKe4uSe2W3T40KPhUO3MTP99G1cz1auRmFRoGr9tIMiZjw">
+<div class="absolute inset-x-0 bottom-0 p-3 bg-gradient-to-t from-black/80 to-transparent">
+<p class="text-[10px] text-white/90 truncate">意象书法 #03</p>
+</div>
+</div>
+</div>
+<div class="mt-8 pt-8 border-t border-ink-black/5">
+<h4 class="font-label-md text-label-md text-on-surface-variant uppercase tracking-widest mb-4">创作统计</h4>
+<div class="space-y-4">
+<div class="flex justify-between items-center">
+<span class="font-body-md text-body-md text-on-surface-variant">总生成次数</span>
+<span class="font-title-lg text-title-lg text-ink-black">428</span>
+</div>
+<div class="flex justify-between items-center">
+<span class="font-body-md text-body-md text-on-surface-variant">收藏率</span>
+<span class="font-title-lg text-title-lg text-ink-black">15%</span>
+</div>
+<div class="flex justify-between items-center">
+<span class="font-body-md text-body-md text-on-surface-variant">常用风格</span>
+<span class="text-xs px-2 py-0.5 bg-silk-gold/10 text-silk-gold rounded-full font-semibold">敦煌重彩</span>
+</div>
+</div>
+</div>
+</section>
+</div>
+</div>
+</main>
+<!-- Footer -->
+<footer class="bg-surface-container-low mt-20 border-t border-outline-variant/30">
+<div class="flex flex-col md:flex-row justify-between items-center max-w-[1280px] mx-auto py-12 px-10 gap-6">
+<div class="flex flex-col items-center md:items-start gap-2">
+<span class="font-headline-lg text-headline-lg text-ink-black opacity-20">墨染梦境</span>
+<p class="font-caption text-caption text-on-surface-variant">© 2024 墨染梦境 Ink Dream AI. All Rights Reserved.</p>
+</div>
+<div class="flex gap-8">
+<a class="font-body-md text-body-md text-on-surface-variant hover:text-ink-black transition-all hover:underline" href="#">关于我们</a>
+<a class="font-body-md text-body-md text-on-surface-variant hover:text-ink-black transition-all hover:underline" href="#">使用协议</a>
+<a class="font-body-md text-body-md text-on-surface-variant hover:text-ink-black transition-all hover:underline" href="#">隐私政策</a>
+<a class="font-body-md text-body-md text-on-surface-variant hover:text-ink-black transition-all hover:underline" href="#">联系支持</a>
+</div>
+</div>
+</footer>
+
+
+</body></html>

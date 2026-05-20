@@ -1,0 +1,210 @@
+<!DOCTYPE html><html lang="zh-CN" style=""><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif:wght@400;600;700&amp;family=Plus+Jakarta+Sans:wght@400;500;600&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                "secondary-fixed-dim": "#a3d0be",
+                "tertiary-fixed": "#ffe088",
+                "inverse-on-surface": "#f3f0ef",
+                "misty-white": "#F5F5F3",
+                "secondary-fixed": "#bfecda",
+                "surface-dim": "#dcd9d9",
+                "on-primary": "#ffffff",
+                "on-secondary-fixed-variant": "#244e41",
+                "tertiary-fixed-dim": "#e9c349",
+                "on-surface": "#1c1b1b",
+                "surface": "#fcf9f8",
+                "on-tertiary-fixed-variant": "#574500",
+                "error-container": "#ffdad6",
+                "inverse-surface": "#313030",
+                "primary-fixed": "#ffdad3",
+                "outline-variant": "#e2bfb8",
+                "on-error": "#ffffff",
+                "primary-fixed-dim": "#ffb4a5",
+                "outline": "#8e706a",
+                "surface-bright": "#fcf9f8",
+                "on-tertiary": "#ffffff",
+                "on-primary-container": "#ffefeb",
+                "ink-black": "#1A1A1A",
+                "surface-container-highest": "#e5e2e1",
+                "background": "#fcf9f8",
+                "on-secondary": "#ffffff",
+                "surface-variant": "#e5e2e1",
+                "jade-green": "#4F796A",
+                "on-secondary-fixed": "#002118",
+                "surface-tint": "#b12c14",
+                "on-primary-fixed": "#3e0400",
+                "inverse-primary": "#ffb4a5",
+                "silk-gold": "#D4AF37",
+                "on-background": "#1c1b1b",
+                "primary": "#a5230c",
+                "on-surface-variant": "#5a413c",
+                "on-tertiary-fixed": "#241a00",
+                "on-tertiary-container": "#4e3d00",
+                "secondary": "#3d6658",
+                "surface-container-lowest": "#ffffff",
+                "secondary-container": "#bce9d7",
+                "error": "#ba1a1a",
+                "surface-container-high": "#eae7e7",
+                "tertiary-container": "#cca72f",
+                "on-secondary-container": "#416b5c",
+                "cinnabar-red": "#C83C23",
+                "surface-container": "#f0eded",
+                "surface-container-low": "#f6f3f2",
+                "tertiary": "#735c00",
+                "primary-container": "#c83c23",
+                "on-error-container": "#93000a",
+                "on-primary-fixed-variant": "#8e1300"
+            },
+            "borderRadius": {
+                "DEFAULT": "0.25rem",
+                "lg": "0.5rem",
+                "xl": "0.75rem",
+                "full": "9999px"
+            },
+            "spacing": {
+                "margin-desktop": "40px",
+                "container-max": "1280px",
+                "margin-mobile": "16px",
+                "gutter": "24px",
+                "section-gap": "80px",
+                "unit": "4px"
+            },
+            "fontFamily": {
+                "label-md": ["Plus Jakarta Sans"],
+                "headline-lg": ["Noto Serif"],
+                "headline-md": ["Noto Serif"],
+                "body-lg": ["Plus Jakarta Sans"],
+                "body-md": ["Plus Jakarta Sans"],
+                "display-hero": ["Noto Serif"],
+                "caption": ["Plus Jakarta Sans"],
+                "title-lg": ["Plus Jakarta Sans"]
+            }
+          }
+        }
+      }
+    </script>
+<style>
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.6);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+        .ink-shadow {
+            box-shadow: 0 20px 50px -10px rgba(0, 0, 0, 0.15)
+        }
+        .seal-cta {
+            position: relative;
+            overflow: hidden
+        }
+        .seal-cta::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: url(https://lh3.googleusercontent.com/aida-public/AB6AXuBqauRGd3736R1PwTOnHgX91d51YFZTkQp_xMkx2MYawFjmdI9ivoq9QDiGq7iJsh676ude-CG6aJjlLd-5NmFyH8wXkidSzwnnkfswy46UCEyqFhiQTavk8dSzStyrP1XOndddV69_XxPDiHesf6sWg7nZv7_8gnf3FhB8Zp47iAKLJjnQ0x7oKAwstv6KbqF9PHId3YxrPb-WgQm84t0cW17-jc5vHJeJC2YnW3pNQQ3MGr45gvjwNw8tJnv9hFgbXi_vWgFW2CM);
+            opacity: 0.1;
+            pointer-events: none
+        }
+        .material-symbols-outlined {
+            font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 24;
+            vertical-align: middle
+        }
+        .tab-active {
+            color: #C83C23;
+            border-bottom: 2px solid #C83C23;
+        }
+    </style>
+</head>
+<body class="bg-ink-black font-body-md text-on-surface min-h-screen flex flex-col items-center justify-center relative overflow-hidden">
+<!-- Full-screen Background Image -->
+<div class="fixed inset-0 z-0">
+<img alt="Breathtaking New Chinese style background" class="w-full h-full object-cover opacity-90" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDQNaWkDB_Ly8m8tjh7BBUcXdAYaleto37mCj0Pz6dNcBA0AR3kzkpxnpI-1c-MEx7fMrXpL15AeWkw7FCcZOYjjgvhH5XH-DYkgZRw_-TCUv4hgeDWNdwqS9IdjUF09TrcNIJDpPy8l4728UGuZy6VIOgOfyoAuTbVhb_4PEJR1og1cY1cTvLaqVhsnYvLP6kEkrBx_Shsmu-0sHCR87DGrIxgv3eh9R08EMeOeakkr2H5lZKaMTMADHs9Qnn0vCDpwod1ejS8aPc">
+<div class="absolute inset-0 bg-gradient-to-b from-black/10 via-transparent to-black/30"></div>
+</div>
+<!-- Login Container -->
+<main class="relative z-10 w-full max-w-md px-margin-mobile md:px-0">
+<!-- Logo/Brand Identity -->
+<div class="text-center mb-10">
+<h1 class="font-headline-lg text-4xl md:text-5xl text-cinnabar-red font-bold tracking-tight mb-2 drop-shadow-sm">墨染梦境</h1>
+<p class="font-label-md text-label-md text-ink-black/70 uppercase tracking-[0.3em]">Ink Dream Universe</p>
+</div>
+<!-- Glassmorphic Login Card -->
+<div class="glass-panel ink-shadow rounded-2xl p-8 md:p-10">
+<div class="mb-10">
+<h2 class="font-headline-md text-headline-md text-ink-black mb-1">登录 / 注册</h2>
+<p class="font-caption text-caption text-on-surface-variant">开启您的东方美学梦境之旅</p>
+</div>
+<!-- Tabs -->
+
+<!-- Login Form -->
+<form action="#" class="space-y-6" method="POST">
+<!-- Account Field -->
+<div class="space-y-2">
+<label class="font-label-md text-label-md text-on-surface-variant flex items-center gap-2" for="phone">
+<span class="material-symbols-outlined text-[18px]">smartphone</span>
+                        手机号
+                    </label>
+<input class="w-full bg-white/40 border border-white/60 rounded-lg py-3 px-4 focus:outline-none focus:ring-2 focus:ring-cinnabar-red/20 focus:border-cinnabar-red transition-all font-body-md text-body-md placeholder:text-on-surface-variant/40" id="phone" name="phone" placeholder="请输入您的手机号" type="tel">
+</div>
+<!-- Password Field -->
+<div class="space-y-2">
+<label class="font-label-md text-label-md text-on-surface-variant flex items-center gap-2" for="vcode">
+<span class="material-symbols-outlined text-[18px]">verified_user</span>
+                        验证码
+                    </label>
+<div class="relative flex gap-2">
+<input class="flex-1 bg-white/40 border border-white/60 rounded-lg py-3 px-4 focus:outline-none focus:ring-2 focus:ring-cinnabar-red/20 focus:border-cinnabar-red transition-all font-body-md text-body-md placeholder:text-on-surface-variant/40" id="vcode" name="vcode" placeholder="请输入验证码" type="text">
+<button type="button" class="whitespace-nowrap px-4 py-2 text-cinnabar-red font-label-md border border-cinnabar-red/30 rounded-lg hover:bg-cinnabar-red/5 transition-colors">获取验证码</button>
+</div>
+</div>
+<!-- Error Message Placeholder (Hidden by default or conditionally shown) -->
+<!-- 
+                <div class="flex items-center gap-2 text-error px-3 py-2 rounded-lg bg-error-container/20 border border-error/20">
+                    <span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">error</span>
+                    <span class="font-caption text-caption">登录凭据无效，请重试。</span>
+                </div>
+                -->
+<!-- Submit Button (The Seal CTA) -->
+<div class="pt-2">
+<button class="seal-cta w-full bg-cinnabar-red text-on-primary py-4 rounded-xl font-title-lg text-title-lg shadow-lg hover:bg-primary transition-all flex items-center justify-center gap-3 group" type="submit">
+                        确认进入
+                        <span class="material-symbols-outlined group-hover:translate-x-1 transition-transform">arrow_forward</span>
+</button>
+</div>
+</form>
+<!-- Secondary Actions -->
+<div class="mt-8 flex justify-between items-center border-t border-ink-black/10 pt-6">
+<a class="font-caption text-caption text-on-surface-variant hover:text-cinnabar-red transition-colors" href="#">忘记密码？</a>
+<div class="flex items-center gap-4">
+<span class="font-caption text-caption text-on-surface-variant">还没有账号？</span>
+<a class="font-caption text-caption text-cinnabar-red font-semibold hover:underline" href="#">立即注册</a>
+</div>
+</div>
+</div>
+<!-- Footer -->
+<footer class="mt-12 text-center space-y-4">
+<div class="flex justify-center gap-6">
+<a class="font-caption text-caption text-ink-black/70 hover:text-cinnabar-red hover:underline transition-all" href="#">安全协议</a>
+<a class="font-caption text-caption text-ink-black/70 hover:text-cinnabar-red hover:underline transition-all" href="#">联系支持</a>
+<a class="font-caption text-caption text-ink-black/70 hover:text-cinnabar-red hover:underline transition-all" href="#">隐私声明</a>
+</div>
+<p class="font-caption text-caption text-ink-black/50">© 2024 墨染梦境 Ink Dream AI. All Rights Reserved.</p>
+</footer>
+</main>
+<!-- Silk Gold Accent Corners -->
+<div class="absolute top-8 left-8 w-16 h-16 border-t border-l border-silk-gold/40 pointer-events-none hidden md:block"></div>
+<div class="absolute bottom-8 right-8 w-16 h-16 border-b border-r border-silk-gold/40 pointer-events-none hidden md:block"></div>
+
+
+</body></html>

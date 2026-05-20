@@ -1,0 +1,371 @@
+<!DOCTYPE html><html lang="zh-CN"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif:wght@400;600;700&amp;family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "secondary-fixed-dim": "#a3d0be",
+                        "tertiary-fixed": "#ffe088",
+                        "inverse-on-surface": "#f3f0ef",
+                        "misty-white": "#F5F5F3",
+                        "secondary-fixed": "#bfecda",
+                        "surface-dim": "#dcd9d9",
+                        "on-primary": "#ffffff",
+                        "on-secondary-fixed-variant": "#244e41",
+                        "tertiary-fixed-dim": "#e9c349",
+                        "on-surface": "#1c1b1b",
+                        "surface": "#fcf9f8",
+                        "on-tertiary-fixed-variant": "#574500",
+                        "error-container": "#ffdad6",
+                        "inverse-surface": "#313030",
+                        "primary-fixed": "#ffdad3",
+                        "outline-variant": "#e2bfb8",
+                        "on-error": "#ffffff",
+                        "primary-fixed-dim": "#ffb4a5",
+                        "outline": "#8e706a",
+                        "surface-bright": "#fcf9f8",
+                        "on-tertiary": "#ffffff",
+                        "on-primary-container": "#ffefeb",
+                        "ink-black": "#1A1A1A",
+                        "surface-container-highest": "#e5e2e1",
+                        "background": "#fcf9f8",
+                        "on-secondary": "#ffffff",
+                        "surface-variant": "#e5e2e1",
+                        "jade-green": "#4F796A",
+                        "on-secondary-fixed": "#002118",
+                        "surface-tint": "#b12c14",
+                        "on-primary-fixed": "#3e0400",
+                        "inverse-primary": "#ffb4a5",
+                        "silk-gold": "#D4AF37",
+                        "on-background": "#1c1b1b",
+                        "primary": "#a5230c",
+                        "on-surface-variant": "#5a413c",
+                        "on-tertiary-fixed": "#241a00",
+                        "on-tertiary-container": "#4e3d00",
+                        "secondary": "#3d6658",
+                        "surface-container-lowest": "#ffffff",
+                        "secondary-container": "#bce9d7",
+                        "error": "#ba1a1a",
+                        "surface-container-high": "#eae7e7",
+                        "tertiary-container": "#cca72f",
+                        "on-secondary-container": "#416b5c",
+                        "cinnabar-red": "#C83C23",
+                        "surface-container": "#f0eded",
+                        "surface-container-low": "#f6f3f2",
+                        "tertiary": "#735c00",
+                        "primary-container": "#c83c23",
+                        "on-error-container": "#93000a",
+                        "on-primary-fixed-variant": "#8e1300"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "margin-desktop": "40px",
+                        "container-max": "1280px",
+                        "margin-mobile": "16px",
+                        "gutter": "24px",
+                        "section-gap": "80px",
+                        "unit": "4px"
+                    },
+                    "fontFamily": {
+                        "label-md": ["Plus Jakarta Sans"],
+                        "headline-lg-mobile": ["Noto Serif"],
+                        "headline-lg": ["Noto Serif"],
+                        "headline-md": ["Noto Serif"],
+                        "body-lg": ["Plus Jakarta Sans"],
+                        "body-md": ["Plus Jakarta Sans"],
+                        "display-hero": ["Noto Serif"],
+                        "caption": ["Plus Jakarta Sans"],
+                        "title-lg": ["Plus Jakarta Sans"]
+                    },
+                    "fontSize": {
+                        "label-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0.05em", "fontWeight": "500"}],
+                        "headline-lg-mobile": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                        "headline-lg": ["32px", {"lineHeight": "40px", "fontWeight": "600"}],
+                        "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                        "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                        "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "display-hero": ["48px", {"lineHeight": "60px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "caption": ["12px", {"lineHeight": "16px", "fontWeight": "400"}],
+                        "title-lg": ["20px", {"lineHeight": "28px", "fontWeight": "600"}]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+        }
+        .seal-button {
+            position: relative;
+            overflow: hidden;
+        }
+        .seal-button::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background-image: radial-gradient(circle at center, transparent 0%, rgba(0,0,0,0.05) 100%);
+            pointer-events: none;
+        }
+    </style>
+</head>
+<body class="bg-misty-white text-on-background font-body-md min-h-screen">
+<!-- Top Navigation Bar -->
+<nav class="bg-misty-white/80 dark:bg-ink-black/80 backdrop-blur-xl border-b border-ink-black/5 dark:border-white/5 shadow-[0_4px_20px_-4px_rgba(26,26,26,0.08)] sticky top-0 z-50">
+<div class="flex justify-between items-center w-full px-margin-desktop py-4 max-w-container-max mx-auto">
+<div class="flex items-center gap-8">
+<span class="font-headline-md text-headline-md text-cinnabar-red font-bold tracking-tight">墨染梦境</span>
+<div class="hidden md:flex gap-6">
+<a class="text-on-surface-variant hover:text-cinnabar-red transition-colors font-body-md" href="#">首页</a>
+<a class="text-on-surface-variant hover:text-cinnabar-red transition-colors font-body-md" href="#">画廊</a>
+<a class="text-on-surface-variant hover:text-cinnabar-red transition-colors font-body-md" href="#">创作空间</a>
+<a class="text-on-surface-variant hover:text-cinnabar-red transition-colors font-body-md" href="#">我的作品</a>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-on-surface-variant cursor-pointer hover:opacity-80 transition-opacity">toll</span>
+<span class="material-symbols-outlined text-on-surface-variant cursor-pointer hover:opacity-80 transition-opacity">notifications</span>
+<div class="w-8 h-8 rounded-full bg-surface-container-highest overflow-hidden">
+<img alt="User Avatar" data-alt="A professional profile portrait of a creative administrator with a focused and serene expression. The lighting is soft and artistic, reflecting a modern workspace aesthetic with subtle hints of traditional Chinese ink textures in the background. High-key lighting highlights the clean, sophisticated atmosphere of the platform." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBfidSgV1fQ-VooKi7HGjX2HKl7UflVO1Me-NRwfCY4xTuTfXA8oZWh7FztBAf87zFu43Zs2mCMm8yKJQCo-S03f0-O5i3q1T6uuRk2cXvnSozn-dVIez0LcU0aoW_XpcSnTiFHqWwCLPhkowZaJkabUKPvOPpUNInqbvnACN48xoO6_wNtgrYKMQsH9DexxpCR7oE_5MYm3V3ognW9OU9imrQwVZYbZYYV2g-rm0TX7Qc22IVSkJ4BVTKeSih0hVOS_11cvIG_Vn8">
+</div>
+</div>
+</div>
+</nav>
+<!-- Sidebar & Main Content Wrapper -->
+<div class="flex max-w-container-max mx-auto">
+<!-- Side Navigation -->
+<aside class="hidden md:flex flex-col p-gutter gap-6 w-64 border-r border-ink-black/10 min-h-[calc(100vh-72px)] sticky top-[72px]">
+<div class="space-y-1"><a class="text-on-surface-variant hover:bg-surface-container-low px-4 py-3 rounded-lg flex items-center gap-3 transition-all" href="#">
+<span class="material-symbols-outlined">group</span>
+<span class="font-label-md text-label-md">用户管理</span>
+</a>
+<a class="bg-secondary-container/30 text-jade-green font-bold rounded-lg px-4 py-3 flex items-center gap-3 translate-x-1 transition-all" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="font-label-md text-label-md">模型配置</span>
+</a>
+<a class="text-on-surface-variant hover:bg-surface-container-low px-4 py-3 rounded-lg flex items-center gap-3 transition-all" href="#">
+<span class="material-symbols-outlined">monitoring</span>
+<span class="font-label-md text-label-md">模型监控</span>
+</a></div>
+
+</aside>
+<!-- Content Canvas -->
+<main class="flex-1 p-margin-desktop">
+<header class="flex justify-between items-end mb-10">
+<div class="space-y-2">
+<h1 class="font-headline-lg text-headline-lg text-ink-black">模型配置中心</h1>
+<p class="text-on-surface-variant font-body-md">管理与调度 OpenAI 兼容的模型供应商及 API 接入</p>
+</div>
+<button class="seal-button bg-cinnabar-red text-white px-6 py-3 rounded-lg font-label-md text-label-md flex items-center gap-2 hover:opacity-90 transition-all active:scale-95">
+<span class="material-symbols-outlined text-[20px]">add</span>
+                    添加新供应商
+                </button>
+</header>
+<div class="grid grid-cols-12 gap-gutter">
+<!-- Main Providers List (8 Columns) -->
+<section class="col-span-12 lg:col-span-8 space-y-gutter">
+<div class="glass-panel border border-ink-black/5 rounded-xl shadow-sm overflow-hidden">
+<table class="w-full text-left">
+<thead>
+<tr class="bg-surface-container-low text-on-surface-variant border-b border-outline-variant/30">
+<th class="px-6 py-4 font-label-md text-label-md">模型名称</th>
+<th class="px-6 py-4 font-label-md text-label-md">供应商</th>
+<th class="px-6 py-4 font-label-md text-label-md">状态</th>
+<th class="px-6 py-4 font-label-md text-label-md text-center">优先级</th>
+<th class="px-6 py-4 font-label-md text-label-md"></th>
+</tr>
+</thead>
+<tbody class="divide-y divide-outline-variant/20">
+<!-- Row 1: Active -->
+<tr class="hover:bg-white/50 transition-colors">
+<td class="px-6 py-5">
+<div class="font-title-lg text-ink-black">GPT-4 Turbo</div>
+<div class="text-caption font-caption text-on-surface-variant">gpt-4-1106-preview</div>
+</td>
+<td class="px-6 py-5">
+<span class="font-body-md text-on-surface">OpenAI Official</span>
+</td>
+<td class="px-6 py-5">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-secondary-container text-jade-green">
+                                            Active
+                                        </span>
+</td>
+<td class="px-6 py-5 text-center">
+<span class="text-silk-gold font-bold">1</span>
+</td>
+<td class="px-6 py-5 text-right">
+<button class="text-on-surface-variant hover:text-cinnabar-red transition-colors">
+<span class="material-symbols-outlined">edit</span>
+</button>
+</td>
+</tr>
+<!-- Row 2: Backup -->
+<tr class="hover:bg-white/50 transition-colors">
+<td class="px-6 py-5">
+<div class="font-title-lg text-ink-black">Claude 3 Opus</div>
+<div class="text-caption font-caption text-on-surface-variant">claude-3-opus-20240229</div>
+</td>
+<td class="px-6 py-5">
+<span class="font-body-md text-on-surface">Azure AI</span>
+</td>
+<td class="px-6 py-5">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-tertiary-fixed text-on-tertiary-fixed-variant">
+                                            Backup
+                                        </span>
+</td>
+<td class="px-6 py-5 text-center">
+<span class="text-on-surface-variant">2</span>
+</td>
+<td class="px-6 py-5 text-right">
+<button class="text-on-surface-variant hover:text-cinnabar-red transition-colors">
+<span class="material-symbols-outlined">edit</span>
+</button>
+</td>
+</tr>
+<!-- Row 3: Inactive -->
+<tr class="hover:bg-white/50 transition-colors opacity-60">
+<td class="px-6 py-5">
+<div class="font-title-lg text-ink-black">Llama 3 70B</div>
+<div class="text-caption font-caption text-on-surface-variant">meta-llama-3-70b</div>
+</td>
+<td class="px-6 py-5">
+<span class="font-body-md text-on-surface">Self-Hosted (vLLM)</span>
+</td>
+<td class="px-6 py-5">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-surface-container-highest text-on-surface-variant">
+                                            Inactive
+                                        </span>
+</td>
+<td class="px-6 py-5 text-center">
+<span class="text-on-surface-variant">--</span>
+</td>
+<td class="px-6 py-5 text-right">
+<button class="text-on-surface-variant hover:text-cinnabar-red transition-colors">
+<span class="material-symbols-outlined">settings_backup_restore</span>
+</button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Informational Card -->
+<div class="p-6 rounded-xl bg-jade-green/5 border border-jade-green/10 flex items-start gap-4">
+<span class="material-symbols-outlined text-jade-green">info</span>
+<div>
+<h4 class="font-title-lg text-jade-green mb-1">自动容灾切换逻辑</h4>
+<p class="text-on-surface-variant text-body-md">系统每 60 秒进行一次健康检查。若主模型 (优先级 1) 响应超时或返回 5xx 错误，流量将自动按优先级递增顺序切换至后续备份模型。</p>
+</div>
+</div>
+</section>
+<!-- Configuration Sidebar (4 Columns) -->
+<aside class="col-span-12 lg:col-span-4">
+<div class="glass-panel border border-silk-gold/30 rounded-xl p-8 shadow-sm space-y-6">
+<div class="flex items-center justify-between">
+<h2 class="font-headline-md text-headline-md text-ink-black">配置详情</h2>
+<span class="material-symbols-outlined text-silk-gold">auto_fix</span>
+</div>
+<form class="space-y-5">
+<div class="space-y-1">
+<label class="font-label-md text-label-md text-on-surface-variant">供应商名称</label>
+<input class="w-full bg-transparent border-0 border-b border-ink-black/20 focus:ring-0 focus:border-jade-green py-2 transition-all placeholder:text-on-surface-variant/40" placeholder="例如: OpenAI 官方" type="text">
+</div>
+<div class="space-y-1">
+<label class="font-label-md text-label-md text-on-surface-variant">Base URL</label>
+<input class="w-full bg-transparent border-0 border-b border-ink-black/20 focus:ring-0 focus:border-jade-green py-2 transition-all" type="text" value="https://api.openai.com/v1">
+</div>
+<div class="space-y-1">
+<label class="font-label-md text-label-md text-on-surface-variant">API Key</label>
+<input class="w-full bg-transparent border-0 border-b border-ink-black/20 focus:ring-0 focus:border-jade-green py-2 transition-all" type="password" value="••••••••••••••••">
+</div>
+<div class="grid grid-cols-2 gap-4">
+<div class="space-y-1">
+<label class="font-label-md text-label-md text-on-surface-variant">API 模式</label>
+<select class="w-full bg-transparent border-0 border-b border-ink-black/20 focus:ring-0 focus:border-jade-green py-2 transition-all text-body-md">
+<option>OpenAI 标准</option>
+<option>Azure 版</option>
+<option>Anthropic 兼容</option>
+</select>
+</div>
+<div class="space-y-1">
+<label class="font-label-md text-label-md text-on-surface-variant">QPS 限制</label>
+<input class="w-full bg-transparent border-0 border-b border-ink-black/20 focus:ring-0 focus:border-jade-green py-2 transition-all" type="number" value="50">
+</div>
+</div>
+<div class="space-y-1">
+<label class="font-label-md text-label-md text-on-surface-variant">超时设置 (ms)</label>
+<input class="w-full h-1 bg-surface-container-highest rounded-lg appearance-none cursor-pointer accent-cinnabar-red" max="60000" min="1000" step="1000" type="range">
+<div class="flex justify-between text-caption font-caption text-on-surface-variant">
+<span class="">1s</span>
+<span class="">30s</span>
+<span class="">60s</span>
+</div>
+</div>
+<div class="pt-6 border-t border-outline-variant/30 flex flex-col gap-4">
+<label class="flex items-center gap-3 cursor-pointer group">
+<div class="relative w-10 h-5 bg-surface-container-highest rounded-full transition-colors group-hover:bg-surface-container-high">
+<div class="absolute left-1 top-1 w-3 h-3 bg-white rounded-full transition-transform translate-x-5 bg-jade-green"></div>
+</div>
+<span class="font-body-md text-on-surface">设为默认主模型</span>
+</label>
+<label class="flex items-center gap-3 cursor-pointer group">
+<div class="relative w-10 h-5 bg-surface-container-highest rounded-full transition-colors group-hover:bg-surface-container-high">
+<div class="absolute left-1 top-1 w-3 h-3 bg-white rounded-full transition-transform"></div>
+</div>
+<span class="font-body-md text-on-surface">启用容灾备份模式</span>
+</label>
+</div>
+<button class="w-full bg-ink-black text-white py-4 rounded-lg font-title-lg flex justify-center items-center gap-2 hover:opacity-90 transition-all" type="button">
+                                保存配置变更
+                            </button>
+</form>
+</div>
+<!-- Quick Status Sidebar Card -->
+<div class="mt-gutter rounded-xl overflow-hidden relative h-48">
+<img class="absolute inset-0 w-full h-full object-cover" data-alt="A serene landscape of misty mountains reflecting in a still lake, captured in the style of a contemporary Chinese ink wash painting. The color palette uses deep jade greens, misty whites, and subtle cinnabar red accents. The lighting is diffused and ethereal, suggesting a quiet morning in an immortal mountain range. The composition is minimalistic with significant negative space, evoking a sense of calm and clarity." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDJ6UJu70J1eAcxMaJw4BBH0h0xmiFCtEm-Nr4FEG_35aYzidF9lJWe1mCRBMokaVAK44ocvQZEpZaD5329B1gL3gxXSkz9ddiNDX5h7QUmkmfLTJNfmw8wjoq4ohOznEZah9orTCBGo2uUmSGT0V-0m5A8VUPKfKdb70tJ_lkRKWzuzCaxBmtzfCsLA-B8tdbfxdcKmgILGql9uNyhxLNZlx97yn2Cc-e99W4wiwWUu7CrZl7kiRvLSQp-mA7nNKAknFBV_ED1v4g">
+<div class="absolute inset-0 bg-gradient-to-t from-ink-black/80 to-transparent p-6 flex flex-col justify-end">
+<div class="flex items-center gap-2 text-white/90">
+<span class="w-2 h-2 rounded-full bg-jade-green animate-pulse"></span>
+<span class="font-label-md text-label-md">系统运行状况：优</span>
+</div>
+<p class="text-white/70 text-caption font-caption mt-1">当前平均延迟: 1.2s | 今日调用: 12.4k</p>
+</div>
+</div>
+</aside>
+</div>
+</main>
+</div>
+<!-- Footer -->
+<footer class="bg-surface-container-low border-t border-outline-variant/30 w-full py-section-gap px-margin-desktop">
+<div class="flex flex-col md:flex-row justify-between items-center max-w-container-max mx-auto gap-gutter">
+<div class="font-headline-lg text-headline-lg text-ink-black opacity-20">墨染梦境</div>
+<div class="flex flex-col items-center md:items-end gap-2">
+<div class="flex gap-6">
+<a class="text-on-surface-variant hover:text-ink-black hover:underline transition-all font-body-md" href="#">关于我们</a>
+<a class="text-on-surface-variant hover:text-ink-black hover:underline transition-all font-body-md" href="#">使用协议</a>
+<a class="text-on-surface-variant hover:text-ink-black hover:underline transition-all font-body-md" href="#">隐私政策</a>
+<a class="text-on-surface-variant hover:text-ink-black hover:underline transition-all font-body-md" href="#">联系支持</a>
+</div>
+<p class="text-caption font-caption text-on-surface-variant/60">© 2024 墨染梦境 Ink Dream AI. All Rights Reserved.</p>
+</div>
+</div>
+</footer>
+
+
+</body></html>

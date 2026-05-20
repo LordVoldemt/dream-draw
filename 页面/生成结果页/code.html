@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+
+<html lang="zh-CN"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>墨染梦境 - 创作结果</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700&amp;family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "tertiary-fixed": "#ffe088",
+                    "surface-container-lowest": "#ffffff",
+                    "on-primary-fixed": "#3e0400",
+                    "on-secondary-fixed": "#002118",
+                    "outline-variant": "#e2bfb8",
+                    "on-error-container": "#93000a",
+                    "surface-bright": "#fcf9f8",
+                    "on-primary": "#ffffff",
+                    "tertiary": "#735c00",
+                    "on-secondary-fixed-variant": "#244e41",
+                    "error-container": "#ffdad6",
+                    "tertiary-fixed-dim": "#e9c349",
+                    "on-error": "#ffffff",
+                    "outline": "#8e706a",
+                    "misty-white": "#F5F5F3",
+                    "secondary-fixed": "#bfecda",
+                    "surface-container-low": "#f6f3f2",
+                    "secondary": "#3d6658",
+                    "secondary-fixed-dim": "#a3d0be",
+                    "inverse-primary": "#ffb4a5",
+                    "on-surface": "#1c1b1b",
+                    "surface-container": "#f0eded",
+                    "silk-gold": "#D4AF37",
+                    "on-tertiary-fixed": "#241a00",
+                    "ink-black": "#1A1A1A",
+                    "background": "#fcf9f8",
+                    "on-primary-container": "#ffefeb",
+                    "on-tertiary": "#ffffff",
+                    "primary-container": "#c83c23",
+                    "surface-tint": "#b12c14",
+                    "on-secondary": "#ffffff",
+                    "jade-green": "#4F796A",
+                    "surface-dim": "#dcd9d9",
+                    "surface": "#fcf9f8",
+                    "on-primary-fixed-variant": "#8e1300",
+                    "primary-fixed": "#ffdad3",
+                    "on-secondary-container": "#416b5c",
+                    "on-surface-variant": "#5a413c",
+                    "surface-container-highest": "#e5e2e1",
+                    "primary-fixed-dim": "#ffb4a5",
+                    "surface-variant": "#e5e2e1",
+                    "inverse-surface": "#313030",
+                    "on-background": "#1c1b1b",
+                    "inverse-on-surface": "#f3f0ef",
+                    "surface-container-high": "#eae7e7",
+                    "tertiary-container": "#cca72f",
+                    "cinnabar-red": "#C83C23",
+                    "error": "#ba1a1a",
+                    "on-tertiary-container": "#4e3d00",
+                    "secondary-container": "#bce9d7",
+                    "on-tertiary-fixed-variant": "#574500",
+                    "primary": "#a5230c"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "container-max": "1280px",
+                    "section-gap": "80px",
+                    "gutter": "24px",
+                    "margin-desktop": "40px",
+                    "unit": "4px",
+                    "margin-mobile": "16px"
+            },
+            "fontFamily": {
+                    "headline-lg-mobile": ["Noto Serif SC"],
+                    "body-md": ["Plus Jakarta Sans"],
+                    "display-hero": ["Noto Serif SC"],
+                    "title-lg": ["Plus Jakarta Sans"],
+                    "headline-lg": ["Noto Serif SC"],
+                    "body-lg": ["Plus Jakarta Sans"],
+                    "label-md": ["Plus Jakarta Sans"],
+                    "caption": ["Plus Jakarta Sans"],
+                    "headline-md": ["Noto Serif SC"]
+            },
+            "fontSize": {
+                    "headline-lg-mobile": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "display-hero": ["48px", {"lineHeight": "60px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "title-lg": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+                    "headline-lg": ["32px", {"lineHeight": "40px", "fontWeight": "600"}],
+                    "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                    "label-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0.05em", "fontWeight": "500"}],
+                    "caption": ["12px", {"lineHeight": "16px", "fontWeight": "400"}],
+                    "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.6);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+        }
+        .ink-shadow {
+            box-shadow: 0 10px 30px -10px rgba(26, 26, 26, 0.08);
+        }
+        .seal-button {
+            position: relative;
+            overflow: hidden;
+        }
+        .seal-button::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background-image: radial-gradient(circle at 20% 20%, rgba(255,255,255,0.1) 0%, transparent 50%);
+            pointer-events: none;
+        }
+        .vertical-text {
+            writing-mode: vertical-rl;
+            text-orientation: mixed;
+        }
+    </style>
+</head>
+<body class="bg-misty-white text-on-surface font-body-md min-h-screen flex flex-col">
+<!-- Top Navigation Bar -->
+<nav class="bg-misty-white/80 dark:bg-ink-black/80 backdrop-blur-xl docked full-width top-0 z-50 border-b border-ink-black/5 dark:border-white/5 shadow-[0_4px_20px_-4px_rgba(26,26,26,0.08)]">
+<div class="flex justify-between items-center w-full px-margin-desktop py-4 max-w-container-max mx-auto">
+<div class="font-headline-md text-headline-md text-cinnabar-red font-bold tracking-tight">墨染梦境</div>
+<div class="hidden md:flex gap-8 items-center">
+<a class="text-on-surface-variant hover:text-cinnabar-red transition-colors font-body-md text-body-md" href="#">首页</a>
+<a class="text-on-surface-variant hover:text-cinnabar-red transition-colors font-body-md text-body-md" href="#">画廊</a>
+<a class="text-cinnabar-red font-semibold border-b-2 border-cinnabar-red pb-1 font-body-md text-body-md" href="#">创作空间</a>
+<a class="text-on-surface-variant hover:text-cinnabar-red transition-colors font-body-md text-body-md" href="#">我的作品</a>
+</div>
+<div class="flex items-center gap-4">
+<button class="hover:opacity-80 transition-opacity"><span class="material-symbols-outlined text-on-surface-variant">toll</span></button>
+<button class="hover:opacity-80 transition-opacity"><span class="material-symbols-outlined text-on-surface-variant">notifications</span></button>
+<div class="w-10 h-10 rounded-full overflow-hidden border border-outline-variant bg-surface-container">
+<img alt="User Avatar" class="w-full h-full object-cover" data-alt="A professional close-up portrait of a woman in a minimalist studio. The lighting is soft and high-key, aligning with a bright, light-mode aesthetic. Her expression is serene and creative, reflecting a persona of a digital artist. The image uses a clean, misty-white background with subtle ink-wash textures." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAOQ0-YeQj_I-tovn3sPTce7y1jCaNHQ23uIgJd5R_IftVGI2jw7G4PwL6GdeEhE6drbFdKaDNw5j7GX41YY99qDIc2IlO3TiRAvq9rJvMwunbj_aCCVLR24XfZ5tTp0IscGt45iycr4wF_EXYhG9XYrKOG9nRnxPtEjTtpOIT1anmlBbfhhq-_bikCR0NKf3XNRtroFMdBOyY35rlUnHSPL0TcU74PTZ-xp8ffGAzQOunxynP130jgnoGayZFPjEnhJmb7pRePgy8"/>
+</div>
+</div>
+</div>
+</nav>
+<!-- Main Content Canvas -->
+<main class="flex-grow max-w-container-max mx-auto w-full px-margin-desktop py-12 flex flex-col gap-12">
+<!-- Showcase Layout: Bento-style split -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+<!-- Left: Hero Preview -->
+<div class="lg:col-span-7 flex flex-col gap-4">
+<div class="glass-panel p-4 rounded-xl ink-shadow border border-white/40">
+<div class="relative aspect-[3/4] w-full rounded-lg overflow-hidden group">
+<img class="w-full h-full object-cover" data-alt="A stunning high-resolution portrait of a beautiful young woman in intricate Tang dynasty Hanfu. She stands amidst a misty, ethereal bamboo forest. The style is minimalist-guofeng with soft ink-wash aesthetics, featuring a palette of misty white, charcoal black, and vibrant cinnabar red accents. Lighting is dreamy and diffused, creating a heavenly Xianxia atmosphere." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDWwdc9QP0ZUVKvG3MT2HkSdMDwrXw1laKHrCp2LSUMMIklOnMEc0B4tbecp9ugkMlzfXZrlGXNcsCIQsRTf-wd--zF1LyHAmrPChBya7THnkL0hDxRYiPYcgOiBTBz-tjA4_-J7yq1BhoueB3TzR3j-VDTYUoucgKkEpnOAiBCJ5v7vQSgoWQ5y8VolGs_F2rqYiIc2QE5eWJbvFoZSEQ-iL6G90rc_Ae5KCKgX-2DA9ObP27FlPWVAzORbiDpuaVz600I_gqQ2AM"/>
+<div class="absolute top-6 left-6 flex flex-col items-center">
+<span class="vertical-text font-headline-md text-headline-md text-on-primary bg-cinnabar-red py-4 px-2 rounded-sm shadow-lg tracking-widest">大唐风华</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Right: Control Panel -->
+<div class="lg:col-span-5 flex flex-col gap-6">
+<!-- Metadata Card -->
+<div class="glass-panel p-8 rounded-xl ink-shadow border border-white/60 space-y-6">
+<div>
+<h2 class="font-title-lg text-title-lg text-ink-black mb-4 flex items-center gap-2">
+<span class="material-symbols-outlined text-jade-green">auto_awesome</span>
+                            生成参数
+                        </h2>
+<div class="bg-misty-white/50 p-4 rounded-lg border border-outline-variant/30">
+<p class="font-body-md text-body-md text-on-surface-variant leading-relaxed italic">
+                                “一位身着华丽大唐襦裙的女子，手持团扇，立于长安城外烟雨朦胧的竹林中，神情恬淡，发髻高耸，周身环绕着淡淡的仙气，具有极高的艺术质感。”
+                            </p>
+</div>
+</div>
+<div class="flex flex-wrap gap-2">
+<span class="bg-secondary-container/30 text-jade-green px-3 py-1 rounded-full text-label-md font-label-md border border-jade-green/20">唐风写意</span>
+<span class="bg-secondary-container/30 text-jade-green px-3 py-1 rounded-full text-label-md font-label-md border border-jade-green/20">8K超清</span>
+<span class="bg-secondary-container/30 text-jade-green px-3 py-1 rounded-full text-label-md font-label-md border border-jade-green/20">丝绸质感</span>
+<span class="bg-secondary-container/30 text-jade-green px-3 py-1 rounded-full text-label-md font-label-md border border-jade-green/20">梦幻光影</span>
+</div>
+<div class="pt-6 border-t border-outline-variant/20 grid grid-cols-2 gap-4">
+<button class="seal-button bg-cinnabar-red text-on-primary py-4 px-6 rounded-lg flex items-center justify-center gap-2 font-title-lg text-title-lg shadow-md hover:opacity-90 transition-all scale-95 active:scale-90">
+<span class="material-symbols-outlined">download</span>
+                            下载原图
+                        </button>
+<button class="bg-white border border-ink-black/10 py-4 px-6 rounded-lg flex items-center justify-center gap-2 font-title-lg text-title-lg text-on-surface-variant hover:bg-misty-white transition-all">
+<span class="material-symbols-outlined">refresh</span>
+                            再次生成
+                        </button>
+<button class="col-span-2 bg-white border border-ink-black/10 py-4 px-6 rounded-lg flex items-center justify-center gap-2 font-title-lg text-title-lg text-on-surface-variant hover:bg-misty-white transition-all">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">favorite</span>
+                            收藏此作
+                        </button>
+</div>
+</div>
+<!-- Share Section -->
+<div class="glass-panel p-8 rounded-xl ink-shadow border border-white/60">
+<h3 class="font-title-lg text-title-lg text-ink-black mb-6">分享灵感</h3>
+<div class="flex items-center gap-6">
+<!-- Poster Preview -->
+<div class="w-24 h-36 bg-surface-container rounded-md overflow-hidden relative border border-outline-variant/30 flex-shrink-0">
+<img class="w-full h-full object-cover opacity-80" data-alt="A miniaturized share poster preview showing a vertical layout of the Tang dynasty character artwork. It features a decorative silk gold border and a small QR code at the bottom right. The design is elegant and minimalist, perfectly suited for Chinese social media sharing." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCbCnmhIlhIxldqT1a2KpUnbSt4M4WEtQjVrg9sOW78sGhICT18w9h0awgn0pZOK1kmiWKv-rV29aUwXqnQ16DuXt97gm46nXknBxuRqxNkYTrUT_pkeT5LKAKdfoUFOIDQZREHClakPEixE68-hSMj5NPVG5UG1lKmcONqczbsXVGcWKbnCs9yGOGLKooGRc3xqyUNX9YYy1ObTdtTJbHbzF8Z82Cv6IxC8Q8QLFVCfn5PKaH47NixGvyveW_NFx5qqTc4dkEUaMY"/>
+<div class="absolute inset-0 flex items-center justify-center">
+<span class="material-symbols-outlined text-white/50 text-4xl">qr_code_2</span>
+</div>
+</div>
+<div class="flex flex-col gap-3">
+<p class="font-body-md text-body-md text-on-surface-variant">生成分享海报，展示你的国风美学</p>
+<div class="flex gap-4">
+<button class="flex flex-col items-center gap-1 group">
+<div class="w-12 h-12 rounded-full bg-misty-white flex items-center justify-center border border-outline-variant/30 group-hover:bg-secondary-container transition-colors">
+<span class="material-symbols-outlined text-jade-green">share</span>
+</div>
+<span class="text-caption font-caption text-on-surface-variant">小红书</span>
+</button>
+<button class="flex flex-col items-center gap-1 group">
+<div class="w-12 h-12 rounded-full bg-misty-white flex items-center justify-center border border-outline-variant/30 group-hover:bg-secondary-container transition-colors">
+<span class="material-symbols-outlined text-jade-green">chat_bubble</span>
+</div>
+<span class="text-caption font-caption text-on-surface-variant">朋友圈</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Recommendations: Related Generations -->
+<section class="mt-8">
+<div class="flex justify-between items-end mb-8 border-b border-outline-variant/20 pb-4">
+<h2 class="font-headline-md text-headline-md text-ink-black">猜你喜欢</h2>
+<a class="text-jade-green font-label-md text-label-md hover:underline flex items-center gap-1" href="#">
+                    更多灵感 <span class="material-symbols-outlined text-sm">arrow_forward</span>
+</a>
+</div>
+<div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+<!-- Inspiration Card 1 -->
+<div class="group cursor-pointer">
+<div class="aspect-[3/4] rounded-lg overflow-hidden relative mb-3 ink-shadow border border-white/40">
+<img class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" data-alt="A traditional Chinese painting style portrait of a scholar sitting by a circular moon window. The aesthetic is heavily minimalist with high whitespace, featuring ink brush textures and a subtle jade-green color palette. The lighting mimics a late afternoon shadow falling across rice paper." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDENgmoEf0EiANCTts5sQMskzKJc9chI-HuChyZwNiskUY59ND7XNvlt3gZ78z8IXZ6pS-O6RrCSSzBBJD8krNg8nAsnpY_Z5c85q4AP7jzH15QpGuAy8zkGF22qP8qyuTb2SvdEM0mj60-mELy0OtXFB150--_dv-Z1Q7yZv4RHT6Gr4jL-k2wjFIroNMvvU-H75x6YKgd1OULAoXgUIiLMBIo-697xhI5j9Vp9p3G3_gEtiHtgNYvyyEbd_6l0frIFq-OuOd73GQ"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity p-4 flex flex-col justify-end">
+<span class="text-white text-label-md font-label-md">宋韵雅集风格</span>
+</div>
+</div>
+<p class="font-body-md text-body-md text-on-surface truncate">清冷宋韵·水墨书生</p>
+</div>
+<!-- Inspiration Card 2 -->
+<div class="group cursor-pointer">
+<div class="aspect-[3/4] rounded-lg overflow-hidden relative mb-3 ink-shadow border border-white/40">
+<img class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" data-alt="A breathtaking fantasy landscape featuring a floating pagoda amongst sea of clouds. The style is inspired by modern Chinese Xianxia art, using a mix of vibrant cinnabar red and misty-white tones. The composition is epic and wide, representing a dreamy, high-end fantasy studio production." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBYY9wSExk6SXdc7bleQABdS6pWsewoNONqowr49Yp7zJGHdXfHP_klG3cHuTkzcGQh18rGC7xA2zuRTnEeXiu6r5t-j2ZSVgfC38vOHOf_-yI7OSiAl_cjqRlpDQh3DIBqqRTEYtm4DuGQJj1KX9h7Mlv5BqTksaZdHDcHtTA11WKWid1q63p0CmWKzTKewhpenkpqaW4pSdrBWjWst33Kx_JTyD96sw40XTn6EdkZYilXGnQpp0MPBNyx6vFWwWBThS-brsw6mx4"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity p-4 flex flex-col justify-end">
+<span class="text-white text-label-md font-label-md">仙侠奇境风格</span>
+</div>
+</div>
+<p class="font-body-md text-body-md text-on-surface truncate">浮空之岛·云间楼阁</p>
+</div>
+<!-- Inspiration Card 3 -->
+<div class="group cursor-pointer">
+<div class="aspect-[3/4] rounded-lg overflow-hidden relative mb-3 ink-shadow border border-white/40">
+<img class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" data-alt="A portrait of a woman in Hanfu playing a Guzheng under a blossoming plum tree. Snowflakes fall gently, creating a serene winter scene. The visual style is premium and dreamy, with soft focus backgrounds and sharp, high-key foreground details. The color palette centers on white, gray, and silk gold." src="https://lh3.googleusercontent.com/aida-public/AB6AXuARsNtqTyQ3nVgl0OukhjcLCIYW9LY0-vSPpJaR3bcXeRmd4IcGzs0k3KjOgLXeNxYS3lXqbRgAwDe5IRNriTR85o3ezz2YmwNssPXGrh-CxwkLiygPgK2uD8W5rjEJ-M1-pV0o1W4hfaOgZwE4Uf6KwSJbnmW5oQkbDtj0sMuwE71eC04AHSZ5pAcln9dkUwjphY8ecbuxlRnpbZByv-K_tL1LXb-ijbIqg-5cyr4xsxVErOxsCsEu1IA0LPFZO_jZwjAQjGpwnm0"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity p-4 flex flex-col justify-end">
+<span class="text-white text-label-md font-label-md">岁寒三友风格</span>
+</div>
+</div>
+<p class="font-body-md text-body-md text-on-surface truncate">落雪寻梅·古筝幽音</p>
+</div>
+<!-- Inspiration Card 4 -->
+<div class="group cursor-pointer">
+<div class="aspect-[3/4] rounded-lg overflow-hidden relative mb-3 ink-shadow border border-white/40">
+<img class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" data-alt="A highly detailed close-up of traditional Chinese silk embroidery featuring dragon and phoenix motifs. The lighting is dramatic, highlighting the metallic gold threads and the rich cinnabar red fabric. The style is sophisticated and culturally profound, embodying the premium fantasy studio aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDyAw_0z0phwsNGHqgCEfawCj_LCXJALUY-YwO0SKMjWq8MB2-bZCtc6kQH0lYnDp9FHuyfNvKrUsbCZD5g1Fee0G8W4Cs8ov1umq1OX6X2_mYhCg04wipSGxuRZHJPOnM5A3I0m49USYp1jfDbwT2Hd0HLLcOF-2w_MiaMI_tColaSyvo4Msn0iAaC3AqfRNS0GZ6vyT5f70ZBt4poYkB7A4FoxmPj6d7uWlyh9yVKsT9SAxZw4WHHUloivE-x7YP_moLkJv5_hG8"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity p-4 flex flex-col justify-end">
+<span class="text-white text-label-md font-label-md">织金绣纹细节</span>
+</div>
+</div>
+<p class="font-body-md text-body-md text-on-surface truncate">华贵纹样·大唐丝织</p>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="bg-surface-container-low dark:bg-surface-dim w-full py-section-gap px-margin-desktop border-t border-outline-variant/30 mt-12">
+<div class="flex flex-col md:flex-row justify-between items-center max-w-container-max mx-auto gap-gutter">
+<div class="flex flex-col items-center md:items-start gap-2">
+<div class="font-headline-lg text-headline-lg text-ink-black opacity-20">墨染梦境</div>
+<p class="font-caption text-caption text-on-surface-variant">© 2024 墨染梦境 Ink Dream AI. All Rights Reserved.</p>
+</div>
+<div class="flex gap-8">
+<a class="text-on-surface-variant hover:text-ink-black font-body-md text-body-md hover:underline transition-all" href="#">关于我们</a>
+<a class="text-on-surface-variant hover:text-ink-black font-body-md text-body-md hover:underline transition-all" href="#">使用协议</a>
+<a class="text-on-surface-variant hover:text-ink-black font-body-md text-body-md hover:underline transition-all" href="#">隐私政策</a>
+<a class="text-on-surface-variant hover:text-ink-black font-body-md text-body-md hover:underline transition-all" href="#">联系支持</a>
+</div>
+</div>
+</footer>
+</body></html>
