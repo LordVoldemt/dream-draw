@@ -1,6 +1,8 @@
 <template>
   <div class="result-page">
     <div v-if="loading" class="state-card">正在加载生成结果...</div>
+    <div v-else-if="taskFailureMessage" class="state-card">{{ taskFailureMessage }}</div>
+    <div v-else-if="loadErrorMessage" class="state-card">{{ loadErrorMessage }}</div>
     <div v-else-if="!work" class="state-card">未找到对应作品，请返回作品页重试。</div>
     <template v-else>
       <section class="hero-grid">
@@ -67,6 +69,8 @@ const api = new DreamDrawApi(
 
 const loading = ref(true);
 const work = ref<WorkRecord | null>(null);
+const loadErrorMessage = ref("");
+const taskFailureMessage = ref("");
 const shareMessage = ref("");
 const shareChannels = [
   { id: "xiaohongshu", label: "小红书" },
@@ -103,11 +107,48 @@ const resultTags = computed(() => {
   ];
 });
 
+function isHttpStatus(error: unknown, status: number) {
+  return (error as { status?: number }).status === status;
+}
+
+async function loadTaskFallback(id: number) {
+  const taskResponse = await api.getTaskDetail(id);
+  const status = String(taskResponse.task.status ?? "");
+  taskFailureMessage.value =
+    status === "failed"
+      ? "生成失败，积分已自动退回，请调整描述或稍后重试。"
+      : status === "blocked"
+        ? "作品未通过审核，积分已自动退回。"
+        : "作品还没有生成完成，请稍后回到作品页查看。";
+}
+
 async function loadWork() {
   loading.value = true;
+  loadErrorMessage.value = "";
+  taskFailureMessage.value = "";
+  work.value = null;
   try {
-    const response = await api.getWorkDetail(Number(route.params.id));
+    const id = Number(route.params.id);
+    let response;
+    try {
+      response = await api.getWorkDetail(id);
+    } catch (error) {
+      if (!isHttpStatus(error, 404)) {
+        throw error;
+      }
+      try {
+        response = await api.getWorkDetailByTask(id);
+      } catch (taskWorkError) {
+        if (!isHttpStatus(taskWorkError, 404)) {
+          throw taskWorkError;
+        }
+        await loadTaskFallback(id);
+        return;
+      }
+    }
     work.value = response.work;
+  } catch (error) {
+    loadErrorMessage.value = error instanceof Error ? error.message : "加载结果失败，请稍后重试。";
   } finally {
     loading.value = false;
   }

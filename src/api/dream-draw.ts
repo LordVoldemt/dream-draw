@@ -111,7 +111,7 @@ export class DreamDrawApi {
   }
 
   createTask(payload: CreateTaskPayload) {
-    return this.client.post<{ task_id: number; status: string; final_points: number }>(
+    return this.client.post<{ task_id: number; work_id?: number; status: string; final_points: number }>(
       "/generate/tasks",
       payload,
     );
@@ -123,6 +123,14 @@ export class DreamDrawApi {
 
   getWorkDetail(workId: number) {
     return this.client.get<{ work: Record<string, unknown> }>(`/works/${workId}`);
+  }
+
+  getWorkDetailByTask(taskId: number) {
+    return this.client.get<{ work: Record<string, unknown> }>(`/works-by-task/${taskId}`);
+  }
+
+  getTaskDetail(taskId: number) {
+    return this.client.get<{ task: Record<string, unknown> }>(`/generate/tasks/${taskId}`);
   }
 
   favoriteWork(workId: number) {

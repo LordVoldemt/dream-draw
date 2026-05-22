@@ -21,7 +21,7 @@
 
       <div class="eta-row">
         <span class="eta-icon">◔</span>
-        <span>预计还需 {{ etaText }}</span>
+        <span>{{ statusText }}</span>
       </div>
 
       <div class="progress-bar">
@@ -36,6 +36,14 @@
         </div>
       </article>
 
+      <div v-if="errorMessage" class="error-card">
+        <p>{{ errorMessage }}</p>
+        <div class="error-actions">
+          <button type="button" class="secondary-action" @click="goWorkspace">返回重试</button>
+          <button type="button" class="primary-action" @click="pollTask">重新检查</button>
+        </div>
+      </div>
+
       <p class="copyright">© 2024 墨染梦境 Ink Dream AI. All Rights Reserved.</p>
     </section>
   </div>
@@ -43,31 +51,104 @@
 
 <script setup lang="ts">
 import { computed, onBeforeUnmount, onMounted, ref } from "vue";
-import { useRouter } from "vue-router";
+import { useRoute, useRouter } from "vue-router";
+import { ApiClient } from "@/api/client";
+import { DreamDrawApi } from "@/api/dream-draw";
+import { useSessionStore } from "@/stores/session";
 
+const route = useRoute();
 const router = useRouter();
-const progress = ref(24);
-let timer: number | null = null;
+const session = useSessionStore();
+const api = new DreamDrawApi(
+  new ApiClient({
+    getToken: () => session.userToken,
+  }),
+);
 
-const etaText = computed(() => {
-  if (progress.value < 45) return "15 秒";
-  if (progress.value < 75) return "10 秒";
-  return "5 秒";
+const progress = ref(24);
+const errorMessage = ref("");
+const taskStatus = ref("pending");
+const taskId = computed(() => Number(route.query.taskId || route.params.id || 0));
+let progressTimer: number | null = null;
+let pollTimer: number | null = null;
+
+const statusText = computed(() => {
+  if (errorMessage.value) {
+    return errorMessage.value;
+  }
+  if (taskStatus.value === "reviewing") {
+    return "作品即将完成，正在做最后润色与审核";
+  }
+  if (taskStatus.value === "generating") {
+    return "正在生成画面，预计还需数分钟";
+  }
+  return "作品已提交，正在排队进入绘制流程";
 });
 
+function stopTimers() {
+  if (progressTimer !== null) {
+    window.clearInterval(progressTimer);
+    progressTimer = null;
+  }
+  if (pollTimer !== null) {
+    window.clearInterval(pollTimer);
+    pollTimer = null;
+  }
+}
+
+async function handleSuccess(taskIdValue: number) {
+  stopTimers();
+  const workResponse = await api.getWorkDetailByTask(taskIdValue);
+  await router.replace(`/result/${String(workResponse.work.id ?? taskIdValue)}`);
+}
+
+async function pollTask() {
+  if (!taskId.value) {
+    errorMessage.value = "缺少任务编号，请返回重新生成。";
+    stopTimers();
+    return;
+  }
+  try {
+    const response = await api.getTaskDetail(taskId.value);
+    taskStatus.value = String(response.task.status ?? "pending");
+    if (taskStatus.value === "success") {
+      progress.value = 100;
+      await handleSuccess(taskId.value);
+      return;
+    }
+    if (taskStatus.value === "failed") {
+      errorMessage.value = "生成失败，积分已自动退回，请调整描述或稍后重试。";
+      stopTimers();
+      return;
+    }
+    if (taskStatus.value === "blocked") {
+      errorMessage.value = "作品未通过审核，积分已自动退回。";
+      stopTimers();
+      return;
+    }
+  } catch (error) {
+    errorMessage.value = error instanceof Error ? error.message : "查询生成状态失败，请稍后重试。";
+    stopTimers();
+  }
+}
+
+async function goWorkspace() {
+  await router.push({ name: "workspace" });
+}
+
 onMounted(() => {
-  timer = window.setInterval(() => {
-    progress.value = Math.min(96, progress.value + 12);
-  }, 800);
+  progressTimer = window.setInterval(() => {
+    progress.value = Math.min(96, progress.value + 8);
+  }, 1000);
+  void pollTask();
+  pollTimer = window.setInterval(() => {
+    void pollTask();
+  }, 3000);
 });
 
 onBeforeUnmount(() => {
-  if (timer !== null) {
-    window.clearInterval(timer);
-  }
+  stopTimers();
 });
-
-void router;
 </script>
 
 <style scoped>
@@ -211,18 +292,22 @@ void router;
   box-shadow: 0 2px 8px rgba(224, 64, 33, 0.22);
 }
 
-.tip-card {
-  display: grid;
-  grid-template-columns: 54px 1fr;
-  gap: 18px;
+.tip-card,
+.error-card {
   width: min(600px, calc(100vw - 48px));
-  margin-top: 138px;
-  padding: 28px 30px;
   border-radius: 18px;
   background: rgba(255, 255, 255, 0.76);
   border: 1px solid rgba(255, 255, 255, 0.64);
   box-shadow: 0 24px 48px rgba(114, 117, 111, 0.1);
   backdrop-filter: blur(14px);
+}
+
+.tip-card {
+  display: grid;
+  grid-template-columns: 54px 1fr;
+  gap: 18px;
+  margin-top: 138px;
+  padding: 28px 30px;
 }
 
 .tip-icon {
@@ -249,6 +334,44 @@ void router;
   line-height: 1.85;
 }
 
+.error-card {
+  margin-top: 24px;
+  padding: 24px 28px;
+  color: #7b3827;
+}
+
+.error-card p {
+  margin: 0;
+  line-height: 1.8;
+}
+
+.error-actions {
+  display: flex;
+  gap: 12px;
+  margin-top: 18px;
+}
+
+.primary-action,
+.secondary-action {
+  height: 44px;
+  padding: 0 20px;
+  border-radius: 999px;
+  font-size: 15px;
+  cursor: pointer;
+}
+
+.primary-action {
+  border: 0;
+  background: linear-gradient(135deg, #d53a25, #f05a2b);
+  color: #fff;
+}
+
+.secondary-action {
+  border: 1px solid rgba(190, 156, 142, 0.56);
+  background: rgba(255, 255, 255, 0.8);
+  color: #5a4036;
+}
+
 .copyright {
   margin: 10px 0 0;
   color: rgba(68, 68, 68, 0.38);
@@ -259,17 +382,16 @@ void router;
   .vertical-brand {
     top: 20px;
     right: 20px;
-    font-size: 16px;
   }
 
   .art-ring {
-    width: 250px;
-    height: 250px;
-    margin-bottom: 26px;
+    width: 272px;
+    height: 272px;
+    margin-bottom: 28px;
   }
 
   .art-core {
-    inset: 36px;
+    inset: 40px;
   }
 
   .generating-shell h1 {
@@ -283,13 +405,16 @@ void router;
 
   .progress-bar {
     margin-top: 54px;
-    width: min(360px, calc(100vw - 48px));
   }
 
   .tip-card {
     grid-template-columns: 1fr;
-    margin-top: 86px;
-    padding: 22px 20px;
+    margin-top: 72px;
+    padding: 24px;
+  }
+
+  .error-actions {
+    flex-direction: column;
   }
 }
 </style>

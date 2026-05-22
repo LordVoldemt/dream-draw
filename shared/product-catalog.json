@@ -1,0 +1,205 @@
+{
+  "styles": [
+    {
+      "id": "style_tang_dynasty",
+      "name": "盛唐",
+      "description": "华丽丰腴、贵气雍容，适合富贵千金与宫廷气质角色。",
+      "extraPoints": 1,
+      "keywords": ["丰腴", "华丽", "金饰", "齐胸襦裙", "披帛"]
+    },
+    {
+      "id": "style_han_dynasty",
+      "name": "汉代",
+      "description": "古朴端庄、温婉克制，适合汉服写真实验与清雅人物。",
+      "extraPoints": 0,
+      "keywords": ["曲裾", "深衣", "古朴", "温婉"]
+    },
+    {
+      "id": "style_xianxia",
+      "name": "仙侠",
+      "description": "飘逸唯美、灵气空灵，适合剑修、仙灵与幻境角色。",
+      "extraPoints": 0,
+      "keywords": ["仙气", "飘逸", "轻纱", "灵光", "云雾"]
+    },
+    {
+      "id": "style_new_chinese",
+      "name": "新中式",
+      "description": "高级现代、东方时尚，适合冷艳、极简和杂志感人像。",
+      "extraPoints": 0,
+      "keywords": ["新中式", "高级感", "极简东方", "现代剪裁"]
+    },
+    {
+      "id": "style_gufeng_portrait",
+      "name": "国风人像",
+      "description": "写实感与角色聚焦，适合精致妆造和个人头像。",
+      "extraPoints": 0,
+      "keywords": ["国风", "人像特写", "氛围感", "精致妆造"]
+    },
+    {
+      "id": "style_cinematic",
+      "name": "电影质感",
+      "description": "戏剧光影、镜头感强，适合海报、封面和高冲击画面。",
+      "extraPoints": 1,
+      "keywords": ["cinematic", "volumetric lighting", "dramatic light"]
+    }
+  ],
+  "templates": [
+    {
+      "id": "tpl_oc_avatar",
+      "name": "OC头像",
+      "scene": "社交头像、梦女人设头像",
+      "composition": "近景或半身，面部聚焦",
+      "extraPoints": 0
+    },
+    {
+      "id": "tpl_dreamgirl_portrait",
+      "name": "梦女人设",
+      "scene": "女性用户自设、陪伴幻想",
+      "composition": "半身偏特写，强调氛围感",
+      "extraPoints": 1
+    },
+    {
+      "id": "tpl_novel_heroine",
+      "name": "小说女主",
+      "scene": "小说封面角色、人设展示",
+      "composition": "全身或半身，人物设定明确",
+      "extraPoints": 0
+    },
+    {
+      "id": "tpl_hanfu_photoshoot",
+      "name": "汉服写真",
+      "scene": "汉服圈展示、风格参考",
+      "composition": "全身，姿态与服饰细节突出",
+      "extraPoints": 0
+    },
+    {
+      "id": "tpl_wallpaper_character",
+      "name": "国风壁纸",
+      "scene": "手机壁纸、个人展示",
+      "composition": "竖版构图，背景完整",
+      "extraPoints": 0
+    },
+    {
+      "id": "tpl_xiaohongshu_cover",
+      "name": "小红书封面",
+      "scene": "图文封面、自媒体素材",
+      "composition": "标题留白，主角居中偏一侧",
+      "extraPoints": 1
+    },
+    {
+      "id": "tpl_video_cover",
+      "name": "视频封面",
+      "scene": "视频头图、横版封面",
+      "composition": "横版构图，视觉冲击更强",
+      "extraPoints": 1
+    },
+    {
+      "id": "tpl_character_sheet",
+      "name": "人设展示卡",
+      "scene": "角色设定展示",
+      "composition": "全身加服饰与设定要素",
+      "extraPoints": 1
+    }
+  ],
+  "ratios": [
+    {
+      "id": "ratio_square_1_1",
+      "label": "1:1",
+      "title": "正方形",
+      "scene": "头像、社交封面、小红书配图",
+      "resolution": "1024x1024",
+      "extraPoints": 0
+    },
+    {
+      "id": "ratio_portrait_3_4",
+      "label": "3:4",
+      "title": "竖版标准",
+      "scene": "半身人像、国风写真",
+      "resolution": "960x1280",
+      "extraPoints": 0
+    },
+    {
+      "id": "ratio_portrait_2_3",
+      "label": "2:3",
+      "title": "竖版海报",
+      "scene": "全身角色、壁纸、小说角色展示",
+      "resolution": "1024x1536",
+      "extraPoints": 0
+    },
+    {
+      "id": "ratio_landscape_4_3",
+      "label": "4:3",
+      "title": "横版标准",
+      "scene": "场景插画、多人构图",
+      "resolution": "1280x960",
+      "extraPoints": 0
+    },
+    {
+      "id": "ratio_landscape_16_9",
+      "label": "16:9",
+      "title": "横版封面",
+      "scene": "视频封面、横版头图",
+      "resolution": "1536x864",
+      "extraPoints": 0
+    },
+    {
+      "id": "ratio_vertical_9_16",
+      "label": "9:16",
+      "title": "竖屏封面",
+      "scene": "手机壁纸、短视频封面",
+      "resolution": "864x1536",
+      "extraPoints": 0
+    }
+  ],
+  "qualityLevels": [
+    {
+      "id": "standard",
+      "name": "普通",
+      "basePoints": 1
+    },
+    {
+      "id": "hd",
+      "name": "高清",
+      "basePoints": 2
+    },
+    {
+      "id": "ultra",
+      "name": "超精细",
+      "basePoints": 3
+    }
+  ],
+  "referenceImageModes": [
+    {
+      "id": "character",
+      "name": "保留人物特征"
+    },
+    {
+      "id": "style",
+      "name": "参考画风"
+    },
+    {
+      "id": "pose",
+      "name": "参考姿势"
+    }
+  ],
+  "referenceImagePoints": [
+    {
+      "count": 0,
+      "extraPoints": 0
+    },
+    {
+      "count": 1,
+      "extraPoints": 1
+    },
+    {
+      "count": 2,
+      "extraPoints": 2
+    },
+    {
+      "count": 3,
+      "extraPoints": 3
+    }
+  ],
+  "modelStatuses": ["healthy", "degraded", "unavailable", "maintenance"],
+  "taskStatuses": ["pending", "generating", "reviewing", "success", "failed", "blocked"]
+}

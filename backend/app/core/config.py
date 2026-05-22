@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import json
 from functools import lru_cache
+from pathlib import Path
 from typing import Any
 
 from pydantic import Field
@@ -27,6 +28,7 @@ class AppSettings(BaseSettings):
     app_name: str = "绘梦 API"
     app_version: str = "0.1.0"
     environment: str = "development"
+    uploads_dir: str = str(Path(__file__).resolve().parents[2] / "uploads")
     object_storage: ObjectStorageConfig = Field(default_factory=ObjectStorageConfig)
     redis: RedisConfig = Field(default_factory=RedisConfig)
     database: DatabaseConfig = Field(default_factory=DatabaseConfig)

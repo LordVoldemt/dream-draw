@@ -3,6 +3,33 @@ export interface ApiClientOptions {
   getToken?: () => string | null;
 }
 
+async function buildRequestError(response: Response): Promise<Error> {
+  let message = `API request failed: ${response.status}`;
+
+  try {
+    const body = (await response.json()) as {
+      detail?: string;
+      message?: string;
+      error?: string | { message?: string; code?: string };
+    };
+    const detail =
+      body.detail ||
+      body.message ||
+      (typeof body.error === "string" ? body.error : body.error?.message || body.error?.code);
+    if (detail) {
+      message = detail;
+    }
+  } catch {
+    if (response.statusText) {
+      message = response.statusText;
+    }
+  }
+
+  const error = new Error(message);
+  Object.assign(error, { status: response.status });
+  return error;
+}
+
 export class ApiClient {
   private readonly baseUrl: string;
   private readonly getToken?: () => string | null;
@@ -45,7 +72,7 @@ export class ApiClient {
     });
 
     if (!response.ok) {
-      throw new Error(`API request failed: ${response.status}`);
+      throw await buildRequestError(response);
     }
 
     return (await response.json()) as T;

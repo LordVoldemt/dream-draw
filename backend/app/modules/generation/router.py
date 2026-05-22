@@ -1,8 +1,14 @@
+import logging
+import traceback
+from threading import Thread
+
 from pydantic import BaseModel, Field, HttpUrl
 from fastapi import APIRouter, Depends, Query, Request
 
+from app.core.config import AppSettings
 from app.core.errors import AppError
 from app.dependencies import (
+    get_app_settings,
     get_current_user_id,
     get_generation_task_repository,
     get_model_health_log_repository,
@@ -25,6 +31,7 @@ from app.services.rate_limit import ip_rate_limiter
 from app.shared.catalog import load_product_catalog
 
 router = APIRouter(tags=["generation"])
+logger = logging.getLogger(__name__)
 
 
 @router.get("/generate/_module")
@@ -133,6 +140,40 @@ def _validate_prompt(prompt: str) -> None:
             raise AppError("blocked_prompt", "当前描述包含受限内容，请调整后重试", status_code=422)
 
 
+def _run_generation_task_in_background(
+    task_id: int,
+    request_id: str,
+    tasks: GenerationTaskRepository,
+    users: UserRepository,
+    transactions: PointTransactionRepository,
+    works: WorkRepository,
+    providers: ModelProviderRepository,
+    monitoring: ModelHealthLogRepository,
+    uploads_dir: str,
+) -> None:
+    try:
+        process_generation_task(
+            task_id=task_id,
+            tasks=tasks,
+            users=users,
+            transactions=transactions,
+            works=works,
+            providers=providers,
+            monitoring=monitoring,
+            uploads_dir=uploads_dir,
+        )
+        logger.warning("[generate.tasks.background.done] request_id=%s task_id=%s", request_id, task_id)
+    except Exception as exc:
+        logger.error(
+            "[generate.tasks.background.unhandled] request_id=%s task_id=%s error_type=%s error=%s traceback=%s",
+            request_id,
+            task_id,
+            type(exc).__name__,
+            str(exc),
+            traceback.format_exc(),
+        )
+
+
 @router.post("/generate/tasks")
 async def create_generation_task(
     request: Request,
@@ -144,62 +185,124 @@ async def create_generation_task(
     works: WorkRepository = Depends(get_work_repository),
     providers: ModelProviderRepository = Depends(get_model_provider_repository),
     monitoring: ModelHealthLogRepository = Depends(get_model_health_log_repository),
+    settings: AppSettings = Depends(get_app_settings),
 ) -> dict:
-    _validate_prompt(payload.prompt)
-    if len(payload.reference_image_urls) > 3:
-        raise AppError("too_many_references", "最多支持 3 张参考图", status_code=422)
-    ip_address = request.headers.get("x-forwarded-for", "unknown").split(",")[0].strip()
-    if not ip_rate_limiter.allow(ip_address):
-        raise AppError("ip_rate_limited", "当前 IP 请求过于频繁，请稍后再试", status_code=429)
-    if tasks.count_active_for_user(user_id) >= 3:
-        raise AppError("rate_limited", "当前生成任务过多，请稍后再试", status_code=429)
-    if tasks.count_created_today_for_user(user_id) >= 20:
-        raise AppError("daily_limit_reached", "新用户当日生成次数已达上限", status_code=429)
-    if tasks.has_duplicate_prompt_today(user_id, payload.prompt):
-        raise AppError("duplicate_prompt", "相同 Prompt 今日已提交，请调整描述后再试", status_code=409)
+    request_id = request.headers.get("x-request-id") or f"generate-{user_id}-{request.headers.get('x-forwarded-for', 'unknown')}"
+    payload_summary = {
+        "style_id": payload.style_id,
+        "template_id": payload.template_id,
+        "ratio_id": payload.ratio_id,
+        "quality_level": payload.quality_level,
+        "reference_count": len(payload.reference_image_urls),
+        "prompt_length": len(payload.prompt),
+    }
+    logger.warning("[generate.tasks.start] request_id=%s user_id=%s payload=%s", request_id, user_id, payload_summary)
+    try:
+        _validate_prompt(payload.prompt)
+        if len(payload.reference_image_urls) > 3:
+            raise AppError("too_many_references", "最多支持 3 张参考图", status_code=422)
+        ip_address = request.headers.get("x-forwarded-for", "unknown").split(",")[0].strip()
+        logger.warning("[generate.tasks.ip] request_id=%s ip=%s", request_id, ip_address)
+        if not ip_rate_limiter.allow(ip_address):
+            raise AppError("ip_rate_limited", "当前 IP 请求过于频繁，请稍后再试", status_code=429)
+        active_task_count = tasks.count_active_for_user(user_id)
+        created_today_count = tasks.count_created_today_for_user(user_id)
+        logger.warning(
+            "[generate.tasks.limits] request_id=%s user_id=%s active_task_count=%s created_today_count=%s",
+            request_id,
+            user_id,
+            active_task_count,
+            created_today_count,
+        )
+        if active_task_count >= 3:
+            raise AppError("rate_limited", "当前生成任务过多，请稍后再试", status_code=429)
+        if created_today_count >= 20:
+            raise AppError("daily_limit_reached", "新用户当日生成次数已达上限", status_code=429)
+        if tasks.has_duplicate_prompt_today(user_id, payload.prompt):
+            raise AppError("duplicate_prompt", "相同 Prompt 今日已提交，请调整描述后再试", status_code=409)
 
-    quote = calculate_generation_quote(
-        style_id=payload.style_id,
-        template_id=payload.template_id,
-        ratio_id=payload.ratio_id,
-        quality_level=payload.quality_level,
-        reference_image_count=len(payload.reference_image_urls),
-    )
-    user = users.find_by_id(user_id)
-    assert user is not None
-    if int(user["points_balance"]) < quote.final_points:
-        raise AppError("insufficient_points", "积分不足，请先充值", status_code=409)
+        quote = calculate_generation_quote(
+            style_id=payload.style_id,
+            template_id=payload.template_id,
+            ratio_id=payload.ratio_id,
+            quality_level=payload.quality_level,
+            reference_image_count=len(payload.reference_image_urls),
+        )
+        logger.warning("[generate.tasks.quote] request_id=%s final_points=%s", request_id, quote.final_points)
+        user = users.find_by_id(user_id)
+        assert user is not None
+        logger.warning("[generate.tasks.user] request_id=%s user_id=%s points_balance=%s", request_id, user_id, user["points_balance"])
+        if int(user["points_balance"]) < quote.final_points:
+            raise AppError("insufficient_points", "积分不足，请先充值", status_code=409)
 
-    users.adjust_points(user_id, -quote.final_points)
-    task = tasks.create(
-        user_id=user_id,
-        prompt=payload.prompt,
-        style_id=payload.style_id,
-        template_id=payload.template_id,
-        ratio_id=payload.ratio_id,
-        quality_level=payload.quality_level,
-        reference_mode=payload.reference_mode,
-        reference_image_count=len(payload.reference_image_urls),
-        final_points=quote.final_points,
-    )
-    transactions.create(
-        user_id=user_id,
-        delta=-quote.final_points,
-        transaction_type="generation_consume",
-        reason="创建生成任务扣除积分",
-        related_task_id=int(task["id"]),
-    )
-    process_generation_task(
-        task_id=int(task["id"]),
-        tasks=tasks,
-        users=users,
-        transactions=transactions,
-        works=works,
-        providers=providers,
-        monitoring=monitoring,
-    )
-    task = tasks.find_by_id(int(task["id"])) or task
-    return {"task_id": task["id"], "status": task["status"], "final_points": task["final_points"]}
+        users.adjust_points(user_id, -quote.final_points)
+        task = tasks.create(
+            user_id=user_id,
+            prompt=payload.prompt,
+            style_id=payload.style_id,
+            template_id=payload.template_id,
+            ratio_id=payload.ratio_id,
+            quality_level=payload.quality_level,
+            reference_mode=payload.reference_mode,
+            reference_image_count=len(payload.reference_image_urls),
+            final_points=quote.final_points,
+        )
+        logger.warning("[generate.tasks.created] request_id=%s task_id=%s", request_id, task["id"])
+        transactions.create(
+            user_id=user_id,
+            delta=-quote.final_points,
+            transaction_type="generation_consume",
+            reason="创建生成任务扣除积分",
+            related_task_id=int(task["id"]),
+        )
+        logger.warning("[generate.tasks.transaction] request_id=%s task_id=%s points=%s", request_id, task["id"], quote.final_points)
+        thread = Thread(
+            target=_run_generation_task_in_background,
+            args=(
+                int(task["id"]),
+                request_id,
+                tasks,
+                users,
+                transactions,
+                works,
+                providers,
+                monitoring,
+                settings.uploads_dir,
+            ),
+            daemon=True,
+        )
+        thread.start()
+        current_task = tasks.find_by_id(int(task["id"])) or task
+        response = {
+            "task_id": current_task["id"],
+            "status": current_task["status"],
+            "final_points": current_task["final_points"],
+            "work_id": None,
+        }
+        logger.warning("[generate.tasks.accepted] request_id=%s response=%s", request_id, response)
+        return response
+    except AppError as exc:
+        logger.exception(
+            "[generate.tasks.app_error] request_id=%s user_id=%s code=%s status_code=%s message=%s payload=%s",
+            request_id,
+            user_id,
+            exc.code,
+            exc.status_code,
+            exc.message,
+            payload_summary,
+        )
+        raise
+    except Exception as exc:
+        logger.error(
+            "[generate.tasks.unhandled] request_id=%s user_id=%s error_type=%s error=%s payload=%s traceback=%s",
+            request_id,
+            user_id,
+            type(exc).__name__,
+            str(exc),
+            payload_summary,
+            traceback.format_exc(),
+        )
+        raise
 
 
 @router.get("/generate/tasks/{task_id}")

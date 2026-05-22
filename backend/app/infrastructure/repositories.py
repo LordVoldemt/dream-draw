@@ -395,6 +395,14 @@ class WorkRepository:
             ).fetchone()
             return dict(row) if row else None
 
+    def find_by_task_id(self, task_id: int) -> dict[str, Any] | None:
+        with self.database.connection() as connection:
+            row = connection.execute(
+                "SELECT * FROM works WHERE task_id = ?",
+                (task_id,),
+            ).fetchone()
+            return dict(row) if row else None
+
     def count_all(self) -> int:
         with self.database.connection() as connection:
             row = connection.execute("SELECT COUNT(*) AS total_count FROM works").fetchone()

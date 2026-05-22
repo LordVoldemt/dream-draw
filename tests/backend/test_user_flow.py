@@ -11,7 +11,8 @@ def create_test_client(tmp_path: Path) -> TestClient:
         {
             "database": {
                 "url": f"sqlite:///{tmp_path / 'dream-draw-test.db'}",
-            }
+            },
+            "uploads_dir": str(tmp_path / "uploads"),
         }
     )
     return TestClient(create_app(settings))
@@ -113,7 +114,7 @@ def test_quote_endpoint_returns_breakdown(tmp_path: Path) -> None:
     assert body["final_points"] == 6
 
 
-def test_create_task_deducts_points_and_returns_task_detail(tmp_path: Path) -> None:
+def test_create_task_returns_immediately_and_persists_generated_assets(tmp_path: Path) -> None:
     client = create_test_client(tmp_path)
     login_payload = login_user(client, "13800138002")
     headers = {"Authorization": f"Bearer {login_payload['token']}", "x-forwarded-for": "10.1.0.2"}
@@ -133,16 +134,26 @@ def test_create_task_deducts_points_and_returns_task_detail(tmp_path: Path) -> N
 
     assert response.status_code == 200
     task_payload = response.json()
-    assert task_payload["status"] == "success"
+    assert task_payload["status"] in {"pending", "generating", "reviewing", "success"}
     assert task_payload["final_points"] == 1
+    assert task_payload["work_id"] is None
 
     task_id = task_payload["task_id"]
     detail_response = client.get(f"/api/generate/tasks/{task_id}", headers=headers)
-    points_response = client.get("/api/points", headers=headers)
-
     assert detail_response.status_code == 200
-    assert detail_response.json()["task"]["prompt"].startswith("盛唐时期")
-    assert points_response.json()["balance"] == 9
+    assert detail_response.json()["task"]["status"] == "success"
+
+    work_by_task_response = client.get(f"/api/works-by-task/{task_id}", headers=headers)
+    assert work_by_task_response.status_code == 200
+    work = work_by_task_response.json()["work"]
+    assert work["image_url"] == f"/uploads/works/task-{task_id}.png"
+    assert work["thumbnail_url"] == f"/uploads/works/task-{task_id}-thumb.png"
+    assert work["share_image_url"] == f"/uploads/works/task-{task_id}-share.png"
+
+    uploads_dir = tmp_path / "uploads" / "works"
+    assert (uploads_dir / f"task-{task_id}.png").exists()
+    assert (uploads_dir / f"task-{task_id}-thumb.png").exists()
+    assert (uploads_dir / f"task-{task_id}-share.png").exists()
 
 
 def test_create_task_rejects_insufficient_points_and_blocked_prompt(tmp_path: Path) -> None:

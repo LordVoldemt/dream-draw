@@ -50,6 +50,22 @@ async def get_work_detail(
     return {"work": work}
 
 
+@router.get("-by-task/{task_id}")
+async def get_work_detail_by_task(
+    task_id: int,
+    user_id: int = Depends(get_current_user_id),
+    works: WorkRepository = Depends(get_work_repository),
+    favorites: FavoriteRepository = Depends(get_favorite_repository),
+) -> dict:
+    work = works.find_by_task_id(task_id)
+    if work is None:
+        raise AppError("work_not_found", "作品不存在", status_code=404)
+    if int(work["user_id"]) != user_id:
+        raise AppError("forbidden", "无权查看该作品", status_code=403)
+    work["is_favorite"] = favorites.exists(user_id, int(work["id"]))
+    return {"work": work}
+
+
 @router.post("/{work_id}/favorite")
 async def favorite_work(
     work_id: int,

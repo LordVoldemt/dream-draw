@@ -3,50 +3,55 @@
     <section class="hero-section">
       <div class="hero-background">
         <img
-          src="https://images.unsplash.com/photo-1578632767115-351597cf2477?auto=format&fit=crop&w=1600&q=80"
-          alt="国风角色主视觉"
+          src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1600&q=80"
+          alt="绘梦首页背景"
         />
-        <div class="hero-overlay"></div>
       </div>
+      <div class="hero-overlay"></div>
       <div class="hero-content">
         <div class="hero-copy">
-          <p class="hero-kicker">专注女性向国风 OC / 梦女人设生成</p>
-          <h1>
-            输入一句描述，
-            <br />
-            生成你的<span>专属国风</span>角色
-          </h1>
-          <p class="hero-description">
-            融合东方意境与现代 AI，让一个梦境中的绝代佳人跃然纸上。
-            从长安贵族到仙山剑仙，开始你的中式幻想之旅。
+          <div class="brand-mark">绘梦</div>
+          <h1>一键绘就你的专属国风角色</h1>
+          <p>
+            无需专业技巧，输入灵感文字，即刻获得电影感、古风感、仙侠感兼具的国风角色图像。
+            让每一个人设、封面、头像与故事角色，都拥有值得收藏的东方美学形象。
           </p>
           <div class="hero-actions">
-            <RouterLink class="primary-button" to="/workspace">立即生成</RouterLink>
-            <a class="secondary-button" href="#inspirations">探索灵感</a>
+            <RouterLink class="primary-button" to="/workspace">立即开始创作</RouterLink>
+            <a class="secondary-button" href="#inspirations">浏览灵感模板</a>
+          </div>
+          <div class="hero-stats">
+            <div>
+              <strong>10W+</strong>
+              <span>创作灵感模板</span>
+            </div>
+            <div>
+              <strong>24h</strong>
+              <span>模型智能守护</span>
+            </div>
+            <div>
+              <strong>国风向</strong>
+              <span>角色视觉优化</span>
+            </div>
           </div>
         </div>
-      </div>
-    </section>
 
-    <section class="content-section">
-      <div class="section-title with-line">
-        <span></span>
-        <h2>格律传承 · 四大风格</h2>
-      </div>
-      <div class="style-grid">
-        <button
-          v-for="style in featuredStyles"
-          :key="style.id"
-          class="style-card"
-          type="button"
-          @click="goPreset(style.id)"
-        >
-          <img :src="style.cover" :alt="style.name" />
-          <div class="style-card-overlay"></div>
-          <div class="style-card-label">
-            <span>{{ style.verticalName }}</span>
+        <div class="hero-panel">
+          <div class="hero-panel-head">
+            <span>风格精选</span>
+            <small>热门创作路线</small>
           </div>
-        </button>
+          <div class="hero-style-grid">
+            <article v-for="item in featuredStyles" :key="item.id" class="hero-style-card">
+              <img :src="item.cover" :alt="item.name" />
+              <div class="hero-style-overlay"></div>
+              <div class="hero-style-copy">
+                <span>{{ item.verticalName }}</span>
+                <strong>{{ item.name }}</strong>
+              </div>
+            </article>
+          </div>
+        </div>
       </div>
     </section>
 
@@ -56,38 +61,85 @@
         <p>精选情绪模板，一键开启你的国风角色叙事</p>
       </div>
       <div class="inspiration-layout">
-        <button
-          class="inspiration-large"
-          type="button"
-          @click="goPreset('style_xianxia', 'tpl_novel_heroine', '清冷月下女剑仙，白衣长剑，月光与飞雪，孤高清绝')"
-        >
-          <img
-            src="https://images.unsplash.com/photo-1516979187457-637abb4f9353?auto=format&fit=crop&w=1200&q=80"
-            alt="清冷月下女剑仙"
-          />
-          <div class="inspiration-overlay"></div>
-          <div class="inspiration-copy">
-            <span class="inspiration-tag">清冷 · 仙气</span>
-            <h3>清冷月下女剑仙</h3>
-            <p>孤月照剑，衣袂生风。适合小说女主、封面角色与仙侠梦女人设。</p>
-          </div>
-        </button>
-        <div class="inspiration-side">
+        <article class="inspiration-large inspiration-carousel">
           <button
-            class="inspiration-small"
+            class="inspiration-preset"
             type="button"
-            @click="goPreset('style_tang_dynasty', 'tpl_dreamgirl_portrait', '长安贵族千金，金色步摇，红色齐胸襦裙，华贵端庄')"
+            @click="goPreset('style_xianxia', 'tpl_novel_heroine', '清冷月下女剑仙，白衣长剑，月光与飞雪，孤高清绝')"
           >
             <img
-              src="https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=900&q=80"
-              alt="长安贵族千金"
+              :src="currentSwordImmortalImage"
+              class="sword-immortal-image"
+              alt="清冷月下女剑仙"
+              data-testid="sword-immortal-image"
             />
             <div class="inspiration-overlay"></div>
-            <div class="inspiration-copy compact">
-              <h3>长安贵族千金</h3>
-              <p>盛世华彩，适合头像与人设首图</p>
+            <div class="inspiration-copy">
+              <span class="inspiration-tag">清冷 · 仙气</span>
+              <h3>清冷月下女剑仙</h3>
+              <p>孤月照剑，衣袂生风。适合小说女主、封面角色与仙侠梦女人设。</p>
             </div>
           </button>
+          <div class="carousel-controls" aria-label="清冷月下女剑仙图片轮播">
+            <button
+              class="carousel-arrow"
+              type="button"
+              aria-label="上一张清冷月下女剑仙"
+              @click="showPreviousSwordImmortal"
+            >
+              ‹
+            </button>
+            <span class="carousel-count">{{ swordImmortalIndex + 1 }} / {{ swordImmortalImages.length }}</span>
+            <button
+              class="carousel-arrow"
+              type="button"
+              aria-label="下一张清冷月下女剑仙"
+              data-testid="sword-immortal-next"
+              @click="showNextSwordImmortal"
+            >
+              ›
+            </button>
+          </div>
+        </article>
+        <div class="inspiration-side">
+          <article class="inspiration-small inspiration-carousel">
+            <button
+              class="inspiration-preset"
+              type="button"
+              @click="goPreset('style_tang_dynasty', 'tpl_dreamgirl_portrait', '长安贵族千金，金色步摇，红色齐胸襦裙，华贵端庄')"
+            >
+              <img
+                :src="currentChanganNobleImage"
+                alt="长安贵族千金"
+                data-testid="changan-noble-image"
+              />
+              <div class="inspiration-overlay"></div>
+              <div class="inspiration-copy compact">
+                <h3>长安贵族千金</h3>
+                <p>盛世华彩，适合头像与人设首图</p>
+              </div>
+            </button>
+            <div class="carousel-controls compact" aria-label="长安贵族千金图片轮播">
+              <button
+                class="carousel-arrow"
+                type="button"
+                aria-label="上一张长安贵族千金"
+                @click="showPreviousChanganNoble"
+              >
+                ‹
+              </button>
+              <span class="carousel-count">{{ changanNobleIndex + 1 }} / {{ changanNobleImages.length }}</span>
+              <button
+                class="carousel-arrow"
+                type="button"
+                aria-label="下一张长安贵族千金"
+                data-testid="changan-noble-next"
+                @click="showNextChanganNoble"
+              >
+                ›
+              </button>
+            </div>
+          </article>
           <button
             class="inspiration-small"
             type="button"
@@ -151,11 +203,35 @@
 </template>
 
 <script setup lang="ts">
-import { computed } from "vue";
+import { computed, ref } from "vue";
 import { RouterLink, useRouter } from "vue-router";
+import swordImmortalImage1 from "@/assets/女剑仙1.png";
+import swordImmortalImage2 from "@/assets/女剑仙2.png";
+import swordImmortalImage3 from "@/assets/女剑仙3.png";
+import swordImmortalImage4 from "@/assets/女剑仙4.png";
+import changanNobleImage1 from "@/assets/长安贵族千金1.png";
+import changanNobleImage2 from "@/assets/长安贵族千金2.png";
+import changanNobleImage3 from "@/assets/长安贵族千金3.png";
+import changanNobleImage4 from "@/assets/长安贵族千金4.png";
 import { styles } from "@/shared/catalog";
 
 const router = useRouter();
+const swordImmortalImages = [
+  swordImmortalImage1,
+  swordImmortalImage2,
+  swordImmortalImage3,
+  swordImmortalImage4,
+];
+const changanNobleImages = [
+  changanNobleImage1,
+  changanNobleImage2,
+  changanNobleImage3,
+  changanNobleImage4,
+];
+const swordImmortalIndex = ref(0);
+const changanNobleIndex = ref(0);
+const currentSwordImmortalImage = computed(() => swordImmortalImages[swordImmortalIndex.value]);
+const currentChanganNobleImage = computed(() => changanNobleImages[changanNobleIndex.value]);
 
 const featuredStyles = computed(() => {
   const coverMap: Record<string, { cover: string; verticalName: string }> = {
@@ -167,38 +243,50 @@ const featuredStyles = computed(() => {
     style_han_dynasty: {
       cover:
         "https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?auto=format&fit=crop&w=900&q=80",
-      verticalName: "汉代风骨",
+      verticalName: "清汉古韵",
     },
     style_xianxia: {
       cover:
-        "https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=900&q=80",
-      verticalName: "仙侠梦幻",
+        "https://images.unsplash.com/photo-1516979187457-637abb4f9353?auto=format&fit=crop&w=900&q=80",
+      verticalName: "仙侠梦境",
     },
     style_new_chinese: {
       cover:
-        "https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=900&q=80",
-      verticalName: "新中式感",
+        "https://images.unsplash.com/photo-1512436991641-6745cdb1723f?auto=format&fit=crop&w=900&q=80",
+      verticalName: "新中式质感",
+    },
+    style_gufeng_portrait: {
+      cover:
+        "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?auto=format&fit=crop&w=900&q=80",
+      verticalName: "古风肖像",
+    },
+    style_cinematic: {
+      cover:
+        "https://images.unsplash.com/photo-1507525428034-b723cf961d3f?auto=format&fit=crop&w=900&q=80",
+      verticalName: "电影镜头",
     },
   };
 
-  return styles
-    .filter((item) => coverMap[item.id])
-    .slice(0, 4)
-    .map((item) => ({
-      ...item,
-      cover: coverMap[item.id].cover,
-      verticalName: coverMap[item.id].verticalName,
-    }));
+  return styles.slice(0, 4).map((style) => ({
+    ...style,
+    cover: coverMap[style.id]?.cover ?? coverMap.style_tang_dynasty.cover,
+    verticalName: coverMap[style.id]?.verticalName ?? "东方美学",
+  }));
 });
 
 const galleryItems = [
   {
-    title: "云裳神女",
+    title: "月下剑影",
     image:
-      "https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?auto=format&fit=crop&w=720&q=80",
+      "https://images.unsplash.com/photo-1516979187457-637abb4f9353?auto=format&fit=crop&w=720&q=80",
   },
   {
-    title: "墨客寻梅",
+    title: "朱砂华裳",
+    image:
+      "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=720&q=80",
+  },
+  {
+    title: "金阙蝶梦",
     image:
       "https://images.unsplash.com/photo-1512436991641-6745cdb1723f?auto=format&fit=crop&w=720&q=80",
   },
@@ -210,9 +298,33 @@ const galleryItems = [
   {
     title: "平湖秋月",
     image:
-      "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=720&q=80",
+      "https://images.unsplash.com/photo-1507525428034-b723cf961d3f?auto=format&fit=crop&w=720&q=80",
   },
 ];
+
+function previousIndex(currentIndex: number, total: number) {
+  return (currentIndex - 1 + total) % total;
+}
+
+function nextIndex(currentIndex: number, total: number) {
+  return (currentIndex + 1) % total;
+}
+
+function showPreviousSwordImmortal() {
+  swordImmortalIndex.value = previousIndex(swordImmortalIndex.value, swordImmortalImages.length);
+}
+
+function showNextSwordImmortal() {
+  swordImmortalIndex.value = nextIndex(swordImmortalIndex.value, swordImmortalImages.length);
+}
+
+function showPreviousChanganNoble() {
+  changanNobleIndex.value = previousIndex(changanNobleIndex.value, changanNobleImages.length);
+}
+
+function showNextChanganNoble() {
+  changanNobleIndex.value = nextIndex(changanNobleIndex.value, changanNobleImages.length);
+}
 
 function goPreset(styleId: string, templateId?: string, prompt?: string) {
   router.push({
@@ -266,468 +378,539 @@ function goPreset(styleId: string, templateId?: string, prompt?: string) {
   z-index: 1;
   display: flex;
   align-items: center;
-  min-height: 820px;
-  max-width: 1280px;
+  justify-content: space-between;
+  gap: 48px;
+  width: min(1200px, calc(100% - 80px));
   margin: 0 auto;
-  padding: 88px 40px 56px;
+  padding: 120px 0 96px;
 }
 
 .hero-copy {
   max-width: 560px;
 }
 
-.hero-kicker {
-  margin: 0 0 18px;
-  color: rgba(120, 44, 29, 0.78);
+.brand-mark {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 68px;
+  padding: 10px 16px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.68);
+  color: #7a4730;
   font-size: 14px;
-  letter-spacing: 0.16em;
+  letter-spacing: 0.24em;
 }
 
 .hero-copy h1 {
-  margin: 0;
+  margin: 24px 0 18px;
+  color: #1b1715;
   font-family: "Noto Serif SC", "Songti SC", serif;
-  font-size: 60px;
-  line-height: 1.12;
-  font-weight: 700;
+  font-size: clamp(44px, 7vw, 72px);
+  line-height: 1.06;
 }
 
-.hero-copy h1 span {
-  color: #c53f25;
-}
-
-.hero-description {
-  max-width: 470px;
-  margin: 22px 0 0;
-  color: rgba(34, 34, 34, 0.72);
-  font-size: 16px;
-  line-height: 1.85;
+.hero-copy p {
+  margin: 0;
+  max-width: 520px;
+  color: rgba(44, 35, 31, 0.8);
+  font-size: 18px;
+  line-height: 1.9;
 }
 
 .hero-actions {
   display: flex;
+  flex-wrap: wrap;
   gap: 16px;
-  margin-top: 34px;
+  margin-top: 32px;
 }
 
 .primary-button,
 .secondary-button,
 .cta-button,
 .gallery-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   text-decoration: none;
 }
 
-.primary-button {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  min-width: 138px;
-  height: 52px;
-  padding: 0 24px;
-  border-radius: 10px;
-  background: linear-gradient(135deg, #d94b2b, #b62b11);
-  box-shadow: 0 10px 24px rgba(183, 45, 20, 0.22);
-  color: #fff;
-  font-weight: 600;
+.primary-button,
+.cta-button {
+  min-height: 54px;
+  padding: 0 28px;
+  border-radius: 999px;
+  background: linear-gradient(135deg, #ad5531, #cc7a47);
+  color: #fff9f1;
+  box-shadow: 0 16px 32px rgba(167, 90, 53, 0.22);
 }
 
 .secondary-button {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  min-width: 138px;
-  height: 52px;
-  padding: 0 24px;
-  border: 1px solid rgba(23, 23, 23, 0.08);
-  border-radius: 10px;
-  background: rgba(255, 255, 255, 0.82);
-  color: #171717;
-  font-weight: 600;
-  backdrop-filter: blur(10px);
+  min-height: 54px;
+  padding: 0 28px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.72);
+  color: #5c4338;
+  border: 1px solid rgba(182, 139, 116, 0.28);
 }
 
-.content-section,
-.cta-section,
-.home-footer {
-  width: min(1280px, calc(100vw - 48px));
-  margin: 0 auto;
+.hero-stats {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+  margin-top: 36px;
 }
 
-.section-title,
-.section-heading {
-  margin-bottom: 28px;
+.hero-stats div {
+  padding: 18px 16px;
+  border-radius: 24px;
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(8px);
 }
 
-.section-title.with-line {
-  display: flex;
-  align-items: center;
-  gap: 16px;
+.hero-stats strong {
+  display: block;
+  margin-bottom: 8px;
+  color: #7d4026;
+  font-size: 28px;
 }
 
-.section-title.with-line span {
-  width: 52px;
-  height: 1px;
-  background: #d8af56;
+.hero-stats span {
+  color: rgba(56, 41, 34, 0.7);
+  font-size: 14px;
 }
 
-.section-title h2,
-.section-heading h2,
-.cta-section h2 {
-  margin: 0;
-  font-family: "Noto Serif SC", "Songti SC", serif;
-  font-size: 36px;
-  line-height: 1.2;
-  font-weight: 600;
+.hero-panel {
+  width: min(420px, 100%);
+  padding: 24px;
+  border-radius: 36px;
+  background: rgba(255, 252, 248, 0.72);
+  backdrop-filter: blur(12px);
+  box-shadow: 0 28px 80px rgba(52, 37, 28, 0.18);
 }
 
-.section-heading p,
-.cta-section p,
-.home-footer p {
-  margin: 10px 0 0;
-  color: rgba(34, 34, 34, 0.6);
-  line-height: 1.8;
-}
-
-.section-heading.center {
-  text-align: center;
-}
-
-.section-heading.between {
+.hero-panel-head {
   display: flex;
   align-items: flex-end;
   justify-content: space-between;
-  gap: 24px;
+  margin-bottom: 20px;
+  color: #52382d;
 }
 
-.style-grid {
+.hero-panel-head span {
+  font-family: "Noto Serif SC", "Songti SC", serif;
+  font-size: 22px;
+}
+
+.hero-panel-head small {
+  color: rgba(82, 56, 45, 0.58);
+}
+
+.hero-style-grid {
   display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 16px;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
 }
 
-.style-card {
+.hero-style-card {
   position: relative;
-  aspect-ratio: 0.72;
+  aspect-ratio: 0.78;
   overflow: hidden;
-  padding: 0;
-  border: 1px solid rgba(255, 255, 255, 0.3);
-  border-radius: 14px;
-  background: #111;
-  cursor: pointer;
-  transition:
-    transform 0.28s ease,
-    box-shadow 0.28s ease;
-  box-shadow: 0 14px 34px rgba(17, 17, 17, 0.12);
+  border-radius: 24px;
 }
 
-.style-card:hover,
-.inspiration-large:hover,
-.inspiration-small:hover,
-.gallery-card:hover {
-  transform: translateY(-6px);
-}
-
-.style-card img,
+.hero-style-card img,
+.gallery-card img,
 .inspiration-large img,
-.inspiration-small img,
-.gallery-card img {
+.inspiration-small img {
   width: 100%;
   height: 100%;
   object-fit: cover;
 }
 
-.style-card-overlay,
-.inspiration-overlay,
-.gallery-hover {
+.inspiration-carousel .inspiration-preset img {
+  object-fit: cover;
+}
+
+.sword-immortal-image {
+  object-position: center top;
+}
+
+.hero-style-overlay,
+.gallery-hover,
+.inspiration-overlay {
   position: absolute;
   inset: 0;
 }
 
-.style-card-overlay {
-  background: linear-gradient(180deg, rgba(17, 17, 17, 0.12), rgba(17, 17, 17, 0.8));
+.hero-style-overlay {
+  background: linear-gradient(180deg, rgba(10, 10, 10, 0.02), rgba(10, 10, 10, 0.72));
 }
 
-.style-card-label {
+.hero-style-copy {
   position: absolute;
-  top: 18px;
-  right: 18px;
-  z-index: 1;
+  left: 14px;
+  right: 14px;
+  bottom: 14px;
+  color: #fff;
 }
 
-.style-card-label span {
-  display: inline-block;
-  padding: 8px 6px;
-  background: rgba(17, 17, 17, 0.2);
-  color: #fff;
-  font-family: "Noto Serif SC", "Songti SC", serif;
+.hero-style-copy span {
+  font-size: 12px;
+  letter-spacing: 0.16em;
+}
+
+.hero-style-copy strong {
+  display: block;
+  margin-top: 8px;
   font-size: 22px;
-  line-height: 1.2;
-  letter-spacing: 0.08em;
-  writing-mode: vertical-rl;
-  text-orientation: mixed;
+}
+
+.content-section {
+  width: min(1200px, calc(100% - 64px));
+  margin: 0 auto;
+}
+
+.section-heading {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 28px;
+}
+
+.section-heading.center {
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.section-heading.between {
+  align-items: flex-end;
+  justify-content: space-between;
+}
+
+.section-heading h2 {
+  margin: 0;
+  font-family: "Noto Serif SC", "Songti SC", serif;
+  font-size: clamp(30px, 4vw, 42px);
+}
+
+.section-heading p {
+  margin: 0;
+  color: rgba(72, 56, 48, 0.7);
+  font-size: 16px;
 }
 
 .inspiration-layout {
   display: grid;
-  grid-template-columns: minmax(0, 1.6fr) minmax(340px, 1fr);
-  gap: 24px;
-  min-height: 620px;
+  grid-template-columns: minmax(0, 1.2fr) minmax(360px, 0.95fr);
+  gap: 22px;
+  align-items: stretch;
 }
 
 .inspiration-large,
 .inspiration-small {
   position: relative;
   overflow: hidden;
+  border: 0;
   padding: 0;
-  border: 1px solid rgba(255, 255, 255, 0.32);
-  border-radius: 18px;
-  background: #111;
+  border-radius: 30px;
+  background: #f4ebe3;
+}
+
+.inspiration-preset {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+  padding: 0;
   cursor: pointer;
-  box-shadow: 0 18px 46px rgba(17, 17, 17, 0.12);
-  transition: transform 0.28s ease;
+  background: transparent;
+}
+
+.inspiration-large {
+  min-height: 900px;
 }
 
 .inspiration-side {
   display: grid;
-  grid-template-rows: 1fr 1fr;
-  gap: 24px;
+  gap: 22px;
+}
+
+.inspiration-small {
+  min-height: 369px;
+}
+
+.carousel-controls {
+  position: absolute;
+  z-index: 2;
+  top: 24px;
+  right: 24px;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px;
+  border-radius: 999px;
+  background: rgba(18, 14, 12, 0.48);
+  backdrop-filter: blur(10px);
+}
+
+.carousel-controls.compact {
+  top: 18px;
+  right: 18px;
+  padding: 6px;
+}
+
+.carousel-arrow {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border: 1px solid rgba(255, 247, 242, 0.28);
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.18);
+  color: #fff8f2;
+  cursor: pointer;
+  font-size: 26px;
+  line-height: 1;
+  transition:
+    background 0.2s ease,
+    transform 0.2s ease;
+}
+
+.carousel-controls.compact .carousel-arrow {
+  width: 30px;
+  height: 30px;
+  font-size: 22px;
+}
+
+.carousel-arrow:hover {
+  background: rgba(255, 255, 255, 0.3);
+  transform: translateY(-1px);
+}
+
+.carousel-count {
+  min-width: 44px;
+  color: rgba(255, 248, 243, 0.88);
+  font-size: 13px;
+  text-align: center;
 }
 
 .inspiration-overlay {
-  background: linear-gradient(180deg, rgba(17, 17, 17, 0.08), rgba(17, 17, 17, 0.82));
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0.04), rgba(0, 0, 0, 0.7));
 }
 
 .inspiration-copy {
   position: absolute;
-  inset-inline: 0;
-  bottom: 0;
-  z-index: 1;
-  padding: 28px;
+  left: 28px;
+  right: 28px;
+  bottom: 30px;
+  color: #fff7f2;
   text-align: left;
-  color: #fff;
 }
 
-.inspiration-copy h3 {
-  margin: 0 0 10px;
-  font-family: "Noto Serif SC", "Songti SC", serif;
-  font-size: 30px;
-  font-weight: 600;
-}
-
-.inspiration-copy p {
-  margin: 0;
-  color: rgba(255, 255, 255, 0.72);
-  line-height: 1.75;
-}
-
-.inspiration-copy.compact h3 {
-  font-size: 24px;
-  margin-bottom: 6px;
+.inspiration-copy.compact {
+  left: 22px;
+  right: 22px;
+  bottom: 22px;
 }
 
 .inspiration-tag {
   display: inline-flex;
   align-items: center;
-  height: 30px;
+  justify-content: center;
+  min-height: 34px;
   padding: 0 14px;
-  margin-bottom: 14px;
   border-radius: 999px;
-  background: rgba(79, 121, 106, 0.88);
-  font-size: 12px;
-  letter-spacing: 0.1em;
+  background: rgba(255, 255, 255, 0.14);
+  font-size: 13px;
+  letter-spacing: 0.16em;
+}
+
+.inspiration-copy h3 {
+  margin: 16px 0 10px;
+  font-size: clamp(32px, 4vw, 46px);
+  font-family: "Noto Serif SC", "Songti SC", serif;
+}
+
+.inspiration-copy.compact h3 {
+  margin: 0 0 8px;
+  font-size: 28px;
+}
+
+.inspiration-copy p {
+  max-width: 520px;
+  margin: 0;
+  color: rgba(255, 248, 243, 0.88);
+  font-size: 16px;
+  line-height: 1.8;
 }
 
 .gallery-link {
-  color: #bf3d21;
-  font-weight: 600;
+  min-height: 48px;
+  padding: 0 20px;
+  border-radius: 999px;
+  background: rgba(237, 222, 206, 0.56);
+  color: #714934;
 }
 
 .gallery-grid {
   display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 16px;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 18px;
 }
 
 .gallery-card {
   position: relative;
-  aspect-ratio: 1;
+  aspect-ratio: 0.74;
   overflow: hidden;
-  border-radius: 12px;
-  box-shadow: 0 10px 28px rgba(17, 17, 17, 0.1);
-  transition: transform 0.28s ease;
+  border-radius: 28px;
+  background: #f5eee7;
 }
 
 .gallery-hover {
   display: flex;
   align-items: flex-end;
-  padding: 14px;
-  background: linear-gradient(180deg, rgba(17, 17, 17, 0), rgba(17, 17, 17, 0.64));
-  color: #fff;
+  padding: 18px;
+  background: linear-gradient(180deg, rgba(14, 12, 11, 0.02), rgba(14, 12, 11, 0.68));
+  color: #fff5ef;
 }
 
 .cta-section {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 88px 24px 64px;
+  position: relative;
+  width: min(1120px, calc(100% - 64px));
+  margin: 0 auto;
+  padding: 64px 72px;
+  border-radius: 40px;
+  overflow: hidden;
+  background: linear-gradient(135deg, #fff7ef, #f5e6d6);
   text-align: center;
-  border-top: 1px solid rgba(17, 17, 17, 0.06);
-  border-bottom: 1px solid rgba(17, 17, 17, 0.06);
+  box-shadow: 0 18px 48px rgba(61, 43, 30, 0.08);
 }
 
 .cta-mark {
-  position: relative;
-  width: 54px;
-  height: 54px;
-  margin: 0 auto 30px;
-  border: 1.5px solid #c33f23;
-  transform: rotate(45deg);
-}
-
-.cta-mark::after {
-  content: "梦";
   position: absolute;
-  inset: 0;
-  display: grid;
-  place-items: center;
-  color: #c33f23;
-  font-family: "Noto Serif SC", "Songti SC", serif;
-  font-size: 18px;
-  font-weight: 600;
-  transform: rotate(-45deg);
+  inset: auto auto -80px -40px;
+  width: 220px;
+  height: 220px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(216, 163, 104, 0.2), transparent 70%);
 }
 
 .cta-section h2 {
-  font-size: 42px;
+  margin: 0;
+  font-size: clamp(32px, 4vw, 46px);
+  font-family: "Noto Serif SC", "Songti SC", serif;
 }
 
 .cta-section p {
   max-width: 760px;
-  margin-top: 18px;
-}
-
-.cta-button {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  min-width: 220px;
-  height: 52px;
-  margin-top: 34px;
-  padding: 0 28px;
-  background: #c63e23;
-  color: #fff;
-  font-weight: 600;
+  margin: 18px auto 32px;
+  color: rgba(71, 52, 41, 0.74);
+  font-size: 17px;
+  line-height: 1.9;
 }
 
 .home-footer {
+  width: min(1200px, calc(100% - 64px));
+  margin: 0 auto;
   display: flex;
-  align-items: flex-start;
   justify-content: space-between;
   gap: 24px;
-  padding-top: 12px;
+  padding-bottom: 12px;
+  color: rgba(66, 47, 40, 0.7);
 }
 
 .footer-brand strong {
   display: block;
   margin-bottom: 10px;
-  color: rgba(23, 23, 23, 0.42);
-  font-family: "Noto Serif SC", "Songti SC", serif;
-  font-size: 30px;
+  color: #3a241b;
+  font-size: 18px;
 }
 
 .footer-brand p {
-  max-width: 360px;
+  max-width: 420px;
   margin: 0;
+  line-height: 1.8;
 }
 
 .footer-links {
   display: flex;
   flex-wrap: wrap;
-  gap: 26px;
-  padding-top: 18px;
+  gap: 18px;
+  align-content: flex-start;
 }
 
 .footer-links a {
-  color: rgba(34, 34, 34, 0.62);
+  color: inherit;
   text-decoration: none;
 }
 
-@media (max-width: 1100px) {
-  .hero-section,
-  .hero-content {
-    min-height: 720px;
-  }
-
-  .hero-copy h1 {
-    font-size: 48px;
-  }
-
-  .style-grid,
-  .gallery-grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-
-  .inspiration-layout {
-    grid-template-columns: 1fr;
-    min-height: auto;
-  }
-
-  .inspiration-large {
-    min-height: 520px;
-  }
-}
-
-@media (max-width: 720px) {
-  .home-page {
-    gap: 56px;
-  }
-
-  .content-section,
-  .cta-section,
+@media (max-width: 1080px) {
+  .hero-content,
   .home-footer {
-    width: min(100vw - 32px, 1280px);
+    width: min(100%, calc(100% - 48px));
   }
 
   .hero-content {
-    padding: 92px 20px 42px;
-    align-items: flex-start;
-  }
-
-  .hero-copy h1 {
-    font-size: 38px;
-  }
-
-  .hero-description {
-    font-size: 15px;
-  }
-
-  .hero-actions,
-  .section-heading.between,
-  .home-footer {
     flex-direction: column;
     align-items: flex-start;
   }
 
-  .style-grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+  .hero-panel {
+    width: 100%;
+  }
+
+  .gallery-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 860px) {
+  .inspiration-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .inspiration-large,
+  .inspiration-small {
+    min-height: 340px;
+  }
+
+  .hero-stats {
+    grid-template-columns: 1fr;
   }
 
   .gallery-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
-  .section-title h2,
-  .section-heading h2,
-  .cta-section h2 {
-    font-size: 28px;
+  .home-footer,
+  .section-heading.between {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+@media (max-width: 640px) {
+  .hero-content {
+    width: min(100%, calc(100% - 32px));
+    padding: 88px 0 72px;
   }
 
-  .inspiration-large,
-  .inspiration-small {
-    min-height: 360px;
+  .content-section,
+  .home-footer,
+  .cta-section {
+    width: min(100%, calc(100% - 32px));
   }
 
-  .inspiration-copy h3 {
-    font-size: 24px;
+  .cta-section {
+    padding: 42px 24px;
+  }
+
+  .gallery-grid,
+  .hero-style-grid {
+    grid-template-columns: 1fr;
   }
 }
 </style>
