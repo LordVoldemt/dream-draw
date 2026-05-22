@@ -155,7 +155,18 @@ async function loadWork() {
 }
 
 function downloadImage() {
-  shareMessage.value = `下载地址：${String(work.value?.image_url ?? "")}`;
+  const imageUrl = String(work.value?.image_url ?? "");
+  const workId = String(work.value?.id ?? "download");
+  if (!imageUrl) {
+    shareMessage.value = "当前作品暂无可下载原图。";
+    return;
+  }
+  const link = document.createElement("a");
+  link.href = imageUrl;
+  link.download = `dream-draw-${workId}.png`;
+  document.body.appendChild(link);
+  link.click();
+  link.remove();
 }
 
 function goRecreate() {

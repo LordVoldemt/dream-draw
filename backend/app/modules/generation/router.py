@@ -218,8 +218,8 @@ async def create_generation_task(
             raise AppError("rate_limited", "当前生成任务过多，请稍后再试", status_code=429)
         if created_today_count >= 20:
             raise AppError("daily_limit_reached", "新用户当日生成次数已达上限", status_code=429)
-        if tasks.has_duplicate_prompt_today(user_id, payload.prompt):
-            raise AppError("duplicate_prompt", "相同 Prompt 今日已提交，请调整描述后再试", status_code=409)
+        # if tasks.has_duplicate_prompt_today(user_id, payload.prompt):
+        #     raise AppError("duplicate_prompt", "相同 Prompt 今日已提交，请调整描述后再试", status_code=409)
 
         quote = calculate_generation_quote(
             style_id=payload.style_id,
