@@ -1,4 +1,5 @@
 from pathlib import Path
+from time import monotonic, sleep
 
 from fastapi.testclient import TestClient
 
@@ -26,6 +27,19 @@ def login_admin(client: TestClient) -> str:
     response = client.post("/api/admin/login", json={"account": "admin", "password": "admin123"})
     assert response.status_code == 200
     return response.json()["token"]
+
+
+def wait_for_task_status(client: TestClient, task_id: int, token: str, expected_status: str) -> dict:
+    deadline = monotonic() + 2
+    headers = {"Authorization": f"Bearer {token}"}
+    while monotonic() < deadline:
+        response = client.get(f"/api/generate/tasks/{task_id}", headers=headers)
+        assert response.status_code == 200
+        task = response.json()["task"]
+        if task["status"] == expected_status:
+            return task
+        sleep(0.02)
+    raise AssertionError(f"task {task_id} did not reach {expected_status}")
 
 
 def create_work(client: TestClient, user_token: str, prompt: str = "汉代温婉女子") -> int:
@@ -250,9 +264,9 @@ def test_worker_refunds_failed_or_blocked_tasks(tmp_path: Path) -> None:
     points_response = client.get("/api/points", headers=headers)
 
     assert blocked_task.status_code == 200
-    assert blocked_task.json()["status"] == "blocked"
+    wait_for_task_status(client, blocked_task.json()["task_id"], user["token"], "blocked")
     assert failed_task.status_code == 200
-    assert failed_task.json()["status"] == "failed"
+    wait_for_task_status(client, failed_task.json()["task_id"], user["token"], "failed")
     assert points_response.json()["balance"] == 10
 
 

@@ -14,6 +14,15 @@
           />
           <div class="prompt-actions">
             <button
+              type="button"
+              class="polish-button"
+              data-testid="polish-prompt"
+              :disabled="polishingPrompt || !prompt.trim()"
+              @click="polishCurrentPrompt"
+            >
+              {{ polishingPrompt ? "润色中..." : "润色" }}
+            </button>
+            <button
               v-for="item in recommendedPrompts"
               :key="item"
               type="button"
@@ -23,6 +32,7 @@
               {{ item }}
             </button>
           </div>
+          <p v-if="promptMessage" class="prompt-message">{{ promptMessage }}</p>
         </section>
 
         <section class="panel">
@@ -169,6 +179,12 @@ import { computed, ref } from "vue";
 import { useRoute, useRouter } from "vue-router";
 import { ApiClient } from "@/api/client";
 import { DreamDrawApi } from "@/api/dream-draw";
+import styleCinematicImage from "@/assets/home-style-cinematic.jpg";
+import styleGufengPortraitImage from "@/assets/home-style-gufeng-portrait.jpg";
+import styleHanDynastyImage from "@/assets/home-style-han-dynasty.jpg";
+import styleNewChineseImage from "@/assets/home-style-new-chinese.jpg";
+import styleTangDynastyImage from "@/assets/home-style-tang-dynasty.jpg";
+import styleXianxiaImage from "@/assets/home-style-xianxia.jpg";
 import { qualityLevels, ratios, referenceImageModes, styles, templates } from "@/shared/catalog";
 import { useSessionStore } from "@/stores/session";
 import { buildQuotePreview, getPromptLengthState } from "@/utils/pricing";
@@ -190,26 +206,22 @@ const selectedQualityLevel = ref(qualityLevels[0].id);
 const selectedReferenceMode = ref(referenceImageModes[0].id);
 const referenceImageCount = ref(0);
 const submitting = ref(false);
+const polishingPrompt = ref(false);
 const submitMessage = ref("");
+const promptMessage = ref("");
 
 const recommendedPrompts = ["盛唐贵族女子", "仙侠白衣少女", "新中式冷艳女性"];
+const styleImageMap: Record<string, string> = {
+  style_tang_dynasty: styleTangDynastyImage,
+  style_han_dynasty: styleHanDynastyImage,
+  style_xianxia: styleXianxiaImage,
+  style_new_chinese: styleNewChineseImage,
+  style_gufeng_portrait: styleGufengPortraitImage,
+  style_cinematic: styleCinematicImage,
+};
 const styleCards = styles.map((item) => ({
   ...item,
-  image:
-    {
-      style_tang_dynasty:
-        "https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=800&q=80",
-      style_han_dynasty:
-        "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=800&q=80",
-      style_xianxia:
-        "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=800&q=80",
-      style_new_chinese:
-        "https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?auto=format&fit=crop&w=800&q=80",
-      style_gufeng_portrait:
-        "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=800&q=80",
-      style_cinematic:
-        "https://images.unsplash.com/photo-1512436991641-6745cdb1723f?auto=format&fit=crop&w=800&q=80",
-    }[item.id] ?? "https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=800&q=80",
+  image: styleImageMap[item.id] ?? styleTangDynastyImage,
 }));
 const templateCards = templates;
 const ratioCards = ratios;
@@ -232,25 +244,42 @@ const currentStyleLabel = computed(() => {
 });
 
 const currentPreviewImage = computed(() => {
-  const map: Record<string, string> = {
-    style_tang_dynasty:
-      "https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=800&q=80",
-    style_han_dynasty:
-      "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=800&q=80",
-    style_xianxia:
-      "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=800&q=80",
-    style_new_chinese:
-      "https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?auto=format&fit=crop&w=800&q=80",
-    style_gufeng_portrait:
-      "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=800&q=80",
-    style_cinematic:
-      "https://images.unsplash.com/photo-1512436991641-6745cdb1723f?auto=format&fit=crop&w=800&q=80",
-  };
-  return map[selectedStyleId.value] || map.style_tang_dynasty;
+  return styleImageMap[selectedStyleId.value] ?? styleTangDynastyImage;
 });
 
 function increaseReference() {
   referenceImageCount.value = Math.min(3, referenceImageCount.value + 1);
+}
+
+async function polishCurrentPrompt() {
+  const currentPrompt = prompt.value.trim();
+  if (!currentPrompt) {
+    promptMessage.value = "先写一点角色设定，再交给 AI 润色。";
+    return;
+  }
+  if (getPromptLengthState(currentPrompt) === "prompt_over_limit") {
+    promptMessage.value = "Prompt 超过 300 字，先精简后再润色。";
+    return;
+  }
+  if (!session.isAuthenticated) {
+    await router.push({
+      name: "login",
+      query: { redirect: "/workspace" },
+    });
+    return;
+  }
+
+  polishingPrompt.value = true;
+  promptMessage.value = "";
+  try {
+    const result = await api.polishPrompt(currentPrompt);
+    prompt.value = result.polished_prompt;
+    promptMessage.value = "Prompt 已润色，可继续微调后生成。";
+  } catch (error) {
+    promptMessage.value = error instanceof Error ? error.message : "润色失败，请稍后再试";
+  } finally {
+    polishingPrompt.value = false;
+  }
 }
 
 async function submitTask() {
@@ -361,10 +390,12 @@ async function submitTask() {
 .prompt-actions {
   display: flex;
   justify-content: flex-end;
+  flex-wrap: wrap;
   gap: 12px;
   margin-top: 18px;
 }
 
+.polish-button,
 .pill-button {
   min-width: 94px;
   height: 42px;
@@ -373,6 +404,18 @@ async function submitTask() {
   background: #faf7f4;
   color: #5c4840;
   cursor: pointer;
+}
+
+.polish-button {
+  border-color: rgba(213, 58, 37, 0.26);
+  background: #fff4ef;
+  color: #b7442b;
+  font-weight: 700;
+}
+
+.polish-button:disabled {
+  cursor: not-allowed;
+  opacity: 0.58;
 }
 
 .style-grid,
@@ -610,13 +653,15 @@ async function submitTask() {
 }
 
 .queue-tip,
-.submit-message {
+.submit-message,
+.prompt-message {
   margin: 14px 2px 0;
   color: rgba(95, 77, 69, 0.78);
   line-height: 1.7;
 }
 
-.submit-message {
+.submit-message,
+.prompt-message {
   color: #b74a2a;
 }
 

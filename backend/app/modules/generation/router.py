@@ -26,6 +26,7 @@ from app.infrastructure.repositories import (
     WorkRepository,
 )
 from app.services.generation_worker import process_generation_task
+from app.services.prompt_polisher import CHAT_PROVIDER_ID, polish_prompt_with_provider
 from app.services.quoting import calculate_generation_quote
 from app.services.rate_limit import ip_rate_limiter
 from app.shared.catalog import load_product_catalog
@@ -79,6 +80,10 @@ class CreateTaskRequest(BaseModel):
     reference_image_urls: list[HttpUrl] = Field(default_factory=list, max_length=3)
 
 
+class PolishPromptRequest(BaseModel):
+    prompt: str = Field(min_length=1, max_length=300)
+
+
 @router.get("/styles")
 async def get_styles() -> dict:
     return {"styles": load_product_catalog()["styles"]}
@@ -112,6 +117,21 @@ async def get_inspirations(group: str | None = Query(default=None)) -> dict:
             raise AppError("group_not_found", "灵感分组不存在", status_code=404)
         return {"group": group, "prompts": prompts}
     return {"groups": INSPIRATION_PROMPTS}
+
+
+@router.post("/prompts/polish")
+async def polish_prompt(
+    payload: PolishPromptRequest,
+    _user_id: int = Depends(get_current_user_id),
+    providers: ModelProviderRepository = Depends(get_model_provider_repository),
+) -> dict[str, str]:
+    _validate_prompt(payload.prompt)
+    provider = providers.find_by_provider_id(CHAT_PROVIDER_ID)
+    if provider is None:
+        raise AppError("prompt_polish_provider_not_found", "未配置 Prompt 润色模型", status_code=404)
+    polished_prompt = polish_prompt_with_provider(payload.prompt, provider)
+    _validate_prompt(polished_prompt)
+    return {"prompt": payload.prompt, "polished_prompt": polished_prompt}
 
 
 @router.post("/generate/quote")

@@ -1,4 +1,5 @@
 from pathlib import Path
+from time import monotonic, sleep
 
 from fastapi.testclient import TestClient
 
@@ -27,6 +28,19 @@ def login_admin(client: TestClient) -> str:
     return response.json()["token"]
 
 
+def wait_for_task_status(client: TestClient, task_id: int, token: str, expected_status: str) -> dict:
+    deadline = monotonic() + 2
+    headers = {"Authorization": f"Bearer {token}"}
+    while monotonic() < deadline:
+        response = client.get(f"/api/generate/tasks/{task_id}", headers=headers)
+        assert response.status_code == 200
+        task = response.json()["task"]
+        if task["status"] == expected_status:
+            return task
+        sleep(0.02)
+    raise AssertionError(f"task {task_id} did not reach {expected_status}")
+
+
 def test_user_full_flow_home_login_generate_result_download(tmp_path: Path) -> None:
     client = create_test_client(tmp_path)
 
@@ -49,13 +63,14 @@ def test_user_full_flow_home_login_generate_result_download(tmp_path: Path) -> N
         },
     )
     assert task_response.status_code == 200
+    wait_for_task_status(client, task_response.json()["task_id"], login_payload["token"], "success")
 
     works_response = client.get("/api/works", headers=headers)
     work_id = works_response.json()["works"][0]["id"]
     result_response = client.get(f"/api/works/{work_id}", headers=headers)
 
     assert result_response.status_code == 200
-    assert result_response.json()["work"]["image_url"].startswith("https://minio.local/")
+    assert result_response.json()["work"]["image_url"].startswith("/uploads/works/task-")
 
 
 def test_share_referral_flow_generates_link_and_new_user_can_complete_first_generation(tmp_path: Path) -> None:
@@ -63,7 +78,7 @@ def test_share_referral_flow_generates_link_and_new_user_can_complete_first_gene
     owner = login_user(client, "13800138201")
     owner_headers = {"Authorization": f"Bearer {owner['token']}", "x-forwarded-for": "10.0.0.2"}
 
-    client.post(
+    task_response = client.post(
         "/api/generate/tasks",
         headers=owner_headers,
         json={
@@ -75,6 +90,8 @@ def test_share_referral_flow_generates_link_and_new_user_can_complete_first_gene
             "reference_image_urls": [],
         },
     )
+    assert task_response.status_code == 200
+    wait_for_task_status(client, task_response.json()["task_id"], owner["token"], "success")
     works_response = client.get("/api/works", headers=owner_headers)
     work_id = works_response.json()["works"][0]["id"]
     share_response = client.post(f"/api/works/{work_id}/share?channel=wechat", headers=owner_headers)

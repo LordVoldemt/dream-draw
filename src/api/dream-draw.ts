@@ -23,6 +23,11 @@ export interface CreateTaskPayload {
   reference_image_urls: string[];
 }
 
+export interface PolishPromptResponse {
+  prompt: string;
+  polished_prompt: string;
+}
+
 export interface PaymentOrderPayload {
   package_id: string;
   channel: "wechat" | "alipay";
@@ -97,6 +102,10 @@ export class DreamDrawApi {
 
   getInspirations() {
     return this.client.get<{ groups: Record<string, string[]> }>("/prompts/inspirations");
+  }
+
+  polishPrompt(prompt: string) {
+    return this.client.post<PolishPromptResponse>("/prompts/polish", { prompt });
   }
 
   quote(payload: QuotePayload) {

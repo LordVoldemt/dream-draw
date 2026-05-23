@@ -653,6 +653,21 @@ class ModelProviderRepository:
             ).fetchone()
             return dict(row) if row else None
 
+    def find_by_provider_id(self, provider_id: str) -> dict[str, Any] | None:
+        self.ensure_seed_provider()
+        with self.database.connection() as connection:
+            row = connection.execute(
+                """
+                SELECT id, provider_id, provider_name, base_url, api_key_ref, model_name,
+                       api_mode, capabilities, priority, status, timeout_seconds,
+                       qps_limit, cost_level, created_at
+                FROM model_providers
+                WHERE provider_id = ?
+                """,
+                (provider_id,),
+            ).fetchone()
+            return dict(row) if row else None
+
     def update(self, provider_db_id: int, payload: dict[str, Any]) -> dict[str, Any]:
         current = self.find_by_db_id(provider_db_id)
         assert current is not None
@@ -693,7 +708,7 @@ class ModelProviderRepository:
 
     def select_provider_for_generation(self) -> dict[str, Any] | None:
         providers = self.list_all()
-        eligible = [provider for provider in providers if provider["status"] in {"healthy", "degraded"}]
+        eligible = [provider for provider in providers if provider["provider_name"] == "text_to_image"]
         if not eligible:
             return None
         return eligible[0]

@@ -70,6 +70,7 @@ flowchart LR
 | `/api/auth/sms/send-code` | `POST` | 发送手机验证码 | phone | success |
 | `/api/auth/login` | `POST` | 手机号验证码登录 | phone, code | token, user |
 | `/api/prompts/inspirations` | `GET` | 获取推荐 Prompt / 随机灵感 | query | prompt list |
+| `/api/prompts/polish` | `POST` | 使用 chat provider 润色并扩展 Prompt | prompt | polished_prompt |
 | `/api/styles` | `GET` | 获取风格列表 | - | styles |
 | `/api/templates` | `GET` | 获取模板列表/热门模板 | style_id | templates |
 | `/api/generate/quote` | `POST` | 计算本次生成积分消耗 | ratio, style, template, refs, quality | points quote |
@@ -97,15 +98,25 @@ flowchart LR
 #### 生成主链路
 
 1. 用户选择 Prompt、风格、模板、比例、参考图和质量档
-2. API 服务先校验登录态、积分、限流、Prompt 合规性
-3. 调用积分报价服务，返回最终积分消耗
-4. 用户确认后创建生成任务，写入数据库和队列
-5. Worker 消费任务，组装增强 Prompt 与参考图参数
-6. 根据模型路由规则选择默认模型或备用模型
-7. 调用 OpenAI-compatible 文生图接口
-8. 生成结果先进入图片审核流程
-9. 审核通过后写入 MinIO、保存作品记录、更新任务状态为 `success`
-10. 审核失败或模型失败则触发兜底策略，如退款、重试或降级
+2. 用户可先调用 Prompt 润色接口，将短描述扩展为适合国风角色生成的完整提示词
+3. API 服务先校验登录态、积分、限流、Prompt 合规性
+4. 调用积分报价服务，返回最终积分消耗
+5. 用户确认后创建生成任务，写入数据库和队列
+6. Worker 消费任务，组装增强 Prompt 与参考图参数
+7. 根据模型路由规则选择默认模型或备用模型
+8. 调用 OpenAI-compatible 文生图接口
+9. 生成结果先进入图片审核流程
+10. 审核通过后写入 MinIO、保存作品记录、更新任务状态为 `success`
+11. 审核失败或模型失败则触发兜底策略，如退款、重试或降级
+
+#### Prompt 润色逻辑
+
+1. 前端提交当前 Prompt 到 `/api/prompts/polish`，要求用户已登录
+2. 后端校验 Prompt 长度与受限关键词
+3. 后端从 `model_providers` 读取 `provider_id=chat` 且状态为 `healthy/degraded` 的配置
+4. 通过 OpenAI-compatible `chat/completions` 调用对应文本模型，`api_key_ref` 支持明文或 `env:KEY_NAME` 环境变量引用
+5. 后端只返回润色后的纯文本 Prompt，并再次执行基础内容校验
+6. 前端用 `polished_prompt` 替换输入框内容，用户仍可继续手动修改后再生成
 
 #### 多模型路由逻辑
 

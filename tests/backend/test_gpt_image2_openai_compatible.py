@@ -13,10 +13,11 @@ def _enabled() -> bool:
 
 
 class TestGptImage2OpenAICompatibleGeneration:
+    @pytest.mark.skipif(not _enabled(), reason="requires RUN_GPT_IMAGE2_OPENAI_COMPATIBLE_TESTS=1")
     def test_generate_image_with_openai_compatible_images_api(self, tmp_path: Path) -> None:
-        base_url = "https://codeapi.swpumc.cn"
-        api_key = "sk-b325468059d0e038738e6ba6330c4832b2bce5d6cacf6da6e595d21e7d742e99"
-        model ="gpt-image-2"
+        base_url = os.environ["GPT_IMAGE2_OPENAI_COMPATIBLE_BASE_URL"].rstrip("/")
+        api_key = os.environ["GPT_IMAGE2_OPENAI_COMPATIBLE_API_KEY"]
+        model = os.environ.get("GPT_IMAGE2_OPENAI_COMPATIBLE_MODEL", "gpt-image-2")
         output_path = tmp_path / "gpt-image2-openai-compatible.png"
 
         response = httpx.post(

@@ -166,3 +166,91 @@
 2. 补充 `lint` 脚本
 3. 切换 npm registry 后重新执行 `npm audit`
 4. 视需要补 Playwright E2E 与覆盖率报告
+
+---
+
+## 2026-05-23 首页与生成页图片资产补充验证
+
+### 本轮范围
+
+- 将 `HomeView.vue` 首页所有远程 Unsplash 展示图替换为本地生成图片资产。
+- 将 `GenerateView.vue` 生成工作台风格卡与右侧预览图替换为同一套本地风格资产。
+- 新增测试约束，防止上述页面重新引入远程占位图片。
+
+### 实际执行命令
+
+- `npm.cmd run test -- home-carousel generate-assets`
+  - 结果：`2 files, 4 tests passed`
+- `npm.cmd run test`
+  - 结果：`6 files, 16 tests passed`
+- `npm.cmd run build`
+  - 结果：通过，`vue-tsc --noEmit && vite build` 成功
+- 浏览器烟测：`http://127.0.0.1:5174/`
+  - 结果：首页 `13` 张图片全部加载成功，断图数 `0`，远程展示图数 `0`
+- 浏览器烟测：`http://127.0.0.1:5174/workspace`
+  - 结果：生成工作台 `7` 张图片全部加载成功，断图数 `0`，远程展示图数 `0`
+
+### 证据
+
+- `output/home-assets-final-contact-sheet.jpg`
+  - 说明：本轮首页与生成页复用的本地图片资产预览拼图
+- 原始生成图片目录：
+  - `C:\Users\jarvis\.codex\generated_images\019e5045-2c02-7f92-800e-8aef4149dc04`
+
+### 备注
+
+- `GenerateView.vue` 中仍保留 `https://example.com/reference-*.png`，它是提交生成任务时模拟参考图 URL 的请求数据，不是页面图片 `src` 展示资源。
+- 构建仍有 Vite/Rollup chunk size warning，与本次图片替换无直接关系，不阻塞本轮验证。
+
+---
+
+## 2026-05-23 生成工作台 Prompt 润色验证
+
+### 本轮范围
+
+- 在生成工作台 Prompt 区新增“润色”按钮，支持加载态、未登录跳转、空输入/超长输入提示和失败提示。
+- 新增 `POST /api/prompts/polish`，后端读取 `model_providers.provider_id = 'chat'` 的 OpenAI-compatible chat provider 调用 `chat/completions`。
+- `api_key_ref` 支持直接密钥或 `env:KEY_NAME` 环境变量引用。
+- 恢复重复 Prompt 防刷校验，修复后端测试中异步任务状态断言的竞态。
+- 将真实联网图像模型测试改为 `RUN_GPT_IMAGE2_OPENAI_COMPATIBLE_TESTS=1` 时才启用，避免常规回归误触外部服务。
+
+### 实际执行命令
+
+- `python -m pytest tests/backend/test_prompt_polish.py -q`
+  - RED：接口未实现时 `2 failed`
+  - GREEN：实现后 `2 passed`
+- `npm.cmd run test -- src/tests/generate-prompt-polish.spec.ts`
+  - RED：按钮未实现时 `2 failed`
+  - GREEN：实现后 `2 passed`
+- `python -m pytest tests/backend/test_prompt_polisher.py tests/backend/test_prompt_polish.py -q`
+  - 结果：`5 passed`
+- `python -m pytest tests/backend -q`
+  - 结果：`50 passed, 1 skipped`
+  - 跳过项：真实外部图像模型调用测试，默认按环境变量开关跳过
+- `npm.cmd run test`
+  - 结果：`7 files, 18 tests passed`
+- `npm.cmd run build`
+  - 结果：通过，`vue-tsc --noEmit && vite build` 成功
+- `npm.cmd run lint`
+  - 结果：失败，`package.json` 未配置 `lint` 脚本
+- 页面可用性检查：`GET http://127.0.0.1:5174/workspace`
+  - 结果：`200`
+
+### 证据
+
+- 新增后端测试：
+  - `tests/backend/test_prompt_polish.py`
+  - `tests/backend/test_prompt_polisher.py`
+- 新增前端测试：
+  - `src/tests/generate-prompt-polish.spec.ts`
+- 文档同步：
+  - `README.md`
+  - `.adpp/changes/2026-05-18-guofeng-character-platform/prd.md`
+  - `.adpp/changes/2026-05-18-guofeng-character-platform/design.md`
+  - `.adpp/changes/2026-05-18-guofeng-character-platform/ux-notes.md`
+
+### 备注
+
+- 构建仍有既有 Vite/Rollup chunk size warning，与本轮 Prompt 润色无直接关系。
+- `npm.cmd run test` 和 `npm.cmd run build` 均输出 `npm warn Unknown user config "sass_binary_site"`，不影响命令结果。
+- 本轮未生成覆盖率报告，也未完成浏览器截图证据；当前环境只完成了 `/workspace` HTTP 200 检查和组件测试覆盖。

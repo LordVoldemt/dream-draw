@@ -3,7 +3,7 @@
     <section class="hero-section">
       <div class="hero-background">
         <img
-          src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1600&q=80"
+          :src="homeHeroImage"
           alt="绘梦首页背景"
         />
       </div>
@@ -146,7 +146,7 @@
             @click="goPreset('style_cinematic', 'tpl_xiaohongshu_cover', '病娇红衣妖姬，暗夜回眸，红伞，强情绪电影感')"
           >
             <img
-              src="https://images.unsplash.com/photo-1507679799987-c73779587ccf?auto=format&fit=crop&w=900&q=80"
+              :src="redDemonImage"
               alt="病娇红衣妖姬"
             />
             <div class="inspiration-overlay"></div>
@@ -213,6 +213,19 @@ import changanNobleImage1 from "@/assets/长安贵族千金1.png";
 import changanNobleImage2 from "@/assets/长安贵族千金2.png";
 import changanNobleImage3 from "@/assets/长安贵族千金3.png";
 import changanNobleImage4 from "@/assets/长安贵族千金4.png";
+import galleryAutumnLakeImage from "@/assets/home-gallery-autumn-lake.jpg";
+import galleryCinnabarRobeImage from "@/assets/home-gallery-cinnabar-robe.jpg";
+import galleryFlowerShadowImage from "@/assets/home-gallery-flower-shadow.jpg";
+import galleryGoldenButterflyImage from "@/assets/home-gallery-golden-butterfly.jpg";
+import galleryMoonSwordImage from "@/assets/home-gallery-moon-sword.jpg";
+import homeHeroImage from "@/assets/home-hero-guofeng-studio.jpg";
+import redDemonImage from "@/assets/home-template-red-demon.jpg";
+import styleCinematicImage from "@/assets/home-style-cinematic.jpg";
+import styleGufengPortraitImage from "@/assets/home-style-gufeng-portrait.jpg";
+import styleHanDynastyImage from "@/assets/home-style-han-dynasty.jpg";
+import styleNewChineseImage from "@/assets/home-style-new-chinese.jpg";
+import styleTangDynastyImage from "@/assets/home-style-tang-dynasty.jpg";
+import styleXianxiaImage from "@/assets/home-style-xianxia.jpg";
 import { styles } from "@/shared/catalog";
 
 const router = useRouter();
@@ -236,33 +249,27 @@ const currentChanganNobleImage = computed(() => changanNobleImages[changanNobleI
 const featuredStyles = computed(() => {
   const coverMap: Record<string, { cover: string; verticalName: string }> = {
     style_tang_dynasty: {
-      cover:
-        "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=900&q=80",
+      cover: styleTangDynastyImage,
       verticalName: "盛唐气象",
     },
     style_han_dynasty: {
-      cover:
-        "https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?auto=format&fit=crop&w=900&q=80",
+      cover: styleHanDynastyImage,
       verticalName: "清汉古韵",
     },
     style_xianxia: {
-      cover:
-        "https://images.unsplash.com/photo-1516979187457-637abb4f9353?auto=format&fit=crop&w=900&q=80",
+      cover: styleXianxiaImage,
       verticalName: "仙侠梦境",
     },
     style_new_chinese: {
-      cover:
-        "https://images.unsplash.com/photo-1512436991641-6745cdb1723f?auto=format&fit=crop&w=900&q=80",
+      cover: styleNewChineseImage,
       verticalName: "新中式质感",
     },
     style_gufeng_portrait: {
-      cover:
-        "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?auto=format&fit=crop&w=900&q=80",
+      cover: styleGufengPortraitImage,
       verticalName: "古风肖像",
     },
     style_cinematic: {
-      cover:
-        "https://images.unsplash.com/photo-1507525428034-b723cf961d3f?auto=format&fit=crop&w=900&q=80",
+      cover: styleCinematicImage,
       verticalName: "电影镜头",
     },
   };
@@ -277,28 +284,23 @@ const featuredStyles = computed(() => {
 const galleryItems = [
   {
     title: "月下剑影",
-    image:
-      "https://images.unsplash.com/photo-1516979187457-637abb4f9353?auto=format&fit=crop&w=720&q=80",
+    image: galleryMoonSwordImage,
   },
   {
     title: "朱砂华裳",
-    image:
-      "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=720&q=80",
+    image: galleryCinnabarRobeImage,
   },
   {
     title: "金阙蝶梦",
-    image:
-      "https://images.unsplash.com/photo-1512436991641-6745cdb1723f?auto=format&fit=crop&w=720&q=80",
+    image: galleryGoldenButterflyImage,
   },
   {
     title: "花钿弄影",
-    image:
-      "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?auto=format&fit=crop&w=720&q=80",
+    image: galleryFlowerShadowImage,
   },
   {
     title: "平湖秋月",
-    image:
-      "https://images.unsplash.com/photo-1507525428034-b723cf961d3f?auto=format&fit=crop&w=720&q=80",
+    image: galleryAutumnLakeImage,
   },
 ];
 

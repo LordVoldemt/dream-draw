@@ -35,6 +35,18 @@ describe("HomeView inspiration carousels", () => {
     push.mockClear();
   });
 
+  it("uses local project assets instead of remote placeholder images", () => {
+    const wrapper = mountHomeView();
+
+    const imageSources = wrapper
+      .findAll("img")
+      .map((image) => image.attributes("src") ?? "");
+
+    expect(imageSources).not.toHaveLength(0);
+    expect(imageSources.every((src) => !/^https?:\/\//.test(src))).toBe(true);
+    expect(imageSources.every((src) => !src.includes("images.unsplash.com"))).toBe(true);
+  });
+
   it("cycles the sword immortal image without opening the preset", async () => {
     const wrapper = mountHomeView();
 

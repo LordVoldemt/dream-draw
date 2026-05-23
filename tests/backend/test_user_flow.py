@@ -1,4 +1,5 @@
 from pathlib import Path
+from time import monotonic, sleep
 
 from fastapi.testclient import TestClient
 
@@ -29,6 +30,19 @@ def login_user(client: TestClient, phone: str = "13800138000") -> dict:
     )
     assert login_response.status_code == 200
     return login_response.json()
+
+
+def wait_for_task_status(client: TestClient, task_id: int, token: str, expected_status: str) -> dict:
+    deadline = monotonic() + 2
+    headers = {"Authorization": f"Bearer {token}"}
+    while monotonic() < deadline:
+        response = client.get(f"/api/generate/tasks/{task_id}", headers=headers)
+        assert response.status_code == 200
+        task = response.json()["task"]
+        if task["status"] == expected_status:
+            return task
+        sleep(0.02)
+    raise AssertionError(f"task {task_id} did not reach {expected_status}")
 
 
 def test_first_login_creates_user_and_grants_bonus(tmp_path: Path) -> None:
@@ -139,9 +153,7 @@ def test_create_task_returns_immediately_and_persists_generated_assets(tmp_path:
     assert task_payload["work_id"] is None
 
     task_id = task_payload["task_id"]
-    detail_response = client.get(f"/api/generate/tasks/{task_id}", headers=headers)
-    assert detail_response.status_code == 200
-    assert detail_response.json()["task"]["status"] == "success"
+    wait_for_task_status(client, task_id, login_payload["token"], "success")
 
     work_by_task_response = client.get(f"/api/works-by-task/{task_id}", headers=headers)
     assert work_by_task_response.status_code == 200

@@ -217,6 +217,7 @@
 - 自动推荐示例 Prompt
 - 一键灵感按钮
 - 随机生成 Prompt
+- Prompt 润色：调用后台 `provider_id=chat` 的 OpenAI-compatible 文本模型，将短描述扩展为更完整的国风角色生成提示词
 
 **推荐示例**:
 - `盛唐时期华贵贵族女子`
@@ -228,6 +229,7 @@
 2. 用户输入如“盛唐时期丰腴贵族女子，金色步摇，红色齐胸襦裙，端庄华贵”
 3. 系统记录输入内容，供后续 Prompt 组装使用
 4. 用户若无思路，可点击“一键灵感”获取随机 Prompt
+5. 用户可点击“润色”，由系统在保留原意的前提下补充人物气质、服饰、场景、光影和画面质感，并替换当前输入
 
 **数据需求**:
 - Prompt 文本
@@ -235,6 +237,8 @@
 - Prompt 字数
 - 是否使用推荐 Prompt
 - 是否使用随机灵感
+- 是否使用 Prompt 润色
+- 润色后的 Prompt 文本
 
 ### 6.4 生成参数配置
 
@@ -749,6 +753,10 @@ final_points =
 - `timeout_seconds`
 - `qps_limit`
 - `cost_level`
+
+**约定 provider_id**:
+- `provider_id=chat`：用于 Prompt 润色/扩展，调用 OpenAI-compatible `chat/completions`
+- 其他文生图 provider：用于生成任务与图像模型路由
 
 **管理能力**:
 - 新增模型配置
