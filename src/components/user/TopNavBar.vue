@@ -1,6 +1,6 @@
 <template>
   <header class="top-nav">
-    <RouterLink class="brand" to="/">墨染梦境</RouterLink>
+    <RouterLink class="brand" to="/">绘梦</RouterLink>
     <nav class="links">
       <RouterLink to="/">首页</RouterLink>
       <RouterLink to="/pricing">画廊</RouterLink>

@@ -85,8 +85,8 @@
 
     <footer class="page-footer">
       <div class="footer-brand">
-        <strong>墨染梦境</strong>
-        <p>© 2024 墨染梦境 Ink Dream AI. All Rights Reserved.</p>
+        <strong>绘梦</strong>
+        <p>© 2024 绘梦 Ink Dream AI. All Rights Reserved.</p>
       </div>
       <div class="footer-links">
         <a href="#">关于我们</a>

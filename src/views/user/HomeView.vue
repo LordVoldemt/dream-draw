@@ -189,7 +189,7 @@
 
     <footer class="home-footer">
       <div class="footer-brand">
-        <strong>墨染梦境</strong>
+        <strong>绘梦</strong>
         <p>专业的 AI 国风角色创作平台，让传统美学在数字时代焕发新生。</p>
       </div>
       <div class="footer-links">

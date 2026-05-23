@@ -3,7 +3,7 @@
     <div class="page-background"></div>
     <div class="page-overlay"></div>
 
-    <div class="vertical-brand">墨染梦境</div>
+    <div class="vertical-brand">绘梦</div>
 
     <section class="generating-shell">
       <div class="art-ring">
@@ -17,7 +17,7 @@
         </div>
       </div>
 
-      <h1>AI 正在墨染梦境中…</h1>
+      <h1>AI 正在绘梦中…</h1>
 
       <div class="eta-row">
         <span class="eta-icon">◔</span>
@@ -44,7 +44,7 @@
         </div>
       </div>
 
-      <p class="copyright">© 2024 墨染梦境 Ink Dream AI. All Rights Reserved.</p>
+      <p class="copyright">© 2024 绘梦 Ink Dream AI. All Rights Reserved.</p>
     </section>
   </div>
 </template>

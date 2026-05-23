@@ -2,7 +2,7 @@
   <div class="admin-layout">
     <aside class="layout-sidebar">
       <div class="brand-wrap">
-        <div class="brand">墨染梦境</div>
+        <div class="brand">绘梦</div>
         <div class="sub-brand">AI艺术工坊</div>
       </div>
       <nav class="sidebar-nav">

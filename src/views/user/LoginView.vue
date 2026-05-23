@@ -5,7 +5,7 @@
 
     <div class="login-shell">
       <header class="brand-block">
-        <h1>墨染梦境</h1>
+        <h1>绘梦</h1>
         <p>INK DREAM UNIVERSE</p>
       </header>
 
@@ -52,7 +52,7 @@
         </div>
       </section>
 
-      <p class="copyright">© 2024 墨染梦境 Ink Dream AI. All Rights Reserved.</p>
+      <p class="copyright">© 2024 绘梦 Ink Dream AI. All Rights Reserved.</p>
     </div>
   </div>
 </template>
